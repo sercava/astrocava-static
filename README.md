@@ -30,7 +30,7 @@ npm run preview
 
 El build genera `dist/`, `sitemap-index.xml` y su alias compatible `sitemap.xml`.
 
-Después del build, `npm run check:predeploy` valida de forma determinista el contrato público completo: conjunto exacto de URLs, enlaces y fragmentos internos, inventario byte a byte de imágenes, SEO técnico básico, sitemap y `robots.txt`. Para clones y pull requests, usa `npm run build:verify && npm run check:predeploy:verify`; `dist-verify/` nunca es desplegable.
+Después del build, `npm run check:predeploy` valida de forma determinista el contrato público completo: conjunto exacto de URLs, enlaces y fragmentos internos, inventario byte a byte de imágenes, SEO técnico básico, sitemap y `robots.txt`. Para clones y pull requests, usa `npm run check:verify`, seguido de `npm run build:verify && npm run check:predeploy:verify`; estos comandos inyectan exclusivamente la identidad sintética y `dist-verify/` nunca es desplegable.
 
 ## Aviso legal y datos privados
 
@@ -62,7 +62,8 @@ Antes del corte DNS, el smoke del workflow consulta directamente el backend Page
 | `npm run build` | Build estático y alias del sitemap |
 | `npm run build:verify` | Build no desplegable con identidad legal sintética en `dist-verify/` |
 | `npm run preview` | Sirve el build existente |
-| `npm run check` | Ejecuta `astro check` con `@astrojs/check` y TypeScript fijados por el lock |
+| `npm run check` | Ejecuta `astro check` con la identidad legal local/de producción |
+| `npm run check:verify` | Ejecuta `astro check` con la identidad sintética determinista para CI sin secretos |
 | `npm run check:privacy` | Verifica que el aviso versionable no contiene PII |
 | `npm run check:rights` | Compara las 272 familias/634 imágenes con el manifiesto exacto y valida la rotulación Midjourney |
 | `npm run check:urls` | Compara las páginas de `dist/` con las 162 URLs aprobadas |

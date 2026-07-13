@@ -17,6 +17,7 @@
     "build:verify": "node scripts/build-verify.mjs",
     "preview": "astro preview",
     "check": "astro check",
+    "check:verify": "node scripts/check-verify.mjs",
     "check:privacy": "node scripts/check-legal-notice-source.mjs",
     "check:rights": "node scripts/check-rights.mjs",
     "check:urls": "node scripts/check-predeploy.mjs --root dist --scope urls",

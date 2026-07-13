@@ -17,6 +17,7 @@ test('CI usa exclusivamente el build sintético y permisos de lectura', () => {
   assert.match(CI, /permissions:\s*\n\s+contents: read/);
   assert.match(CI, /npm run build:verify/);
   assert.match(CI, /npm run check:predeploy:verify/);
+  assert.match(CI, /npm run check:verify/);
   assert.doesNotMatch(CI, /secrets\./);
   assert.doesNotMatch(CI, /npm run build(?:\s|$)/m);
 });
@@ -53,6 +54,7 @@ test('solo el despliegue consume los cinco secretos y construye producción', ()
   }
   assert.match(DEPLOY, /npm run build\n/);
   assert.match(DEPLOY, /npm run check:predeploy\n/);
+  assert.match(DEPLOY, /npm run check:verify/);
   assert.doesNotMatch(DEPLOY, /npm run build:verify/);
   assert.match(DEPLOY, /deployment-provenance\.mjs write/);
   assert.match(DEPLOY, /deployment-provenance\.mjs verify/);

@@ -43,7 +43,7 @@ jobs:
         run: npm run test:ci
 
       - name: Run Astro check
-        run: npm run check
+        run: npm run check:verify
 
       - name: Build deployable production artifact
         env:
