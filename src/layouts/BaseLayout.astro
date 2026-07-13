@@ -1,0 +1,104 @@
+---
+import '../styles/global.css';
+import SearchBox from '../components/SearchBox.astro';
+
+interface Props {
+  title: string;
+  description?: string;
+  canonicalUrl: string;
+  mainClass?: string;
+  ogImage?: string;
+  ogTitle?: string;
+  ogDescription?: string;
+  twitterTitle?: string;
+  twitterDescription?: string;
+  twitterImage?: string;
+}
+
+const {
+  title,
+  description = '',
+  canonicalUrl,
+  mainClass,
+  ogImage,
+  ogTitle,
+  ogDescription,
+  twitterTitle,
+  twitterDescription,
+  twitterImage,
+} = Astro.props;
+const pageTitle = title.includes('Astrocava') ? title : `${title} | Astrocava`;
+const resolvedOgTitle = ogTitle || pageTitle;
+const resolvedOgDesc = ogDescription || description;
+const resolvedTwTitle = twitterTitle || resolvedOgTitle;
+const resolvedTwDesc = twitterDescription || resolvedOgDesc;
+const resolvedTwImage = twitterImage || ogImage;
+const pathname = Astro.url.pathname;
+const primaryNav = [
+  { href: '/galeria/', label: 'Galería' },
+  { href: '/observacion/', label: 'Observación' },
+  { href: '/arqueoastronomia/', label: 'Arqueoastronomía' },
+  { href: '/astrofotografia/', label: 'Astrofotografía' },
+  { href: '/info/', label: 'Info' },
+];
+const isCurrent = (href: string) => pathname === href || pathname.startsWith(href);
+---
+
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{pageTitle}</title>
+    {description && <meta name="description" content={description} />}
+    <link rel="icon" href="/favicon.ico" sizes="any" />
+    <link rel="canonical" href={canonicalUrl} />
+    <meta property="og:title" content={resolvedOgTitle} />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:type" content="article" />
+    {resolvedOgDesc && <meta property="og:description" content={resolvedOgDesc} />}
+    {ogImage && <meta property="og:image" content={ogImage} />}
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={resolvedTwTitle} />
+    {resolvedTwDesc && <meta name="twitter:description" content={resolvedTwDesc} />}
+    {resolvedTwImage && <meta name="twitter:image" content={resolvedTwImage} />}
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="site-header-inner">
+        <a class="site-brand" href="/">Astrocava</a>
+        <nav class="primary-nav" aria-label="Secciones principales">
+          <ul>
+            {
+              primaryNav.map((item) => (
+                <li>
+                  <a href={item.href} aria-current={isCurrent(item.href) ? 'page' : undefined}>
+                    {item.label}
+                  </a>
+                </li>
+              ))
+            }
+          </ul>
+        </nav>
+        <SearchBox variant="header" idPrefix="site-search" />
+      </div>
+    </header>
+    <main class:list={['site-main', mainClass]}>
+      <slot />
+    </main>
+    <footer class="site-footer">
+      <div class="site-footer-inner">
+        <span class="site-footer-brand">Astrocava</span>
+        <nav aria-label="Información del sitio">
+          <a href="/info/">Acerca de este sitio</a>
+          <span aria-hidden="true"> · </span>
+          <a href="/aviso-legal/">Aviso legal</a>
+          <span aria-hidden="true"> · </span>
+          <a href="/politica-de-cookies/">Cookies</a>
+          <span aria-hidden="true"> · </span>
+          <a href="/licencias/">Licencias</a>
+        </nav>
+      </div>
+    </footer>
+  </body>
+</html>

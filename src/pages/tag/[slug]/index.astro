@@ -1,0 +1,30 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import EntryList from '../../../components/EntryList.astro';
+import { getPublishedEntries, entriesForTag } from '../../../lib/entries';
+import activeTags from '../../../data/active-tags.json';
+
+export async function getStaticPaths() {
+  return activeTags.map((t) => ({ params: { slug: t.slug } }));
+}
+
+const { slug } = Astro.params;
+const tagMeta = activeTags.find((t) => t.slug === slug);
+const all = await getPublishedEntries();
+const tagged = entriesForTag(all, slug!);
+const pathname = `/tag/${slug}/`;
+const canonicalUrl = `https://www.astrocava.com${pathname}`;
+const title = tagMeta?.name ? `Etiqueta: ${tagMeta.name}` : `Etiqueta: ${slug}`;
+const description = `Artículos de Astrocava etiquetados con «${tagMeta?.name ?? slug}».`;
+---
+
+<BaseLayout title={title} description={description} canonicalUrl={canonicalUrl}>
+  <h1>{title}</h1>
+  {
+    tagged.length === 0 ? (
+      <p>Sin entradas con esta etiqueta.</p>
+    ) : (
+      <EntryList entries={tagged} />
+    )
+  }
+</BaseLayout>

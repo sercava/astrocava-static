@@ -1,0 +1,64 @@
+---
+import type { CollectionEntry } from 'astro:content';
+
+interface Props {
+  entries: CollectionEntry<'entries'>[];
+}
+
+const { entries } = Astro.props;
+const dateFormatter = new Intl.DateTimeFormat('es-ES', {
+  day: 'numeric',
+  month: 'short',
+  year: 'numeric',
+  timeZone: 'UTC',
+});
+
+function summary(entry: CollectionEntry<'entries'>): string {
+  const text = (entry.data.excerpt || entry.data.content_plaintext || '')
+    .replace(/\s+/g, ' ')
+    .trim();
+  if (text.length <= 180) return text;
+  return `${text.slice(0, 177).trimEnd()}…`;
+}
+---
+
+<ul class="entry-list">
+  {
+    entries.map((entry) => {
+      const description = summary(entry);
+      const publishedAt = entry.data.published_at;
+
+      return (
+        <li>
+          <article class="entry-card">
+            <a
+              class={`entry-card-link${entry.data.feature_image ? '' : ' entry-card-link--text-only'}`}
+              href={entry.data.pathname}
+            >
+              <span class="entry-card-content">
+                <span class="entry-card-title">{entry.data.title}</span>
+                {description && <span class="entry-card-description">{description}</span>}
+                {publishedAt && (
+                  <time class="entry-card-meta" datetime={publishedAt.toISOString()}>
+                    {dateFormatter.format(publishedAt)}
+                  </time>
+                )}
+              </span>
+              {
+                entry.data.feature_image && (
+                  <span class="entry-card-thumbnail">
+                    <img
+                      src={entry.data.feature_image}
+                      alt={entry.data.feature_image_alt || ''}
+                      loading="lazy"
+                    />
+                  </span>
+                )
+              }
+            </a>
+          </article>
+        </li>
+      );
+    })
+  }
+</ul>

@@ -1,0 +1,29 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import EntryList from './EntryList.astro';
+import type { CollectionEntry } from 'astro:content';
+
+interface Props {
+  title: string;
+  pathname: string;
+  description?: string;
+  entries: CollectionEntry<'entries'>[];
+}
+
+const { title, pathname, description = '', entries } = Astro.props;
+const canonicalUrl = new URL(pathname, 'https://www.astrocava.com').href;
+const resolvedDescription =
+  description ||
+  `Artículos y recursos de Astrocava sobre ${title.toLowerCase()}.`;
+---
+
+<BaseLayout title={title} description={resolvedDescription} canonicalUrl={canonicalUrl}>
+  <h1>{title}</h1>
+  {
+    entries.length === 0 ? (
+      <p>No hay entradas en esta sección.</p>
+    ) : (
+      <EntryList entries={entries} />
+    )
+  }
+</BaseLayout>

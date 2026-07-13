@@ -1,0 +1,332 @@
+[
+  {
+    "slug": "messier",
+    "name": "MESSIER",
+    "pathname": "/tag/messier/"
+  },
+  {
+    "slug": "nebulosa",
+    "name": "NEBULOSA",
+    "pathname": "/tag/nebulosa/"
+  },
+  {
+    "slug": "verano",
+    "name": "VERANO",
+    "pathname": "/tag/verano/"
+  },
+  {
+    "slug": "serpens",
+    "name": "SERPENS",
+    "pathname": "/tag/serpens/"
+  },
+  {
+    "slug": "cielo-profundo",
+    "name": "CIELO-PROFUNDO",
+    "pathname": "/tag/cielo-profundo/"
+  },
+  {
+    "slug": "barnard",
+    "name": "BARNARD",
+    "pathname": "/tag/barnard/"
+  },
+  {
+    "slug": "aquila",
+    "name": "AQUILA",
+    "pathname": "/tag/aquila/"
+  },
+  {
+    "slug": "primavera",
+    "name": "PRIMAVERA",
+    "pathname": "/tag/primavera/"
+  },
+  {
+    "slug": "cumulo-abierto",
+    "name": "CÚMULO ABIERTO",
+    "pathname": "/tag/cumulo-abierto/"
+  },
+  {
+    "slug": "cancer",
+    "name": "CANCER",
+    "pathname": "/tag/cancer/"
+  },
+  {
+    "slug": "perseus",
+    "name": "PERSEUS",
+    "pathname": "/tag/perseus/"
+  },
+  {
+    "slug": "otono",
+    "name": "OTOÑO",
+    "pathname": "/tag/otono/"
+  },
+  {
+    "slug": "sagittarius",
+    "name": "SAGITTARIUS",
+    "pathname": "/tag/sagittarius/"
+  },
+  {
+    "slug": "scutum",
+    "name": "SCUTUM",
+    "pathname": "/tag/scutum/"
+  },
+  {
+    "slug": "cygnus",
+    "name": "CYGNUS",
+    "pathname": "/tag/cygnus/"
+  },
+  {
+    "slug": "caldwell",
+    "name": "CALDWELL",
+    "pathname": "/tag/caldwell/"
+  },
+  {
+    "slug": "invierno",
+    "name": "INVIERNO",
+    "pathname": "/tag/invierno/"
+  },
+  {
+    "slug": "monoceros",
+    "name": "MONOCEROS",
+    "pathname": "/tag/monoceros/"
+  },
+  {
+    "slug": "orion",
+    "name": "ORION",
+    "pathname": "/tag/orion/"
+  },
+  {
+    "slug": "vulpecula",
+    "name": "VULPECULA",
+    "pathname": "/tag/vulpecula/"
+  },
+  {
+    "slug": "galaxia",
+    "name": "GALAXIA",
+    "pathname": "/tag/galaxia/"
+  },
+  {
+    "slug": "andromeda",
+    "name": "ANDROMEDA",
+    "pathname": "/tag/andromeda/"
+  },
+  {
+    "slug": "auriga",
+    "name": "AURIGA",
+    "pathname": "/tag/auriga/"
+  },
+  {
+    "slug": "ofiuco",
+    "name": "OFIUCO",
+    "pathname": "/tag/ofiuco/"
+  },
+  {
+    "slug": "cumulo-globular",
+    "name": "CÚMULO GLOBULAR",
+    "pathname": "/tag/cumulo-globular/"
+  },
+  {
+    "slug": "pegasus",
+    "name": "PEGASUS",
+    "pathname": "/tag/pegasus/"
+  },
+  {
+    "slug": "leo",
+    "name": "LEO",
+    "pathname": "/tag/leo/"
+  },
+  {
+    "slug": "gemini",
+    "name": "GEMINI",
+    "pathname": "/tag/gemini/"
+  },
+  {
+    "slug": "observacion",
+    "name": "OBSERVACION",
+    "pathname": "/tag/observacion/"
+  },
+  {
+    "slug": "sol",
+    "name": "SOL",
+    "pathname": "/tag/sol/"
+  },
+  {
+    "slug": "draco",
+    "name": "DRACO",
+    "pathname": "/tag/draco/"
+  },
+  {
+    "slug": "scorpius",
+    "name": "SCORPIUS",
+    "pathname": "/tag/scorpius/"
+  },
+  {
+    "slug": "hercules",
+    "name": "HERCULES",
+    "pathname": "/tag/hercules/"
+  },
+  {
+    "slug": "lyra",
+    "name": "LYRA",
+    "pathname": "/tag/lyra/"
+  },
+  {
+    "slug": "delphinus",
+    "name": "DELPHINUS",
+    "pathname": "/tag/delphinus/"
+  },
+  {
+    "slug": "eridanus",
+    "name": "ERIDANUS",
+    "pathname": "/tag/eridanus/"
+  },
+  {
+    "slug": "taurus",
+    "name": "TAURUS",
+    "pathname": "/tag/taurus/"
+  },
+  {
+    "slug": "lepus",
+    "name": "LEPUS",
+    "pathname": "/tag/lepus/"
+  },
+  {
+    "slug": "lynx",
+    "name": "LYNX",
+    "pathname": "/tag/lynx/"
+  },
+  {
+    "slug": "canis-maior",
+    "name": "CANIS MAIOR",
+    "pathname": "/tag/canis-maior/"
+  },
+  {
+    "slug": "aquarius",
+    "name": "AQUARIUS",
+    "pathname": "/tag/aquarius/"
+  },
+  {
+    "slug": "cepheus",
+    "name": "CEPHEUS",
+    "pathname": "/tag/cepheus/"
+  },
+  {
+    "slug": "capricornus",
+    "name": "CAPRICORNUS",
+    "pathname": "/tag/capricornus/"
+  },
+  {
+    "slug": "piscis",
+    "name": "PISCIS",
+    "pathname": "/tag/piscis/"
+  },
+  {
+    "slug": "cassiopeia",
+    "name": "CASSIOPEIA",
+    "pathname": "/tag/cassiopeia/"
+  },
+  {
+    "slug": "sculptor",
+    "name": "SCULPTOR",
+    "pathname": "/tag/sculptor/"
+  },
+  {
+    "slug": "cetus",
+    "name": "CETUS",
+    "pathname": "/tag/cetus/"
+  },
+  {
+    "slug": "aries",
+    "name": "ARIES",
+    "pathname": "/tag/aries/"
+  },
+  {
+    "slug": "triangulum",
+    "name": "TRIANGULUM",
+    "pathname": "/tag/triangulum/"
+  },
+  {
+    "slug": "arqueoastronomia",
+    "name": "ARQUEOASTRONOMIA",
+    "pathname": "/tag/arqueoastronomia/"
+  },
+  {
+    "slug": "jupiter",
+    "name": "JUPITER",
+    "pathname": "/tag/jupiter/"
+  },
+  {
+    "slug": "marte",
+    "name": "MARTE",
+    "pathname": "/tag/marte/"
+  },
+  {
+    "slug": "saturno",
+    "name": "SATURNO",
+    "pathname": "/tag/saturno/"
+  },
+  {
+    "slug": "galeria",
+    "name": "GALERIA",
+    "pathname": "/tag/galeria/"
+  },
+  {
+    "slug": "sistema-solar",
+    "name": "SISTEMA-SOLAR",
+    "pathname": "/tag/sistema-solar/"
+  },
+  {
+    "slug": "luna",
+    "name": "LUNA",
+    "pathname": "/tag/luna/"
+  },
+  {
+    "slug": "ingenios-humanos",
+    "name": "INGENIOS-HUMANOS",
+    "pathname": "/tag/ingenios-humanos/"
+  },
+  {
+    "slug": "venus",
+    "name": "VENUS",
+    "pathname": "/tag/venus/"
+  },
+  {
+    "slug": "adquisicion-astrofoto",
+    "name": "ADQUISICION-ASTROFOTO",
+    "pathname": "/tag/adquisicion-astrofoto/"
+  },
+  {
+    "slug": "hydra",
+    "name": "HYDRA",
+    "pathname": "/tag/hydra/"
+  },
+  {
+    "slug": "nebulosa-planetaria",
+    "name": "NEBULOSA-PLANETARIA",
+    "pathname": "/tag/nebulosa-planetaria/"
+  },
+  {
+    "slug": "introduccion-astrofoto",
+    "name": "INTRODUCCION-ASTROFOTO",
+    "pathname": "/tag/introduccion-astrofoto/"
+  },
+  {
+    "slug": "procesado-astrofoto",
+    "name": "PROCESADO-ASTROFOTO",
+    "pathname": "/tag/procesado-astrofoto/"
+  },
+  {
+    "slug": "preprocesado-astrofoto",
+    "name": "PREPROCESADO-ASTROFOTO",
+    "pathname": "/tag/preprocesado-astrofoto/"
+  },
+  {
+    "slug": "cometa",
+    "name": "COMETA",
+    "pathname": "/tag/cometa/"
+  },
+  {
+    "slug": "canes-venatici",
+    "name": "CANES VENATICI",
+    "pathname": "/tag/canes-venatici/"
+  }
+]

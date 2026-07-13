@@ -1,0 +1,42 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import EntryList from '../components/EntryList.astro';
+import SearchBox from '../components/SearchBox.astro';
+import { getPublishedEntries } from '../lib/entries';
+
+const entries = await getPublishedEntries();
+const posts = entries
+  .filter((e) => e.data.type === 'post')
+  .sort(
+    (a, b) =>
+      (b.data.published_at?.getTime() ?? 0) -
+      (a.data.published_at?.getTime() ?? 0),
+  );
+const canonicalUrl = 'https://www.astrocava.com/';
+---
+
+<BaseLayout
+  title="Astrocava"
+  description="Astronomía, astrofotografía, observación y arqueoastronomía."
+  canonicalUrl={canonicalUrl}
+  mainClass="site-main--home"
+>
+  <section class="home-hero" aria-labelledby="home-title">
+    <div class="home-hero-content">
+      <h1 id="home-title">
+        Esto va de Astronomía: Observación visual, Astrofotografía y un poco de Arqueoastronomía
+      </h1>
+      <SearchBox variant="hero" idPrefix="home-search" />
+    </div>
+  </section>
+  <div class="home-content">
+    <h2>Últimas publicaciones</h2>
+    {
+      posts.length === 0 ? (
+        <p>Sitio en migración (piloto).</p>
+      ) : (
+        <EntryList entries={posts} />
+      )
+    }
+  </div>
+</BaseLayout>

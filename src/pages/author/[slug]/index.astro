@@ -1,0 +1,23 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import EntryList from '../../../components/EntryList.astro';
+import { getPublishedEntries } from '../../../lib/entries';
+
+export async function getStaticPaths() {
+  return [{ params: { slug: 'sergio' } }];
+}
+
+const { slug } = Astro.params;
+const all = await getPublishedEntries();
+const pathname = `/author/${slug}/`;
+const canonicalUrl = `https://www.astrocava.com${pathname}`;
+---
+
+<BaseLayout
+  title="Sergio"
+  description="Artículos de astronomía, astrofotografía y observación en Astrocava."
+  canonicalUrl={canonicalUrl}
+>
+  <h1>Autor: Sergio</h1>
+  <EntryList entries={all} />
+</BaseLayout>

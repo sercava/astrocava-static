@@ -1,0 +1,113 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { render } from 'astro:content';
+import type { CollectionEntry } from 'astro:content';
+import { resolveMetaDescription } from '../lib/seo';
+
+interface Props {
+  entry: CollectionEntry<'entries'>;
+}
+
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+const d = entry.data;
+const title = d.meta_title || d.title;
+const description = resolveMetaDescription({
+  meta_description: d.meta_description,
+  excerpt: d.excerpt,
+  content_plaintext: d.content_plaintext,
+});
+const ogTitle = d.og_title || title;
+const ogDescription = d.og_description || description;
+
+function absImage(src: string | undefined) {
+  if (!src) return undefined;
+  if (src.startsWith('http')) return src;
+  return new URL(src, d.canonical_url).href;
+}
+
+const ogImage = absImage(d.og_image || d.feature_image);
+const twitterTitle = d.twitter_title || ogTitle;
+const twitterDescription = d.twitter_description || ogDescription;
+const twitterImage = absImage(d.twitter_image || d.og_image || d.feature_image);
+
+const dateStr = d.published_at
+  ? d.published_at.toLocaleDateString('es-ES', {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric',
+    })
+  : null;
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  canonicalUrl={d.canonical_url}
+  ogImage={ogImage}
+  ogTitle={ogTitle}
+  ogDescription={ogDescription}
+  twitterTitle={twitterTitle}
+  twitterDescription={twitterDescription}
+  twitterImage={twitterImage}
+>
+  <article class="prose">
+    <header class="article-header">
+      <h1>{d.title}</h1>
+      {dateStr && <p class="article-meta">Publicado: {dateStr}</p>}
+      {
+        d.feature_image && (
+          <figure class="feature-image">
+            <img
+              src={d.feature_image}
+              alt={d.feature_image_alt || d.title}
+              loading="eager"
+            />
+            {
+              (d.feature_image_caption ||
+                d.feature_image_credit ||
+                d.feature_image_license) && (
+                <figcaption>
+                  {d.feature_image_caption && (
+                    <span class="feature-image-caption">{d.feature_image_caption}</span>
+                  )}
+                  {(d.feature_image_credit || d.feature_image_license) && (
+                    <small class="feature-image-attribution">
+                      {d.feature_image_credit && (
+                        <>
+                          {'Crédito: '}
+                          {d.feature_image_credit_url ? (
+                            <a href={d.feature_image_credit_url} rel="noreferrer">
+                              {d.feature_image_credit}
+                            </a>
+                          ) : (
+                            d.feature_image_credit
+                          )}
+                          {'.'}
+                        </>
+                      )}
+                      {d.feature_image_license && (
+                        <>
+                          {d.feature_image_credit ? ' Licencia: ' : 'Licencia: '}
+                          {d.feature_image_license_url ? (
+                            <a href={d.feature_image_license_url} rel="noreferrer">
+                              {d.feature_image_license}
+                            </a>
+                          ) : (
+                            d.feature_image_license
+                          )}
+                          {'.'}
+                        </>
+                      )}
+                    </small>
+                  )}
+                </figcaption>
+              )
+            }
+          </figure>
+        )
+      }
+    </header>
+    <Content />
+  </article>
+</BaseLayout>

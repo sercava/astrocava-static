@@ -1,0 +1,32 @@
+---
+slug: aviso-legal
+title: Aviso legal
+type: page
+status: published
+primary_tag_slug: ''
+pathname: /aviso-legal/
+url: "https://www.astrocava.com/aviso-legal/"
+canonical_url: "https://www.astrocava.com/aviso-legal/"
+published_at: 2024-07-19T18:45:00.000Z
+updated_at: 2024-07-20T07:54:21.000Z
+excerpt: ''
+content_plaintext: "Aviso legal, identificación del titular y condiciones de uso de Astrocava."
+tags: []
+author: sergio
+meta_title: ''
+meta_description: ''
+feature_image: /content/images/2024/07/aviso-legal.png
+feature_image_alt: "Ilustración conceptual para el aviso legal, generada con IA mediante Midjourney"
+feature_image_caption: Ilustración conceptual generada mediante prompts de texto; no es una fotografía ni una observación científica.
+feature_image_credit: Ilustración generada con Midjourney por Sergio Cava
+feature_image_credit_url: "https://docs.midjourney.com/hc/en-us/articles/32083055291277-Terms-of-Service"
+feature_image_license: CC BY 4.0 (aportaciones humanas)
+feature_image_license_url: "https://creativecommons.org/licenses/by/4.0/"
+og_title: ''
+og_description: ''
+og_image: /content/images/2024/07/aviso-legal.png
+twitter_title: ''
+twitter_description: ''
+twitter_image: /content/images/2024/07/aviso-legal.png
+---
+<p>Entiendo que como usuario responsable de esta página, antes de hacer nada, te lees este documento. </p><p>Te lo pongo fácil, puedes acceder al aviso Legal desde cualquiera de las páginas del sitio a través de un enlace en el pié de cada una de ellas.</p><p>Así, de esta manera, tras su lectura, puedes usar este sitio web, lo que indicará tu aceptación completa, plena y sin reservas de todas y cada una de las cláusulas y condiciones generales incluidas en este Aviso Legal. Esto te clasifica automáticamente como «usuario» de este sitio web (incluso sin tener que registrarte o identificarte).</p><p>Si no estás conforme con las cláusulas y condiciones de uso de este Aviso Legal, deberás abandonar este sitio web y no utilizarlo.</p><p>Como eres un usuario responsable, también entenderás que este Aviso Legal puede cambiar, por lo que será necesario que en cada visita vuelvas a leer este entretenido texto por si hay algo que no te gusta y no esté de acuerdo, en cuyo caso, deberías abstenerte de seguir navegando por ella.</p><h2 id="titularidad-de-astrocavacom">Titularidad de astrocava.com</h2><p>Me ha dicho mi abogado que para cumplir las leyes debo poner quién es el titular de esta página y cómo contactar.</p><p>Ahí van:</p><ul data-legal-identity="@@ASTROCAVA_LEGAL_BUILD_KIND@@"><li>Titular de la web: @@ASTROCAVA_LEGAL_OWNER@@</li><li>DNI: @@ASTROCAVA_LEGAL_IDENTIFIER@@</li><li>Dirección postal:<ul><li>@@ASTROCAVA_LEGAL_ADDRESS_LINE_1@@</li><li>@@ASTROCAVA_LEGAL_ADDRESS_LINE_2@@</li><li>España</li></ul></li><li>correo electrónico: @@ASTROCAVA_LEGAL_EMAIL@@</li></ul><h2 id="condiciones-de-uso">Condiciones de uso</h2><p>He visto avisos legales que dicen que al utilizar este sitio web debes cumplir la normativa vigente, pero no es necesario que yo te lo diga para que estés sometido a ella. </p><p>Las obligaciones legales también aplican al titular de astrocava.com y este Aviso Legal no puede ir contra ellas, por lo que deberá interpretarse conforme a ellas.</p><p>El titular de astrocava.com podrá modificar, en cualquier momento, y sin aviso previo, la presentación y configuración del Sitio Web y de los Contenidos y Servicios que en él pudieran estar incorporados.</p><p>El titular de astrocava.com puede interrumpir, desactivar y/o cancelar cualquiera de los elementos que se integran en el Sitio Web o el acceso a los mismos.</p><p>Desde astrocava.com y sus subdominios es posible que se redirija a contenidos de otras páginas web, y de los que el titular de astrocava.com no es responsable ni es capaz de controlar los contenidos alojados por terceros en sus sitios web.&nbsp;</p><p>En principio, este sitio web debería garantizar un correcto funcionamiento los 365 días del año, 24 horas al día, pero existe la posibilidad que no esté disponible por mantenimiento, errores, causas de fuerza mayor... o una invasión de zombis que impidan que puedas acceder a la web.</p><p>En caso de imposibilidad de conexión y este sitio web sea de vital importancia para ti, siento decirte que el titular de astrocava.com no se responsabiliza de los daños o perjuicios de cualquier tipo que pudieran derivarse y te afecten como usuario.</p><p>El titular de astrocava.com no garantiza la continuidad, disponibilidad y utilidad del Sitio Web, ni de los Contenidos o Servicios.</p><h2 id="privacidad">Privacidad</h2><p>Este sitio web no recopila datos personales, pero dado que se te puede ocurrir enviarme una postal a la dirección que he puesto más arriba o un mensaje al correo electrónico de contacto, te aviso de que los datos de remitente que se incluyan, lo que aparezca en el asunto y cuerpo del mensaje y los documentos adjuntos serán objeto de tratamiento.</p><p>Como ves, como usuario, eres el único responsable de la veracidad y corrección de los datos que remitas y el hecho de que me los envíes me legitima para su tratamiento.</p><p>La finalidad del tratamiento de datos será gestionar y resolver consultas realizadas, dar a conocer nuevos servicios o las novedades del sitio web.</p><p>Los datos tratados se mantendrán en tanto no expiren los plazos legales establecidos para la conservación de datos, si hubiera obligación legal de mantenimiento, o de no existir ese plazo legal, hasta que solicites la supresión o la revocación del consentimiento otorgado.</p><p>El titular de este sitio web se compromete en relación con el uso y tratamiento de los datos personales de los usuarios, a respetar su confidencialidad, a utilizarlos de acuerdo con las finalidades enunciadas y adoptar  todas las medidas para evitar la alteración, pérdida y su tratamiento o acceso no autorizado.</p><h3 id="tus-derechos-en-relaci%C3%B3n-con-tus-datos">Tus derechos en relación con tus datos</h3><p>El usuario puede revocar el consentimiento para el tratamiento, haciendo ejercicio de los derechos de acceso, rectificación, supresión, portabilidad, oposición y limitación al tratamiento, poniéndolo en conocimiento del titular de astrocava.com a través de los canales de comunicación establecidos en esta página.</p><p>La comunicación deberá ir acompañada de cualquier documento oficial que permita la identificación, para evitar el acceso de sus datos por parte de terceros.</p>

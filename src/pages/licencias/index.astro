@@ -1,0 +1,107 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import {
+  BRITISH_MUSEUM_ALGOL,
+  CODE_COPYRIGHT_NOTICE,
+  MIDJOURNEY_ATTRIBUTION,
+  OWN_CONTENT_LICENSE,
+  PUBLIC_CONTENT_ATTRIBUTION,
+} from '../../../scripts/licensing-contract.mjs';
+
+const canonicalUrl = 'https://www.astrocava.com/licencias/';
+const repositoryBase =
+  'https://github.com/sercava/astrocava-static/blob/main';
+---
+
+<BaseLayout
+  title="Licencias y atribuciones"
+  description="Licencias del código y del contenido de Astrocava, exclusiones y atribuciones de material de terceros."
+  canonicalUrl={canonicalUrl}
+>
+  <article class="prose">
+    <h1>Licencias y atribuciones</h1>
+    <p>
+      Astrocava separa la licencia del código de la del contenido. Este resumen no
+      amplía las condiciones de los documentos completos ni las licencias de
+      terceros.
+    </p>
+
+    <h2>Código</h2>
+    <p>
+      El código propio del sitio se distribuye bajo la licencia MIT. Aviso de
+      copyright: <strong>{CODE_COPYRIGHT_NOTICE}</strong>.
+    </p>
+
+    <h2>Contenido editorial propio</h2>
+    <p>
+      Los textos editoriales originales se distribuyen bajo
+      <a href={OWN_CONTENT_LICENSE.url}>{OWN_CONTENT_LICENSE.name}</a>, salvo
+      indicación o exclusión expresa. La atribución solicitada es
+      <strong>{PUBLIC_CONTENT_ATTRIBUTION}</strong>, con enlace al contenido
+      original y a la licencia e indicación de los cambios cuando corresponda.
+    </p>
+
+    <h2>Imágenes</h2>
+    <p>
+      El manifiesto exacto identifica 272 familias y 634 archivos. Solo están
+      bajo {OWN_CONTENT_LICENSE.shortName} las 244 familias clasificadas como
+      obra propia. El favicon vigente forma una familia de identidad visual con
+      derechos reservados. La presencia de una imagen en el sitio o en el
+      historial del repositorio no amplía su licencia.
+    </p>
+
+    <h2>Material de terceros</h2>
+    <p>
+      Cada recurso de terceros conserva su licencia original. También quedan
+      fuera de las licencias generales el material de dominio público, los
+      logos, iconos, favicon, identidad visual, el aviso legal y la política de
+      cookies.
+    </p>
+
+    <h3>British Museum</h3>
+    <p>
+      La imagen «{BRITISH_MUSEUM_ALGOL.caption}» se utiliza en el contexto
+      informativo no comercial de Astrocava con el crédito
+      <a href={BRITISH_MUSEUM_ALGOL.sourceUrl}
+        >{BRITISH_MUSEUM_ALGOL.credit}</a
+      > y la licencia
+      <a href={BRITISH_MUSEUM_ALGOL.licenseUrl}
+        >{BRITISH_MUSEUM_ALGOL.license}</a
+      >. Esta licencia exige atribución, uso no comercial y compartir las
+      adaptaciones bajo la misma licencia.
+    </p>
+
+    <h2>Ilustraciones Midjourney</h2>
+    <p>
+      Nueve familias se presentan expresamente como ilustraciones conceptuales
+      generadas mediante prompts de texto, nunca como fotografías, mapas u
+      observaciones científicas. Crédito: <strong
+        >{MIDJOURNEY_ATTRIBUTION.credit}</strong
+      >. La indicación «CC BY 4.0 (aportaciones humanas)» alcanza únicamente los
+      derechos y aportaciones humanas que correspondan a Sergio Cava; no afirma
+      autoría humana exclusiva sobre el resultado íntegro.
+    </p>
+
+    <h2>Documentos completos</h2>
+    <ul>
+      <li><a href={`${repositoryBase}/LICENSE.md`}>Licencias y alcance</a></li>
+      <li><a href={`${repositoryBase}/NOTICE.md`}>Avisos y exclusiones</a></li>
+      <li>
+        <a href={`${repositoryBase}/ATTRIBUTIONS.md`}
+          >Atribuciones y procedencia</a
+        >
+      </li>
+      <li>
+        <a href={`${repositoryBase}/RIGHTS_MANIFEST.json`}
+          >Manifiesto exacto de derechos y hashes</a
+        >
+      </li>
+    </ul>
+    <p>
+      El manifiesto fue verificado el 12 de julio de 2026 y su digest de inventario
+      es <code
+        >66098411a458e93998f219dc16a60ad89a78cab77554e9930b623a590bbe8ea9</code
+      >. El build rechaza cualquier ruta ausente, extra o modificada.
+    </p>
+  </article>
+</BaseLayout>

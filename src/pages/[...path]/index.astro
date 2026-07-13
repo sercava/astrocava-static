@@ -1,0 +1,54 @@
+---
+import ArticleLayout from '../../components/ArticleLayout.astro';
+import SectionIndex from '../../components/SectionIndex.astro';
+import { getPublishedEntries, getPostsInSection } from '../../lib/entries';
+import { SECTION_INDEXES } from '../../lib/routes';
+
+export async function getStaticPaths() {
+  const entries = await getPublishedEntries();
+  const entryPaths = entries.map((entry) => {
+    const path = entry.data.pathname.replace(/^\//, '').replace(/\/$/, '');
+    return {
+      params: { path },
+      props: { kind: 'entry' as const, entry },
+    };
+  });
+
+  const sectionPaths = SECTION_INDEXES.filter((s) => s.path !== '/').map(
+    (section) => {
+      const path = section.path.replace(/^\//, '').replace(/\/$/, '');
+      return {
+        params: { path },
+        props: {
+          kind: 'section' as const,
+          sectionPath: section.path,
+          sectionTitle: section.title,
+        },
+      };
+    },
+  );
+
+  const pathSet = new Set(entryPaths.map((p) => p.params.path));
+  const sections = sectionPaths.filter((s) => !pathSet.has(s.params.path));
+
+  return [...entryPaths, ...sections];
+}
+
+const props = Astro.props;
+const sectionPosts =
+  props.kind === 'section'
+    ? await getPostsInSection(props.sectionPath)
+    : [];
+---
+
+{
+  props.kind === 'entry' ? (
+    <ArticleLayout entry={props.entry} />
+  ) : (
+    <SectionIndex
+      title={props.sectionTitle}
+      pathname={props.sectionPath}
+      entries={sectionPosts}
+    />
+  )
+}

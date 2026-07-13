@@ -1,0 +1,225 @@
+---
+interface Props {
+  variant: 'header' | 'hero';
+  idPrefix: string;
+}
+
+const { variant, idPrefix } = Astro.props;
+const label = 'Buscar artículos, etiquetas y autores';
+const panelId = `${idPrefix}-panel`;
+const inputId = `${idPrefix}-input`;
+const resultsId = `${idPrefix}-results`;
+---
+
+<div
+  class:list={['search-widget', `search-widget--${variant}`]}
+  data-search-root
+  data-search-variant={variant}
+>
+  {
+    variant === 'header' && (
+      <button
+        class="site-search-toggle"
+        type="button"
+        aria-label="Abrir búsqueda"
+        aria-controls={panelId}
+        aria-expanded="false"
+        data-search-toggle
+      >
+        <svg aria-hidden="true" viewBox="0 0 24 24">
+          <path d="m21 21-4.35-4.35m2.35-5.65a8 8 0 1 1-16 0 8 8 0 0 1 16 0Z" />
+        </svg>
+      </button>
+    )
+  }
+  <div
+    id={panelId}
+    class:list={[variant === 'header' && 'site-search-popover']}
+    hidden={variant === 'header'}
+    data-search-panel
+  >
+    <form class="search-form" role="search" action="/" data-search-form>
+      <label class="visually-hidden" for={inputId}>{label}</label>
+      <svg class="search-input-icon" aria-hidden="true" viewBox="0 0 24 24">
+        <path d="m21 21-4.35-4.35m2.35-5.65a8 8 0 1 1-16 0 8 8 0 0 1 16 0Z" />
+      </svg>
+      <input
+        id={inputId}
+        class="search-input"
+        type="search"
+        name="q"
+        placeholder={label}
+        autocomplete="off"
+        aria-controls={resultsId}
+        aria-expanded="false"
+        data-search-input
+      />
+    </form>
+    <div
+      id={resultsId}
+      class="search-results"
+      aria-live="polite"
+      hidden
+      data-search-results
+    ></div>
+  </div>
+</div>
+
+<script>
+  type SearchItem = {
+    kind: 'Artículo' | 'Etiqueta' | 'Autor';
+    title: string;
+    pathname: string;
+    description?: string;
+    searchText: string;
+  };
+
+  let searchItemsPromise: Promise<SearchItem[]> | undefined;
+  const loadItems = () => {
+    searchItemsPromise ??= fetch('/search-index.json', {
+      headers: { Accept: 'application/json' },
+    }).then((response) => {
+      if (!response.ok) throw new Error(`HTTP ${response.status}`);
+      return response.json() as Promise<SearchItem[]>;
+    });
+    return searchItemsPromise;
+  };
+
+  const normalize = (value: string) =>
+    value
+      .normalize('NFD')
+      .replace(/[\u0300-\u036f]/g, '')
+      .toLocaleLowerCase('es');
+
+  for (const root of document.querySelectorAll<HTMLElement>('[data-search-root]')) {
+    if (root.dataset.searchInitialized === 'true') continue;
+    root.dataset.searchInitialized = 'true';
+
+    const form = root.querySelector<HTMLFormElement>('[data-search-form]');
+    const input = root.querySelector<HTMLInputElement>('[data-search-input]');
+    const results = root.querySelector<HTMLElement>('[data-search-results]');
+    const panel = root.querySelector<HTMLElement>('[data-search-panel]');
+    const toggle = root.querySelector<HTMLButtonElement>('[data-search-toggle]');
+    let requestVersion = 0;
+
+    const closeResults = () => {
+      if (!input || !results) return;
+      requestVersion += 1;
+      results.hidden = true;
+      results.removeAttribute('aria-busy');
+      results.replaceChildren();
+      input.setAttribute('aria-expanded', 'false');
+    };
+
+    const closeWidget = (restoreFocus = false) => {
+      closeResults();
+      if (!toggle || !panel || panel.hidden) return;
+      panel.hidden = true;
+      toggle.setAttribute('aria-expanded', 'false');
+      toggle.setAttribute('aria-label', 'Abrir búsqueda');
+      if (restoreFocus) toggle.focus();
+    };
+
+    const showMessage = (message: string) => {
+      if (!results || !input) return;
+      const text = document.createElement('p');
+      text.className = 'search-empty';
+      text.textContent = message;
+      results.replaceChildren(text);
+      results.hidden = false;
+      input.setAttribute('aria-expanded', 'true');
+    };
+
+    const renderResults = async () => {
+      if (!input || !results) return;
+      const rawQuery = input.value.trim();
+      const query = normalize(rawQuery);
+      const tokens = query.split(/\s+/).filter(Boolean);
+      if (query.length < 2) {
+        closeResults();
+        return;
+      }
+
+      const version = ++requestVersion;
+      results.setAttribute('aria-busy', 'true');
+      try {
+        const items = await loadItems();
+        if (version !== requestVersion) return;
+        const matches = items
+          .filter((item) => tokens.every((token) => normalize(item.searchText).includes(token)))
+          .sort((left, right) => {
+            const leftTitle = normalize(left.title);
+            const rightTitle = normalize(right.title);
+            return Number(rightTitle.startsWith(query)) - Number(leftTitle.startsWith(query));
+          })
+          .slice(0, 8);
+
+        if (matches.length === 0) {
+          showMessage(`No hay resultados para «${rawQuery}».`);
+          return;
+        }
+
+        const list = document.createElement('ul');
+        list.className = 'search-result-list';
+        for (const item of matches) {
+          const row = document.createElement('li');
+          const link = document.createElement('a');
+          const meta = document.createElement('span');
+          const title = document.createElement('span');
+          link.href = item.pathname;
+          meta.className = 'search-result-kind';
+          meta.textContent = item.kind;
+          title.className = 'search-result-title';
+          title.textContent = item.title;
+          link.append(meta, title);
+          if (item.description) {
+            const description = document.createElement('span');
+            description.className = 'search-result-description';
+            description.textContent = item.description;
+            link.append(description);
+          }
+          row.append(link);
+          list.append(row);
+        }
+        results.replaceChildren(list);
+        results.hidden = false;
+        input.setAttribute('aria-expanded', 'true');
+      } catch {
+        if (version === requestVersion) {
+          showMessage('No se pudo cargar la búsqueda. Inténtalo de nuevo.');
+        }
+      } finally {
+        if (version === requestVersion) results.removeAttribute('aria-busy');
+      }
+    };
+
+    form?.addEventListener('submit', (event) => {
+      event.preventDefault();
+      void renderResults();
+    });
+    input?.addEventListener('focus', () => void loadItems().catch(() => {}));
+    input?.addEventListener('input', () => void renderResults());
+    toggle?.addEventListener('click', () => {
+      if (!panel) return;
+      const opening = panel.hidden;
+      panel.hidden = !opening;
+      toggle.setAttribute('aria-expanded', String(opening));
+      toggle.setAttribute('aria-label', opening ? 'Cerrar búsqueda' : 'Abrir búsqueda');
+      if (opening) {
+        input?.focus();
+        void loadItems().catch(() => {});
+      } else {
+        closeResults();
+      }
+    });
+    document.addEventListener('click', (event) => {
+      if (root.contains(event.target as Node)) return;
+      closeWidget();
+    });
+    document.addEventListener('keydown', (event) => {
+      if (event.key !== 'Escape') return;
+      if (toggle && panel && !panel.hidden) closeWidget(true);
+      else if (root.contains(document.activeElement)) closeResults();
+    });
+  }
+</script>

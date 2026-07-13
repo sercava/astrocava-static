@@ -1,0 +1,49 @@
+{
+  "name": "astrocava-static",
+  "type": "module",
+  "version": "0.1.0",
+  "private": true,
+  "license": "SEE LICENSE IN LICENSE.md",
+  "packageManager": "npm@11.13.0",
+  "engines": {
+    "node": "24.16.0",
+    "npm": "11.13.0"
+  },
+  "scripts": {
+    "predev": "npm run check:privacy && npm run check:rights",
+    "dev": "astro dev",
+    "prebuild": "npm run check:privacy && npm run check:rights",
+    "build": "node scripts/build-production.mjs",
+    "build:verify": "node scripts/build-verify.mjs",
+    "preview": "astro preview",
+    "check": "astro check",
+    "check:privacy": "node scripts/check-legal-notice-source.mjs",
+    "check:rights": "node scripts/check-rights.mjs",
+    "check:urls": "node scripts/check-predeploy.mjs --root dist --scope urls",
+    "check:links": "node scripts/check-predeploy.mjs --root dist --scope links",
+    "check:images": "node scripts/check-predeploy.mjs --root dist --scope images",
+    "check:seo": "node scripts/check-predeploy.mjs --root dist --scope seo",
+    "check:sitemap": "node scripts/check-predeploy.mjs --root dist --scope sitemap",
+    "check:predeploy": "node scripts/check-predeploy.mjs --root dist",
+    "check:predeploy:verify": "node scripts/check-predeploy.mjs --root dist-verify",
+    "test:legal-notice": "node --test --test-isolation=none scripts/remark-legal-notice.test.mjs",
+    "test:licensing": "node --test --test-isolation=none scripts/licensing.test.mjs",
+    "test:rights": "node --test --test-isolation=none scripts/check-rights.test.mjs",
+    "test:predeploy": "node --test --test-isolation=none scripts/check-predeploy.test.mjs",
+    "test:presentation": "node --test --test-isolation=none scripts/presentation.test.mjs",
+    "test:provenance": "node --test --test-isolation=none scripts/deployment-provenance.test.mjs",
+    "test:smoke": "node --test --test-isolation=none scripts/smoke-deployment.test.mjs",
+    "test:workflow": "node --test --test-isolation=none scripts/workflow-contract.test.mjs",
+    "test:ci": "npm run test:legal-notice && npm run test:licensing && npm run test:rights && npm run test:predeploy && npm run test:presentation && npm run test:provenance && npm run test:smoke && npm run test:workflow"
+  },
+  "dependencies": {
+    "@astrojs/mdx": "^4.3.0",
+    "@astrojs/sitemap": "^3.4.1",
+    "astro": "^5.12.0"
+  },
+  "devDependencies": {
+    "@astrojs/check": "0.9.9",
+    "typescript": "^5.8.0",
+    "vite": "^6.4.3"
+  }
+}
