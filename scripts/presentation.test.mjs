@@ -109,3 +109,22 @@ test('las tarjetas bookmark de Ghost tienen estilos estructurales', () => {
   }
   assert.match(css, /\.kg-bookmark-icon\s*{[^}]*width:\s*1rem/s);
 });
+
+test('las imágenes del artículo se amplían sin alterar los enlaces', () => {
+  const article = source('src/components/ArticleLayout.astro');
+  const lightbox = source('src/components/ImageLightbox.astro');
+  const css = source('src/styles/global.css');
+
+  assert.match(article, /import ImageLightbox from '\.\/ImageLightbox\.astro'/);
+  assert.match(article, /<ImageLightbox \/>/);
+  assert.match(lightbox, /<dialog[\s\S]*data-image-lightbox/);
+  assert.match(lightbox, /\.feature-image img/);
+  assert.match(lightbox, /\.prose figure\.kg-image-card img/);
+  assert.match(lightbox, /\.prose figure\.kg-gallery-card img/);
+  assert.match(lightbox, /if \(image\.closest\('a'\)\) continue/);
+  assert.match(lightbox, /image\.getAttribute\('src'\) \|\| image\.currentSrc/);
+  assert.match(lightbox, /dialog\.showModal\(\)/);
+  assert.match(lightbox, /event\.key !== 'Enter' && event\.key !== ' '/);
+  assert.match(css, /\.prose img\[data-lightbox-trigger\]\s*{[^}]*cursor:\s*zoom-in/s);
+  assert.match(css, /\.image-lightbox-image\s*{[^}]*object-fit:\s*contain/s);
+});

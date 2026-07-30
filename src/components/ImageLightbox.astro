@@ -1,0 +1,118 @@
+<dialog
+  class="image-lightbox"
+  data-image-lightbox
+  aria-label="Imagen ampliada"
+>
+  <button
+    class="image-lightbox-close"
+    type="button"
+    data-image-lightbox-close
+    aria-label="Cerrar imagen ampliada"
+  >
+    <span aria-hidden="true">×</span>
+  </button>
+  <figure class="image-lightbox-figure">
+    <img class="image-lightbox-image" data-image-lightbox-image alt="" />
+    <figcaption
+      class="image-lightbox-caption"
+      data-image-lightbox-caption
+      hidden
+    >
+    </figcaption>
+  </figure>
+</dialog>
+
+<script>
+  const lightbox = document.querySelector<HTMLDialogElement>(
+    '[data-image-lightbox]',
+  );
+  const lightboxImage = lightbox?.querySelector<HTMLImageElement>(
+    '[data-image-lightbox-image]',
+  );
+  const lightboxCaption = lightbox?.querySelector<HTMLElement>(
+    '[data-image-lightbox-caption]',
+  );
+  const closeButton = lightbox?.querySelector<HTMLButtonElement>(
+    '[data-image-lightbox-close]',
+  );
+
+  if (lightbox && lightboxImage && lightboxCaption && closeButton) {
+    const dialog = lightbox;
+    const modalImage = lightboxImage;
+    const modalCaption = lightboxCaption;
+    const modalCloseButton = closeButton;
+    const selector = [
+      '.feature-image img',
+      '.prose figure.kg-image-card img',
+      '.prose figure.kg-gallery-card img',
+    ].join(', ');
+    const images = document.querySelectorAll<HTMLImageElement>(selector);
+    let activeImage: HTMLImageElement | null = null;
+
+    function sourceFor(image: HTMLImageElement) {
+      return image.getAttribute('src') || image.currentSrc;
+    }
+
+    function captionFor(image: HTMLImageElement) {
+      const figureCaption = image
+        .closest('figure')
+        ?.querySelector('figcaption')
+        ?.textContent?.trim();
+      return figureCaption || image.alt.trim();
+    }
+
+    function openFrom(image: HTMLImageElement) {
+      const source = sourceFor(image);
+      if (!source) return;
+
+      if (typeof dialog.showModal !== 'function') {
+        window.open(source, '_blank', 'noopener');
+        return;
+      }
+
+      activeImage = image;
+      modalImage.src = source;
+      modalImage.alt = image.alt;
+
+      const caption = captionFor(image);
+      modalCaption.textContent = caption;
+      modalCaption.hidden = !caption;
+
+      dialog.showModal();
+      modalCloseButton.focus();
+    }
+
+    for (const image of images) {
+      if (image.closest('a')) continue;
+
+      image.dataset.lightboxTrigger = '';
+      image.tabIndex = 0;
+      image.setAttribute('role', 'button');
+      image.setAttribute('aria-haspopup', 'dialog');
+      image.setAttribute(
+        'aria-label',
+        image.alt.trim() ? `Ampliar imagen: ${image.alt.trim()}` : 'Ampliar imagen',
+      );
+
+      image.addEventListener('click', () => openFrom(image));
+      image.addEventListener('keydown', (event) => {
+        if (event.key !== 'Enter' && event.key !== ' ') return;
+        event.preventDefault();
+        openFrom(image);
+      });
+    }
+
+    modalCloseButton.addEventListener('click', () => dialog.close());
+    dialog.addEventListener('click', (event) => {
+      if (event.target === dialog) dialog.close();
+    });
+    dialog.addEventListener('close', () => {
+      modalImage.removeAttribute('src');
+      modalImage.alt = '';
+      modalCaption.textContent = '';
+      modalCaption.hidden = true;
+      activeImage?.focus({ preventScroll: true });
+      activeImage = null;
+    });
+  }
+</script>

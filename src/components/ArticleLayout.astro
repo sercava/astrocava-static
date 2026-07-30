@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import ImageLightbox from './ImageLightbox.astro';
 import { render } from 'astro:content';
 import type { CollectionEntry } from 'astro:content';
 import { resolveMetaDescription } from '../lib/seo';
@@ -110,4 +111,5 @@ const dateStr = d.published_at
     </header>
     <Content />
   </article>
+  <ImageLightbox />
 </BaseLayout>
