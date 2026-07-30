@@ -28,6 +28,10 @@ function page({ route, body = '', description = 'Descripción técnica de prueba
   return `<!doctype html><html lang="es"><head><title>${route} | Astrocava</title><meta name="description" content="${description}"><link rel="canonical" href="${url}"><meta property="og:url" content="${url}"></head><body><h1>Página ${route}</h1>${body}</body></html>`;
 }
 
+function redirectPage({ to = '/' } = {}) {
+  return `<!doctype html><html><head><meta http-equiv="refresh" content="0;url=${to}"><link rel="canonical" href="${new URL(to, ORIGIN)}"></head></html>`;
+}
+
 function write(root, publicPath, value) {
   const filePath = path.join(root, ...publicPath.split('/').filter(Boolean));
   fs.mkdirSync(path.dirname(filePath), { recursive: true });
@@ -45,6 +49,7 @@ function createFixture(t) {
     body: '<a href="/licencias/#legal">Licencias</a><img src="/content/images/test.jpg" alt="Prueba">',
   }));
   write(root, 'licencias/index.html', page({ route: '/licencias/', body: '<a id="legal"></a><a href="/">Inicio</a>' }));
+  write(root, 'page/2/index.html', redirectPage());
   write(root, 'content/images/test.jpg', image);
   write(root, 'favicon.ico', favicon);
 
@@ -55,14 +60,15 @@ function createFixture(t) {
   write(root, 'robots.txt', `User-agent: *\nAllow: /\nSitemap: ${ORIGIN}/sitemap-index.xml\n`);
 
   const contract = {
-    schemaVersion: 1,
+    schemaVersion: 2,
     canonicalOrigin: ORIGIN,
     baseline: 'Fixture pública mínima',
     legacyUrlCount: 1,
-    expectedHtmlCount: 2,
+    expectedHtmlCount: 3,
     expectedImageFiles: 2,
     urls: ['/', '/licencias/'],
     protectedUrls: ['/'],
+    redirects: [{ from: '/page/2/', to: '/' }],
   };
   const rightsManifest = {
     totals: { files: 2 },
@@ -87,7 +93,9 @@ test('acepta el build que satisface todo el contrato predeploy', (t) => {
   const fixture = createFixture(t);
   const result = run(fixture);
   assert.deepEqual(result.scopes, ['urls', 'links', 'images', 'seo', 'sitemap']);
-  assert.equal(result.summary.urls.html, 2);
+  assert.equal(result.summary.urls.html, 3);
+  assert.equal(result.summary.urls.content, 2);
+  assert.equal(result.summary.urls.redirects, 1);
   assert.equal(result.summary.images.imageFiles, 2);
   assert.equal(result.summary.sitemap.sitemapUrls, 2);
 });
@@ -95,26 +103,48 @@ test('acepta el build que satisface todo el contrato predeploy', (t) => {
 test('fija los totales y las cinco URLs SEO del contrato público real', () => {
   assert.doesNotThrow(() => validatePredeployContract(ACTUAL_CONTRACT));
   assert.equal(ACTUAL_CONTRACT.legacyUrlCount, 161);
-  assert.equal(ACTUAL_CONTRACT.expectedHtmlCount, 162);
+  assert.equal(ACTUAL_CONTRACT.expectedHtmlCount, 163);
   assert.equal(ACTUAL_CONTRACT.expectedImageFiles, 634);
   assert.deepEqual(ACTUAL_CONTRACT.protectedUrls, PROTECTED_URLS);
+  assert.deepEqual(ACTUAL_CONTRACT.redirects, [{ from: '/page/2/', to: '/' }]);
 });
 
 test('rechaza contratos con URLs no canónicas, desordenadas o no declaradas', () => {
   const base = {
-    schemaVersion: 1,
+    schemaVersion: 2,
     canonicalOrigin: ORIGIN,
     baseline: 'Prueba',
     legacyUrlCount: 1,
-    expectedHtmlCount: 2,
+    expectedHtmlCount: 3,
     expectedImageFiles: 0,
     urls: ['/', '/licencias/'],
     protectedUrls: ['/'],
+    redirects: [{ from: '/page/2/', to: '/' }],
   };
   assert.throws(() => validatePredeployContract({ ...base, urls: ['/licencias/', '/'] }), /ordenada/);
   assert.throws(() => validatePredeployContract({ ...base, urls: ['/', '/licencias'] }), /barra final/);
   assert.throws(() => validatePredeployContract({ ...base, protectedUrls: ['/', '/'] }), /duplicados/);
   assert.throws(() => validatePredeployContract({ ...base, privatePath: 'backup.sql' }), /Campo no permitido/);
+});
+
+test('rechaza redirects ausentes, incorrectos o incluidos en el sitemap', (t) => {
+  const fixture = createFixture(t);
+  write(fixture.root, 'page/2/index.html', redirectPage({ to: '/licencias/' }));
+  assert.throws(() => run(fixture, ['urls']), /page\/2\/ redirige a .*licencias.* no a/);
+
+  write(
+    fixture.root,
+    'page/2/index.html',
+    redirectPage().replace('href="https://www.astrocava.com/"', 'href="http://["'),
+  );
+  assert.throws(() => run(fixture, ['urls']), /page\/2\/ debe declarar canonical/);
+
+  write(fixture.root, 'page/2/index.html', redirectPage());
+  fs.writeFileSync(
+    path.join(fixture.root, 'sitemap-0.xml'),
+    `<?xml version="1.0"?><urlset><url><loc>${ORIGIN}/</loc></url><url><loc>${ORIGIN}/licencias/</loc></url><url><loc>${ORIGIN}/page/2/</loc></url></urlset>`,
+  );
+  assert.throws(() => run(fixture, ['sitemap']), /URL de sitemap extra: \/page\/2\//);
 });
 
 test('rechaza páginas HTML faltantes y extra', (t) => {

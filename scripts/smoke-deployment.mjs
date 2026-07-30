@@ -16,6 +16,67 @@ const PROTECTED_ROUTES = [
   ...PREDEPLOY_CONTRACT.protectedUrls.map((route) => route.replace(/^\//, '')),
 ];
 
+function htmlTags(html, name) {
+  return [...html.matchAll(new RegExp(`<${name}\\b[^>]*>`, 'gi'))].map(
+    (match) => match[0],
+  );
+}
+
+function htmlAttribute(tag, name) {
+  const escaped = name.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  const match = tag.match(
+    new RegExp(
+      `(?:^|\\s)${escaped}\\s*=\\s*(?:"([^"]*)"|'([^']*)'|([^\\s"'=<>]+))`,
+      'i',
+    ),
+  );
+  return match ? match[1] ?? match[2] ?? match[3] ?? '' : null;
+}
+
+function resolvedHref(value, base) {
+  try {
+    return value ? new URL(value, base).href : null;
+  } catch {
+    return null;
+  }
+}
+
+function assertStaticRedirect(html, redirect, origin) {
+  const refreshTags = htmlTags(html, 'meta').filter(
+    (tag) => htmlAttribute(tag, 'http-equiv')?.toLowerCase() === 'refresh',
+  );
+  const content =
+    refreshTags.length === 1 ? htmlAttribute(refreshTags[0], 'content') : null;
+  const match = content?.match(/^\s*0\s*;\s*url\s*=\s*(.+?)\s*$/i);
+  if (!match) {
+    throw new Error(`${redirect.from}: falta meta refresh inmediato`);
+  }
+  const actual = resolvedHref(
+    match[1].replace(/^(['"])(.*)\1$/, '$2'),
+    origin,
+  );
+  const expected = new URL(redirect.to, origin);
+  if (!actual) {
+    throw new Error(`${redirect.from}: destino de refresh inválido`);
+  }
+  if (actual !== expected.href) {
+    throw new Error(
+      `${redirect.from}: redirige a ${actual}, no a ${expected.href}`,
+    );
+  }
+
+  const canonicals = htmlTags(html, 'link').filter((tag) =>
+    htmlAttribute(tag, 'rel')?.toLowerCase().split(/\s+/).includes('canonical'),
+  );
+  const canonicalHref =
+    canonicals.length === 1 ? htmlAttribute(canonicals[0], 'href') : null;
+  if (resolvedHref(canonicalHref, origin) !== expected.href) {
+    throw new Error(
+      `${redirect.from}: canonical distinto del destino ${expected.href}`,
+    );
+  }
+}
+
 function parseArguments(argv) {
   const values = {};
   for (let index = 0; index < argv.length; index += 2) {
@@ -128,6 +189,13 @@ export async function smokeDeployment(options) {
     if (route === 'aviso-legal/' && !html.includes('data-legal-identity="production"')) {
       throw new Error('El aviso legal desplegado no tiene marcador de producción');
     }
+  }
+
+  for (const redirect of PREDEPLOY_CONTRACT.redirects) {
+    const html = await (
+      await request(redirect.from.replace(/^\//, ''), 'text/html')
+    ).text();
+    assertStaticRedirect(html, redirect, origin);
   }
 
   await request('sitemap.xml', 'xml');

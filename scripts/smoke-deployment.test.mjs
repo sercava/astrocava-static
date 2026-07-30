@@ -12,6 +12,10 @@ const LEGAL_HTML = HTML.replace(
   '</body>',
   '<div data-legal-identity="production">Identidad</div></body>',
 );
+const REDIRECT_HTML = `<!doctype html><html><head>
+  <meta http-equiv="refresh" content="0;url=/">
+  <link rel="canonical" href="https://www.astrocava.com/">
+</head></html>`;
 
 async function serverFixture(context, overrides = {}) {
   const seenHosts = [];
@@ -52,6 +56,11 @@ async function serverFixture(context, overrides = {}) {
       response.end(overrides.legalHtml ?? LEGAL_HTML);
       return;
     }
+    if (route === '/page/2/') {
+      response.setHeader('content-type', 'text/html');
+      response.end(overrides.redirectHtml ?? REDIRECT_HTML);
+      return;
+    }
     response.setHeader('content-type', 'text/html');
     response.end(HTML);
   });
@@ -75,7 +84,7 @@ test('smoke valida procedencia, rutas, imagen y Host del backend pre-DNS', async
   });
 
   assert.equal(provenance.commit, COMMIT);
-  assert.equal(seenHosts.length, 12);
+  assert.equal(seenHosts.length, 13);
   assert.deepEqual(new Set(seenHosts), new Set(['www.astrocava.com']));
 });
 
@@ -116,5 +125,37 @@ test('smoke rechaza commit distinto e identidad sintética', async (context) => 
       expectedCommit: COMMIT,
     }),
     /identidad sintética/,
+  );
+});
+
+test('smoke rechaza una compatibilidad estática con destino incorrecto', async (context) => {
+  const wrongRedirect = await serverFixture(context, {
+    redirectHtml: REDIRECT_HTML.replaceAll(
+      'https://www.astrocava.com/',
+      'https://www.astrocava.com/licencias/',
+    ).replace('content="0;url=/"', 'content="0;url=/licencias/"'),
+  });
+  await assert.rejects(
+    smokeDeployment({
+      origin: 'https://www.astrocava.com',
+      backend: wrongRedirect.backend,
+      expectedCommit: COMMIT,
+    }),
+    /page\/2\/: redirige a .*licencias.* no a/,
+  );
+
+  const invalidCanonical = await serverFixture(context, {
+    redirectHtml: REDIRECT_HTML.replace(
+      'href="https://www.astrocava.com/"',
+      'href="http://["',
+    ),
+  });
+  await assert.rejects(
+    smokeDeployment({
+      origin: 'https://www.astrocava.com',
+      backend: invalidCanonical.backend,
+      expectedCommit: COMMIT,
+    }),
+    /page\/2\/: canonical distinto del destino/,
   );
 });
