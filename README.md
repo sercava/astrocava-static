@@ -46,13 +46,13 @@ Para desarrollo local, copia `.env.example` como `.env.local` y sustituye todos 
 
 `npm run build` es estricto y produce el único artefacto desplegable en `dist/`. `npm run build:verify` usa una identidad sintética determinista para checks de clones y pull requests y escribe en `dist-verify/`; ese directorio está ignorado y nunca debe desplegarse.
 
-## CI y staging
+## CI y despliegue
 
 `.github/workflows/ci.yml` se ejecuta en pushes y pull requests con Node `24.16.0` y npm `11.13.0`. No accede a secretos: instala el lock, ejecuta todas las regresiones y `astro check`, genera solo `dist-verify/` y aplica el gate predeploy sintético.
 
 El despliegue de `.github/workflows/deploy-pages.yml` es manual, acepta únicamente `main` y usa el entorno protegido `github-pages`. Ese entorno debe restringirse a la rama `main` y contener exactamente los cinco secretos legales. El job vuelve a ejecutar tests y checks, construye `dist/` con identidad real, valida el marcador legal de producción, añade `deployment-provenance.json` con el commit y digest SHA-256 del payload y despliega ese mismo directorio mediante GitHub Pages.
 
-Antes del corte DNS, el smoke del workflow consulta directamente el backend Pages con `Host: www.astrocava.com`. Así valida el artefacto nuevo sin dirigir tráfico público desde Ghost; HTTPS y las redirecciones públicas se comprueban durante el corte.
+Tras publicar, el smoke del workflow consulta `https://www.astrocava.com`, espera brevemente la propagación del commit exacto y valida por HTTPS la procedencia, las rutas protegidas, el sitemap, `robots.txt` y una imagen pública.
 
 ## Comandos disponibles
 

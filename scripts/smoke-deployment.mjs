@@ -3,6 +3,7 @@ import fs from 'node:fs';
 import http from 'node:http';
 import https from 'node:https';
 import path from 'node:path';
+import { setTimeout as delay } from 'node:timers/promises';
 import { fileURLToPath } from 'node:url';
 
 const ROOT = path.join(path.dirname(fileURLToPath(import.meta.url)), '..');
@@ -39,6 +40,14 @@ function requiredUrl(value, label) {
   }
 }
 
+function integerOption(value, label, minimum) {
+  const parsed = Number(value);
+  if (!Number.isInteger(parsed) || parsed < minimum) {
+    throw new Error(`${label} debe ser un entero mayor o igual que ${minimum}`);
+  }
+  return parsed;
+}
+
 function rawRequest(url, headers) {
   const transport = url.protocol === 'https:' ? https : http;
   return new Promise((resolve, reject) => {
@@ -68,6 +77,8 @@ export async function smokeDeployment(options) {
   const backend = requiredUrl(options.backend ?? options.origin, 'backend');
   const expectedCommit = options.expectedCommit;
   if (!expectedCommit) throw new Error('Falta expectedCommit para el smoke');
+  const attempts = integerOption(options.attempts ?? 1, 'attempts', 1);
+  const retryDelayMs = integerOption(options.retryDelayMs ?? 0, 'retryDelayMs', 0);
 
   async function request(relativePath, expectedType) {
     const logicalUrl = new URL(relativePath, origin);
@@ -84,12 +95,25 @@ export async function smokeDeployment(options) {
     return response;
   }
 
-  const provenance = await (await request('deployment-provenance.json', 'application/json')).json();
-  if (provenance.commit !== expectedCommit) {
-    throw new Error(`Staging sirve ${provenance.commit}, no ${expectedCommit}`);
-  }
-  if (!/^[a-f0-9]{64}$/.test(provenance.payload?.digest ?? '')) {
-    throw new Error('Staging no expone un digest de payload válido');
+  let provenance;
+  for (let attempt = 1; attempt <= attempts; attempt += 1) {
+    try {
+      provenance = await (
+        await request('deployment-provenance.json', 'application/json')
+      ).json();
+      if (provenance.commit !== expectedCommit) {
+        throw new Error(
+          `El despliegue sirve ${provenance.commit}, no ${expectedCommit}`,
+        );
+      }
+      if (!/^[a-f0-9]{64}$/.test(provenance.payload?.digest ?? '')) {
+        throw new Error('El despliegue no expone un digest de payload válido');
+      }
+      break;
+    } catch (error) {
+      if (attempt === attempts) throw error;
+      await delay(retryDelayMs);
+    }
   }
 
   for (const route of PROTECTED_ROUTES) {
@@ -102,7 +126,7 @@ export async function smokeDeployment(options) {
       throw new Error(`${route || '/'}: contiene identidad sintética`);
     }
     if (route === 'aviso-legal/' && !html.includes('data-legal-identity="production"')) {
-      throw new Error('El aviso legal de staging no tiene marcador de producción');
+      throw new Error('El aviso legal desplegado no tiene marcador de producción');
     }
   }
 
@@ -127,6 +151,8 @@ if (isMain) {
     backend: values.backend,
     hostHeader: values['host-header'],
     expectedCommit: values['expected-commit'],
+    attempts: values.attempts,
+    retryDelayMs: values['retry-delay-ms'],
   });
   console.log(
     `smoke-deployment: ${provenance.commit} ${provenance.payload.digest} ok`,

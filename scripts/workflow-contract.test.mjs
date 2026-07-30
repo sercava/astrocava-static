@@ -60,10 +60,14 @@ test('solo el despliegue consume los cinco secretos y construye producción', ()
   assert.match(DEPLOY, /deployment-provenance\.mjs verify/);
 });
 
-test('despliegue usa el flujo oficial actual de GitHub Pages y smoke pre-DNS', () => {
+test('despliegue usa el flujo oficial actual de GitHub Pages y smoke de producción', () => {
   assert.match(DEPLOY, /actions\/configure-pages@983d7736d9b0ae728b81ab479565c72886d7745b/);
   assert.match(DEPLOY, /actions\/upload-pages-artifact@7b1f4a764d45c48632c6b24a0339c27f5614fb0b/);
   assert.match(DEPLOY, /actions\/deploy-pages@d6db90164ac5ed86f2b6aed7e0febac5b3c0c03e/);
-  assert.match(DEPLOY, /--backend http:\/\/sercava\.github\.io/);
-  assert.match(DEPLOY, /--host-header www\.astrocava\.com/);
+  assert.match(DEPLOY, /--origin https:\/\/www\.astrocava\.com/);
+  assert.match(DEPLOY, /--expected-commit "\$\{\{ github\.sha \}\}"/);
+  assert.match(DEPLOY, /--attempts 12/);
+  assert.match(DEPLOY, /--retry-delay-ms 5000/);
+  assert.doesNotMatch(DEPLOY, /--backend http:\/\/sercava\.github\.io/);
+  assert.doesNotMatch(DEPLOY, /--host-header www\.astrocava\.com/);
 });

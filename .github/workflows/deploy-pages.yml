@@ -1,4 +1,4 @@
-name: Deploy staging to GitHub Pages
+name: Deploy production to GitHub Pages
 
 on:
   workflow_dispatch:
@@ -80,14 +80,14 @@ jobs:
         with:
           path: dist
 
-      - name: Deploy staging artifact
+      - name: Deploy production artifact
         id: deployment
         uses: actions/deploy-pages@d6db90164ac5ed86f2b6aed7e0febac5b3c0c03e # v4
 
-      - name: Smoke-test Pages backend before DNS cut
+      - name: Smoke-test production deployment
         run: >-
           node scripts/smoke-deployment.mjs
           --origin https://www.astrocava.com
-          --backend http://sercava.github.io
-          --host-header www.astrocava.com
           --expected-commit "${{ github.sha }}"
+          --attempts 12
+          --retry-delay-ms 5000

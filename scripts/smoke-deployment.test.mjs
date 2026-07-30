@@ -15,14 +15,18 @@ const LEGAL_HTML = HTML.replace(
 
 async function serverFixture(context, overrides = {}) {
   const seenHosts = [];
+  let provenanceRequests = 0;
   const server = http.createServer((request, response) => {
     seenHosts.push(request.headers.host);
     const route = request.url;
     if (route === '/deployment-provenance.json') {
+      const commits = overrides.commits ?? [overrides.commit ?? COMMIT];
+      const commit = commits[Math.min(provenanceRequests, commits.length - 1)];
+      provenanceRequests += 1;
       response.setHeader('content-type', 'application/json');
       response.end(
         JSON.stringify({
-          commit: overrides.commit ?? COMMIT,
+          commit,
           payload: { digest: DIGEST },
         }),
       );
@@ -54,7 +58,11 @@ async function serverFixture(context, overrides = {}) {
   await new Promise((resolve) => server.listen(0, '127.0.0.1', resolve));
   context.after(() => new Promise((resolve) => server.close(resolve)));
   const { port } = server.address();
-  return { backend: `http://127.0.0.1:${port}`, seenHosts };
+  return {
+    backend: `http://127.0.0.1:${port}`,
+    seenHosts,
+    provenanceRequests: () => provenanceRequests,
+  };
 }
 
 test('smoke valida procedencia, rutas, imagen y Host del backend pre-DNS', async (context) => {
@@ -71,6 +79,22 @@ test('smoke valida procedencia, rutas, imagen y Host del backend pre-DNS', async
   assert.deepEqual(new Set(seenHosts), new Set(['www.astrocava.com']));
 });
 
+test('smoke espera a que producción sirva el commit recién desplegado', async (context) => {
+  const fixture = await serverFixture(context, {
+    commits: ['anterior', COMMIT],
+  });
+  const provenance = await smokeDeployment({
+    origin: 'https://www.astrocava.com',
+    backend: fixture.backend,
+    expectedCommit: COMMIT,
+    attempts: 2,
+    retryDelayMs: 0,
+  });
+
+  assert.equal(provenance.commit, COMMIT);
+  assert.equal(fixture.provenanceRequests(), 2);
+});
+
 test('smoke rechaza commit distinto e identidad sintética', async (context) => {
   const wrongCommit = await serverFixture(context, { commit: 'otro' });
   await assert.rejects(
@@ -79,7 +103,7 @@ test('smoke rechaza commit distinto e identidad sintética', async (context) => 
       backend: wrongCommit.backend,
       expectedCommit: COMMIT,
     }),
-    /Staging sirve otro/,
+    /El despliegue sirve otro/,
   );
 
   const verifyIdentity = await serverFixture(context, {
