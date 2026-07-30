@@ -17,6 +17,7 @@ const CONTRACT_KEYS = new Set([
   'expectedImageFiles',
   'urls',
   'protectedUrls',
+  'redirects',
 ]);
 
 function readJson(filePath, label) {
@@ -55,7 +56,7 @@ export function validatePredeployContract(contract) {
   for (const key of Object.keys(contract)) {
     if (!CONTRACT_KEYS.has(key)) throw new Error(`Campo no permitido en contrato: ${key}`);
   }
-  if (contract.schemaVersion !== 1) throw new Error('Schema predeploy no soportado');
+  if (contract.schemaVersion !== 2) throw new Error('Schema predeploy no soportado');
   if (contract.canonicalOrigin !== 'https://www.astrocava.com') {
     throw new Error('El origen canónico debe ser https://www.astrocava.com');
   }
@@ -67,18 +68,42 @@ export function validatePredeployContract(contract) {
       throw new Error(`${field} debe ser un entero no negativo`);
     }
   }
-  if (!Array.isArray(contract.urls) || !Array.isArray(contract.protectedUrls)) {
-    throw new Error('urls y protectedUrls deben ser listas');
+  if (
+    !Array.isArray(contract.urls) ||
+    !Array.isArray(contract.protectedUrls) ||
+    !Array.isArray(contract.redirects)
+  ) {
+    throw new Error('urls, protectedUrls y redirects deben ser listas');
   }
   contract.urls.forEach((value, index) => validatePublicPagePath(value, `urls[${index}]`));
   contract.protectedUrls.forEach((value, index) =>
     validatePublicPagePath(value, `protectedUrls[${index}]`),
   );
+  contract.redirects.forEach((redirect, index) => {
+    if (!redirect || typeof redirect !== 'object' || Array.isArray(redirect)) {
+      throw new Error(`redirects[${index}] debe ser un objeto`);
+    }
+    if (
+      JSON.stringify(Object.keys(redirect).sort()) !==
+      JSON.stringify(['from', 'to'])
+    ) {
+      throw new Error(`redirects[${index}] solo admite from y to`);
+    }
+    validatePublicPagePath(redirect.from, `redirects[${index}].from`);
+    validatePublicPagePath(redirect.to, `redirects[${index}].to`);
+    if (redirect.from === redirect.to) {
+      throw new Error(`redirects[${index}] no puede redirigir a sí mismo`);
+    }
+  });
   if (new Set(contract.urls).size !== contract.urls.length) {
     throw new Error('urls contiene duplicados');
   }
   if (new Set(contract.protectedUrls).size !== contract.protectedUrls.length) {
     throw new Error('protectedUrls contiene duplicados');
+  }
+  const redirectSources = contract.redirects.map((redirect) => redirect.from);
+  if (new Set(redirectSources).size !== redirectSources.length) {
+    throw new Error('redirects contiene orígenes duplicados');
   }
   if (JSON.stringify(contract.urls) !== JSON.stringify(sortedUnique(contract.urls))) {
     throw new Error('urls debe estar ordenada de forma canónica');
@@ -88,10 +113,13 @@ export function validatePredeployContract(contract) {
   ) {
     throw new Error('protectedUrls debe estar ordenada de forma canónica');
   }
-  if (contract.urls.length !== contract.expectedHtmlCount) {
-    throw new Error('expectedHtmlCount no coincide con urls');
+  if (JSON.stringify(redirectSources) !== JSON.stringify(sortedUnique(redirectSources))) {
+    throw new Error('redirects debe estar ordenada por from');
   }
-  if (contract.legacyUrlCount + 1 !== contract.expectedHtmlCount) {
+  if (contract.urls.length + contract.redirects.length !== contract.expectedHtmlCount) {
+    throw new Error('expectedHtmlCount no coincide con urls y redirects');
+  }
+  if (contract.legacyUrlCount + 1 !== contract.urls.length) {
     throw new Error('El contrato debe contener las URLs legacy más /licencias/');
   }
   if (!contract.urls.includes('/licencias/')) {
@@ -100,6 +128,14 @@ export function validatePredeployContract(contract) {
   for (const protectedUrl of contract.protectedUrls) {
     if (!contract.urls.includes(protectedUrl)) {
       throw new Error(`URL SEO protegida fuera del contrato: ${protectedUrl}`);
+    }
+  }
+  for (const redirect of contract.redirects) {
+    if (contract.urls.includes(redirect.from)) {
+      throw new Error(`Redirect declarado también como URL de contenido: ${redirect.from}`);
+    }
+    if (!contract.urls.includes(redirect.to)) {
+      throw new Error(`Destino de redirect fuera del contrato: ${redirect.to}`);
     }
   }
   return contract;
@@ -174,6 +210,14 @@ function addIssue(issues, scope, message) {
   issues.push(`[${scope}] ${message}`);
 }
 
+function resolvedHref(value, base) {
+  try {
+    return value ? new URL(value, base).href : null;
+  } catch {
+    return null;
+  }
+}
+
 function compareSets(actual, expected, issues, scope, label) {
   for (const value of expected) {
     if (!actual.has(value)) addIssue(issues, scope, `${label} faltante: ${value}`);
@@ -183,12 +227,67 @@ function compareSets(actual, expected, issues, scope, label) {
   }
 }
 
+function checkStaticRedirect(page, redirect, contract, issues) {
+  const refreshTags = tags(page.html, 'meta').filter(
+    (tag) => attribute(tag, 'http-equiv')?.toLowerCase() === 'refresh',
+  );
+  const content = refreshTags.length === 1 ? attribute(refreshTags[0], 'content') : null;
+  const match = content?.match(/^\s*0\s*;\s*url\s*=\s*(.+?)\s*$/i);
+  if (refreshTags.length !== 1 || !match) {
+    addIssue(
+      issues,
+      'urls',
+      `${redirect.from} debe contener un único meta refresh inmediato`,
+    );
+  } else {
+    let actual;
+    try {
+      actual = new URL(match[1].replace(/^(['"])(.*)\1$/, '$2'), contract.canonicalOrigin);
+    } catch {
+      addIssue(issues, 'urls', `${redirect.from} tiene un destino de refresh inválido`);
+    }
+    const expected = new URL(redirect.to, contract.canonicalOrigin);
+    if (actual && actual.href !== expected.href) {
+      addIssue(
+        issues,
+        'urls',
+        `${redirect.from} redirige a ${actual.href}, no a ${expected.href}`,
+      );
+    }
+  }
+
+  const expectedCanonical = new URL(redirect.to, contract.canonicalOrigin).href;
+  const canonicals = tagsWithAttribute(page.html, 'link', 'rel', 'canonical');
+  const canonicalHref =
+    canonicals.length === 1 ? attribute(canonicals[0], 'href') : null;
+  if (resolvedHref(canonicalHref, contract.canonicalOrigin) !== expectedCanonical) {
+    addIssue(
+      issues,
+      'urls',
+      `${redirect.from} debe declarar canonical al destino ${expectedCanonical}`,
+    );
+  }
+}
+
 function checkUrls({ pages, contract, issues }) {
-  compareSets(new Set(pages.keys()), new Set(contract.urls), issues, 'urls', 'URL');
+  const expectedRoutes = new Set([
+    ...contract.urls,
+    ...contract.redirects.map((redirect) => redirect.from),
+  ]);
+  compareSets(new Set(pages.keys()), expectedRoutes, issues, 'urls', 'URL');
   for (const protectedUrl of contract.protectedUrls) {
     if (!pages.has(protectedUrl)) addIssue(issues, 'urls', `URL SEO protegida ausente: ${protectedUrl}`);
   }
-  return { html: pages.size, protected: contract.protectedUrls.length };
+  for (const redirect of contract.redirects) {
+    const page = pages.get(redirect.from);
+    if (page) checkStaticRedirect(page, redirect, contract, issues);
+  }
+  return {
+    html: pages.size,
+    content: contract.urls.length,
+    redirects: contract.redirects.length,
+    protected: contract.protectedUrls.length,
+  };
 }
 
 function publicFileForPath(distRoot, publicPath) {
@@ -559,14 +658,27 @@ export function runPredeployChecks({
     if (!ALL_SCOPES.includes(scope)) throw new Error(`Scope desconocido: ${scope}`);
   }
   const pages = collectHtmlPages(distRoot);
+  const contentPages = new Map(
+    [...pages].filter(([route]) => contract.urls.includes(route)),
+  );
   const issues = [];
   const summary = {};
   if (selected.has('urls')) summary.urls = checkUrls({ pages, contract, issues });
-  if (selected.has('links')) summary.links = checkLinks({ pages, contract, distRoot, issues });
-  if (selected.has('images')) {
-    summary.images = checkImages({ pages, contract, distRoot, rightsManifest, issues });
+  if (selected.has('links')) {
+    summary.links = checkLinks({ pages: contentPages, contract, distRoot, issues });
   }
-  if (selected.has('seo')) summary.seo = checkSeo({ pages, contract, issues });
+  if (selected.has('images')) {
+    summary.images = checkImages({
+      pages: contentPages,
+      contract,
+      distRoot,
+      rightsManifest,
+      issues,
+    });
+  }
+  if (selected.has('seo')) {
+    summary.seo = checkSeo({ pages: contentPages, contract, issues });
+  }
   if (selected.has('sitemap')) summary.sitemap = checkSitemap({ contract, distRoot, issues });
   if (issues.length) {
     throw new Error(`check:predeploy detectó ${issues.length} problema(s):\n- ${issues.join('\n- ')}`);

@@ -49,6 +49,9 @@ export default defineConfig({
   site: 'https://www.astrocava.com',
   outDir: legalBuildKind === 'verify' ? './dist-verify' : './dist',
   trailingSlash: 'always',
+  redirects: {
+    '/page/2/': '/',
+  },
   markdown: {
     gfm: true,
     remarkPlugins: [
@@ -60,7 +63,7 @@ export default defineConfig({
   },
   integrations: [
     sitemap({
-      filter: (page) => !page.includes('/draft/'),
+      filter: (page) => !page.includes('/draft/') && !page.endsWith('/page/2/'),
     }),
   ],
 });

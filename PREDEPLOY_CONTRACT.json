@@ -1,9 +1,9 @@
 {
-  "schemaVersion": 1,
+  "schemaVersion": 2,
   "canonicalOrigin": "https://www.astrocava.com",
-  "baseline": "Ghost sitemap verificado 2026-06-02 + /licencias/ aprobada en T-002D",
+  "baseline": "Ghost sitemap verificado 2026-06-02 + /licencias/ aprobada en T-002D + compatibilidad /page/2/ aprobada en T-009",
   "legacyUrlCount": 161,
-  "expectedHtmlCount": 162,
+  "expectedHtmlCount": 163,
   "expectedImageFiles": 634,
   "urls": [
     "/",
@@ -175,5 +175,11 @@
     "/observacion/catalogos-de-objetos-astronomicos/",
     "/observacion/el-cielo-de-invierno/",
     "/observacion/el-cielo-de-verano/"
+  ],
+  "redirects": [
+    {
+      "from": "/page/2/",
+      "to": "/"
+    }
   ]
 }
