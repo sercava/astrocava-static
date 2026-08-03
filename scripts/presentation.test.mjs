@@ -49,6 +49,31 @@ test('la portada conserva su frase editorial histórica', () => {
   assert.match(home, /<SearchBox variant="hero" idPrefix="home-search" \/>/);
 });
 
+test('M16 conserva la propuesta SEO y editorial aprobada', () => {
+  const article = source(
+    'src/content/entries/m16-la-nebulosa-del-aguila.md',
+  );
+
+  assert.match(
+    article,
+    /meta_title: "Nebulosa del Águila: M16 \(Messier 16\)"/,
+  );
+  assert.match(
+    article,
+    /meta_description: La Nebulosa del Águila \(M16 o Messier 16\).*astrofotografías propias\./,
+  );
+  assert.match(article, /nebulosa de emisión IC 4703/);
+  assert.match(article, /cúmulo abierto NGC 6611/);
+  assert.match(article, /cierta contaminación lumínica/);
+  assert.match(article, /apariencia grisácea/);
+  assert.match(
+    article,
+    /href="\/observacion\/los-colores-en-la-observacion-visual\/"/,
+  );
+  assert.doesNotMatch(article, /La «Nebulosa del Águila» es el número 16/);
+  assert.doesNotMatch(article, /no se van a poder apreciar los colores/);
+});
+
 test('la portada y la cabecera comparten una búsqueda local bajo demanda', () => {
   const home = source('src/pages/index.astro');
   const layout = source('src/layouts/BaseLayout.astro');
