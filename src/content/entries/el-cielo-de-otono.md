@@ -10,11 +10,11 @@ canonical_url: "https://www.astrocava.com/observacion/el-cielo-de-otono/"
 published_at: 2020-10-18T12:37:00.000Z
 updated_at: 2024-09-20T18:59:27.000Z
 excerpt: ''
-content_plaintext: "El otoño es cambio, transición, las noches se alargan, el frío reaparece... y en el cielo que podemos observar también nos encontramos a medio camino. No dejamos de observar parte de las constelaciones de verano, como el Cisne, pero perdiendo de vista el centro galáctico y, al final de la noche, ya aparecen las constelaciones de invierno como Auriga, Tauro o incluso el mismísimo Orión. En el hemis…"
+content_plaintext: "El cielo de otoño, observado desde latitudes medias del hemisferio norte, combina las últimas constelaciones de verano con las grandes figuras de Andrómeda, Pegaso, Casiopea y Perseo. Esta guía reúne las constelaciones y los objetos más interesantes para planificar una noche de observación durante esta estación."
 tags: [observacion, cygnus, aquarius, cepheus, capricornus, pegasus, piscis, andromeda, cassiopeia, sculptor, cetus, aries, triangulum, perseus]
 author: sergio
-meta_title: ''
-meta_description: ''
+meta_title: "Cielo de otoño: constelaciones y qué observar"
+meta_description: "Guía del cielo de otoño desde España: constelaciones, galaxias, nebulosas y otros objetos recomendados para observar durante las noches de esta estación."
 feature_image: /content/images/2024/04/noche-estrellada-oto-o-generada-ia.jpg
 feature_image_alt: "Ilustración de un paisaje nocturno de otoño, generada con IA mediante Midjourney"
 feature_image_caption: Ilustración conceptual generada mediante prompts de texto; no es una fotografía ni una observación científica.
@@ -29,7 +29,7 @@ twitter_title: ''
 twitter_description: ''
 twitter_image: /content/images/2024/04/noche-estrellada-oto-o-generada-ia.jpg
 ---
-<p>El otoño es cambio, transición, las noches se alargan, el frío reaparece... y en el cielo que podemos observar también nos encontramos a medio camino. </p><p>No dejamos de observar parte de las <a href="/observacion/el-cielo-de-verano/" rel="noreferrer">constelaciones de verano</a>, como el Cisne, pero perdiendo de vista el centro galáctico y, al final de la noche, ya aparecen las <a href="/observacion/el-cielo-de-invierno/" rel="noreferrer">constelaciones de invierno</a> como Auriga, Tauro o incluso el mismísimo Orión.</p><p>En el hemisferio norte, y en latitudes medias, conforme avanzamos en la estación, vamos disponiendo de cada vez más horas de oscuridad total y, cuando se produce el cambio oficial al horario de invierno (que le queda ya poca vida), conseguimos adelantar de un plumazo una hora el inicio de las observaciones. </p><p>La tabla que se presenta a continuación es válida, minuto arriba, minuto abajo, para el centro de la Península Ibérica.</p>
+<p>El cielo de otoño, observado desde latitudes medias del hemisferio norte, combina las últimas constelaciones de verano con las grandes figuras de Andrómeda, Pegaso, Casiopea y Perseo. Esta guía reúne las constelaciones y los objetos más interesantes para planificar una noche de observación durante esta estación.</p><p>El otoño es cambio, transición, las noches se alargan, el frío reaparece... y en el cielo que podemos observar también nos encontramos a medio camino. </p><p>No dejamos de observar parte de las <a href="/observacion/el-cielo-de-verano/" rel="noreferrer">constelaciones de verano</a>, como el Cisne, pero perdiendo de vista el centro galáctico y, al final de la noche, ya aparecen las <a href="/observacion/el-cielo-de-invierno/" rel="noreferrer">constelaciones de invierno</a> como Auriga, Tauro o incluso el mismísimo Orión.</p><p>En el hemisferio norte, y en latitudes medias, conforme avanzamos en la estación, vamos disponiendo de cada vez más horas de oscuridad total y, cuando se produce el cambio oficial al horario de invierno (que le queda ya poca vida), conseguimos adelantar de un plumazo una hora el inicio de las observaciones. </p><p>La tabla que se presenta a continuación es válida, minuto arriba, minuto abajo, para el centro de la Península Ibérica.</p>
 <!--kg-card-begin: html-->
 <table>
 <thead>

@@ -74,6 +74,39 @@ test('M16 conserva la propuesta SEO y editorial aprobada', () => {
   assert.doesNotMatch(article, /no se van a poder apreciar los colores/);
 });
 
+test('El cielo de otoño conserva la propuesta SEO y editorial aprobada', () => {
+  const article = source('src/content/entries/el-cielo-de-otono.md');
+  const expectedIntro =
+    'El cielo de otoño, observado desde latitudes medias del hemisferio norte, combina las últimas constelaciones de verano con las grandes figuras de Andrómeda, Pegaso, Casiopea y Perseo. Esta guía reúne las constelaciones y los objetos más interesantes para planificar una noche de observación durante esta estación.';
+  const originalIntro =
+    '<p>El otoño es cambio, transición, las noches se alargan, el frío reaparece... y en el cielo que podemos observar también nos encontramos a medio camino. </p>';
+
+  assert.match(article, /^title: El cielo de otoño$/m);
+  assert.match(article, /^pathname: \/observacion\/el-cielo-de-otono\/$/m);
+  assert.match(
+    article,
+    /^canonical_url: "https:\/\/www\.astrocava\.com\/observacion\/el-cielo-de-otono\/"$/m,
+  );
+  assert.match(
+    article,
+    /^meta_title: "Cielo de otoño: constelaciones y qué observar"$/m,
+  );
+  assert.match(
+    article,
+    /^meta_description: "Guía del cielo de otoño desde España: constelaciones, galaxias, nebulosas y otros objetos recomendados para observar durante las noches de esta estación\."$/m,
+  );
+  assert.match(
+    article,
+    /^content_plaintext: "El cielo de otoño, observado .* durante esta estación\."$/m,
+  );
+  assert.ok(article.includes(`<p>${expectedIntro}</p>${originalIntro}`));
+  assert.match(
+    article,
+    /^feature_image: \/content\/images\/2024\/04\/noche-estrellada-oto-o-generada-ia\.jpg$/m,
+  );
+  assert.match(article, /<!--kg-card-begin: html-->\n<table>/);
+});
+
 test('la portada y la cabecera comparten una búsqueda local bajo demanda', () => {
   const home = source('src/pages/index.astro');
   const layout = source('src/layouts/BaseLayout.astro');
