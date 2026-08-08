@@ -228,6 +228,19 @@ function compareSets(actual, expected, issues, scope, label) {
 }
 
 function checkStaticRedirect(page, redirect, contract, issues) {
+  const robotsTags = tags(page.html, 'meta').filter(
+    (tag) => attribute(tag, 'name')?.toLowerCase() === 'robots',
+  );
+  const robotsTokens = robotsTags.flatMap((tag) =>
+    (attribute(tag, 'content') ?? '')
+      .toLowerCase()
+      .split(',')
+      .map((token) => token.trim()),
+  );
+  if (!robotsTokens.includes('noindex')) {
+    addIssue(issues, 'urls', `${redirect.from} debe declarar noindex`);
+  }
+
   const refreshTags = tags(page.html, 'meta').filter(
     (tag) => attribute(tag, 'http-equiv')?.toLowerCase() === 'refresh',
   );

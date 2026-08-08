@@ -1,10 +1,14 @@
 import assert from 'node:assert/strict';
+import fs from 'node:fs';
 import http from 'node:http';
 import test from 'node:test';
 import { smokeDeployment } from './smoke-deployment.mjs';
 
 const COMMIT = 'abc123';
 const DIGEST = 'a'.repeat(64);
+const REDIRECTS = JSON.parse(
+  fs.readFileSync(new URL('../PREDEPLOY_CONTRACT.json', import.meta.url), 'utf8'),
+).redirects;
 const HTML = `<!doctype html><html><head>
   <link rel="canonical" href="https://www.astrocava.com/">
 </head><body><img src="/content/images/test.jpg"></body></html>`;
@@ -12,10 +16,15 @@ const LEGAL_HTML = HTML.replace(
   '</body>',
   '<div data-legal-identity="production">Identidad</div></body>',
 );
-const REDIRECT_HTML = `<!doctype html><html><head>
-  <meta http-equiv="refresh" content="0;url=/">
-  <link rel="canonical" href="https://www.astrocava.com/">
+function redirectHtml(to) {
+  return `<!doctype html><html><head>
+  <meta name="robots" content="noindex">
+  <meta http-equiv="refresh" content="0;url=${to}">
+  <link rel="canonical" href="${new URL(to, 'https://www.astrocava.com')}">
 </head></html>`;
+}
+
+const REDIRECT_HTML = redirectHtml('/');
 
 async function serverFixture(context, overrides = {}) {
   const seenHosts = [];
@@ -56,9 +65,14 @@ async function serverFixture(context, overrides = {}) {
       response.end(overrides.legalHtml ?? LEGAL_HTML);
       return;
     }
-    if (route === '/page/2/') {
+    const redirect = REDIRECTS.find(({ from }) => from === route);
+    if (redirect) {
       response.setHeader('content-type', 'text/html');
-      response.end(overrides.redirectHtml ?? REDIRECT_HTML);
+      response.end(
+        overrides.redirectHtmlByRoute?.[route] ??
+          (route === '/page/2/' ? overrides.redirectHtml : undefined) ??
+          redirectHtml(redirect.to),
+      );
       return;
     }
     response.setHeader('content-type', 'text/html');
@@ -84,7 +98,7 @@ test('smoke valida procedencia, rutas, imagen y Host del backend pre-DNS', async
   });
 
   assert.equal(provenance.commit, COMMIT);
-  assert.equal(seenHosts.length, 13);
+  assert.equal(seenHosts.length, 12 + REDIRECTS.length);
   assert.deepEqual(new Set(seenHosts), new Set(['www.astrocava.com']));
 });
 
@@ -157,5 +171,20 @@ test('smoke rechaza una compatibilidad estática con destino incorrecto', async 
       expectedCommit: COMMIT,
     }),
     /page\/2\/: canonical distinto del destino/,
+  );
+
+  const missingNoindex = await serverFixture(context, {
+    redirectHtml: REDIRECT_HTML.replace(
+      '  <meta name="robots" content="noindex">\n',
+      '',
+    ),
+  });
+  await assert.rejects(
+    smokeDeployment({
+      origin: 'https://www.astrocava.com',
+      backend: missingNoindex.backend,
+      expectedCommit: COMMIT,
+    }),
+    /page\/2\/: falta noindex/,
   );
 });

@@ -14,6 +14,19 @@ import remarkLegalNotice, {
 } from './scripts/remark-legal-notice.mjs';
 
 const PROJECT_ROOT = path.dirname(fileURLToPath(import.meta.url));
+const LEGACY_REDIRECTS = {
+  '/astrofotografia/introduccion/objetivos-en-astrofotografia/':
+    '/astrofotografia/adquisicion/objetivos-en-astrofotografia/',
+  '/galeria/sistema-solar/el-planeta-jupiter/':
+    '/observacion/el-planeta-jupiter/',
+  '/galeria/sistema-solar/el-planeta-marte/':
+    '/observacion/el-planeta-marte/',
+  '/galeria/sistema-solar/el-planeta-saturno/':
+    '/observacion/el-planeta-saturno/',
+  '/observacion/transito-de-venus-en-junio-de-2004/':
+    '/galeria/sistema-solar/transito-de-venus-en-junio-de-2004/',
+  '/page/2/': '/',
+};
 const LEGAL_NOTICE_SOURCE_PATH = path.join(
   PROJECT_ROOT,
   LEGAL_NOTICE_SOURCE_RELATIVE_PATH,
@@ -49,9 +62,7 @@ export default defineConfig({
   site: 'https://www.astrocava.com',
   outDir: legalBuildKind === 'verify' ? './dist-verify' : './dist',
   trailingSlash: 'always',
-  redirects: {
-    '/page/2/': '/',
-  },
+  redirects: LEGACY_REDIRECTS,
   markdown: {
     gfm: true,
     remarkPlugins: [
@@ -63,7 +74,9 @@ export default defineConfig({
   },
   integrations: [
     sitemap({
-      filter: (page) => !page.includes('/draft/') && !page.endsWith('/page/2/'),
+      filter: (page) =>
+        !page.includes('/draft/') &&
+        !Object.keys(LEGACY_REDIRECTS).some((route) => page.endsWith(route)),
     }),
   ],
 });

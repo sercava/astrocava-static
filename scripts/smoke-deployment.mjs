@@ -42,6 +42,18 @@ function resolvedHref(value, base) {
 }
 
 function assertStaticRedirect(html, redirect, origin) {
+  const robotsTokens = htmlTags(html, 'meta')
+    .filter((tag) => htmlAttribute(tag, 'name')?.toLowerCase() === 'robots')
+    .flatMap((tag) =>
+      (htmlAttribute(tag, 'content') ?? '')
+        .toLowerCase()
+        .split(',')
+        .map((token) => token.trim()),
+    );
+  if (!robotsTokens.includes('noindex')) {
+    throw new Error(`${redirect.from}: falta noindex`);
+  }
+
   const refreshTags = htmlTags(html, 'meta').filter(
     (tag) => htmlAttribute(tag, 'http-equiv')?.toLowerCase() === 'refresh',
   );

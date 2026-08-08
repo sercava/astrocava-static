@@ -18,6 +18,29 @@ const PROTECTED_URLS = [
   '/observacion/el-cielo-de-invierno/',
   '/observacion/el-cielo-de-verano/',
 ];
+const EXPECTED_REDIRECTS = [
+  {
+    from: '/astrofotografia/introduccion/objetivos-en-astrofotografia/',
+    to: '/astrofotografia/adquisicion/objetivos-en-astrofotografia/',
+  },
+  {
+    from: '/galeria/sistema-solar/el-planeta-jupiter/',
+    to: '/observacion/el-planeta-jupiter/',
+  },
+  {
+    from: '/galeria/sistema-solar/el-planeta-marte/',
+    to: '/observacion/el-planeta-marte/',
+  },
+  {
+    from: '/galeria/sistema-solar/el-planeta-saturno/',
+    to: '/observacion/el-planeta-saturno/',
+  },
+  {
+    from: '/observacion/transito-de-venus-en-junio-de-2004/',
+    to: '/galeria/sistema-solar/transito-de-venus-en-junio-de-2004/',
+  },
+  { from: '/page/2/', to: '/' },
+];
 
 function digest(bytes) {
   return crypto.createHash('sha256').update(bytes).digest('hex');
@@ -29,7 +52,7 @@ function page({ route, body = '', description = 'Descripción técnica de prueba
 }
 
 function redirectPage({ to = '/' } = {}) {
-  return `<!doctype html><html><head><meta http-equiv="refresh" content="0;url=${to}"><link rel="canonical" href="${new URL(to, ORIGIN)}"></head></html>`;
+  return `<!doctype html><html><head><meta name="robots" content="noindex"><meta http-equiv="refresh" content="0;url=${to}"><link rel="canonical" href="${new URL(to, ORIGIN)}"></head></html>`;
 }
 
 function write(root, publicPath, value) {
@@ -100,13 +123,13 @@ test('acepta el build que satisface todo el contrato predeploy', (t) => {
   assert.equal(result.summary.sitemap.sitemapUrls, 2);
 });
 
-test('fija los totales y las cinco URLs SEO del contrato público real', () => {
+test('fija los totales, las cinco URLs SEO y las compatibilidades del contrato público real', () => {
   assert.doesNotThrow(() => validatePredeployContract(ACTUAL_CONTRACT));
   assert.equal(ACTUAL_CONTRACT.legacyUrlCount, 161);
-  assert.equal(ACTUAL_CONTRACT.expectedHtmlCount, 163);
+  assert.equal(ACTUAL_CONTRACT.expectedHtmlCount, 168);
   assert.equal(ACTUAL_CONTRACT.expectedImageFiles, 634);
   assert.deepEqual(ACTUAL_CONTRACT.protectedUrls, PROTECTED_URLS);
-  assert.deepEqual(ACTUAL_CONTRACT.redirects, [{ from: '/page/2/', to: '/' }]);
+  assert.deepEqual(ACTUAL_CONTRACT.redirects, EXPECTED_REDIRECTS);
 });
 
 test('rechaza contratos con URLs no canónicas, desordenadas o no declaradas', () => {
@@ -138,6 +161,13 @@ test('rechaza redirects ausentes, incorrectos o incluidos en el sitemap', (t) =>
     redirectPage().replace('href="https://www.astrocava.com/"', 'href="http://["'),
   );
   assert.throws(() => run(fixture, ['urls']), /page\/2\/ debe declarar canonical/);
+
+  write(
+    fixture.root,
+    'page/2/index.html',
+    redirectPage().replace('<meta name="robots" content="noindex">', ''),
+  );
+  assert.throws(() => run(fixture, ['urls']), /page\/2\/ debe declarar noindex/);
 
   write(fixture.root, 'page/2/index.html', redirectPage());
   fs.writeFileSync(
