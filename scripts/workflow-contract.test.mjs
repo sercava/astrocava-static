@@ -61,9 +61,21 @@ test('solo el despliegue consume los cinco secretos y construye producción', ()
 });
 
 test('despliegue usa el flujo oficial actual de GitHub Pages y smoke de producción', () => {
-  assert.match(DEPLOY, /actions\/configure-pages@983d7736d9b0ae728b81ab479565c72886d7745b/);
-  assert.match(DEPLOY, /actions\/upload-pages-artifact@7b1f4a764d45c48632c6b24a0339c27f5614fb0b/);
-  assert.match(DEPLOY, /actions\/deploy-pages@d6db90164ac5ed86f2b6aed7e0febac5b3c0c03e/);
+  assert.match(
+    DEPLOY,
+    /actions\/configure-pages@45bfe0192ca1faeb007ade9deae92b16b8254a0d # v6\.0\.0/,
+  );
+  assert.match(
+    DEPLOY,
+    /actions\/upload-pages-artifact@fc324d3547104276b827a68afc52ff2a11cc49c9 # v5\.0\.0/,
+  );
+  assert.match(
+    DEPLOY,
+    /actions\/deploy-pages@cd2ce8fcbc39b97be8ca5fce6e763baed58fa128 # v5\.0\.0/,
+  );
+  assert.doesNotMatch(DEPLOY, /actions\/configure-pages@.*# v5(?:\s|$)/m);
+  assert.doesNotMatch(DEPLOY, /actions\/deploy-pages@.*# v4(?:\s|$)/m);
+  assert.doesNotMatch(DEPLOY, /actions\/upload-pages-artifact@.*# v4(?:\s|$)/m);
   assert.match(DEPLOY, /--origin https:\/\/www\.astrocava\.com/);
   assert.match(DEPLOY, /--expected-commit "\$\{\{ github\.sha \}\}"/);
   assert.match(DEPLOY, /--attempts 12/);
