@@ -7,7 +7,6 @@ interface Props {
 }
 
 const { sections } = Astro.props;
-const number = (index: number) => String(index + 1).padStart(2, '0');
 ---
 
 <div class="home-curated home-curated--a">
@@ -20,7 +19,7 @@ const number = (index: number) => String(index + 1).padStart(2, '0');
     </p>
   </header>
   {
-    sections.map((section, index) => (
+    sections.map((section) => (
       <section
         id={`area-${section.id}`}
         class:list={[
@@ -31,9 +30,7 @@ const number = (index: number) => String(index + 1).padStart(2, '0');
         aria-labelledby={`area-${section.id}-title`}
       >
         <header class="home-section-header">
-          <span class="home-section-number" aria-hidden="true">{number(index)}</span>
           <div>
-            <p class="home-section-kicker">Escaparate temático</p>
             <h2 id={`area-${section.id}-title`}>{section.label}</h2>
             <p>{section.description}</p>
           </div>

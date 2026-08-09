@@ -89,6 +89,8 @@ test('la portada A organiza cinco áreas con la selección editorial acordada', 
   assert.match(showcases, /home-section-grid--a/);
   assert.match(showcases, /role="featured" eyebrow="Protagonista"/);
   assert.match(showcases, /section\.secondary\.map/);
+  assert.doesNotMatch(showcases, /Escaparate temático|home-section-number|number\(index\)/);
+  assert.doesNotMatch(css, /\.home-section-number/);
   assert.match(
     css,
     /\.home-section-grid--a\s*{[^}]*grid-template-columns:\s*minmax\(0, 1\.45fr\) minmax\(18rem, 0\.85fr\)/s,
