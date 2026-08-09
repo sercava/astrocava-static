@@ -1,6 +1,6 @@
 # Atribuciones y procedencia de recursos
 
-Actualizado: 2026-07-12
+Actualizado: 2026-08-09
 
 Este registro ofrece la lectura humana de las atribuciones que requieren más contexto. El inventario completo y vinculante del árbol actual está en [`RIGHTS_MANIFEST.json`](RIGHTS_MANIFEST.json): 272 familias y 634 archivos, todos con clasificación publicable, rutas, tamaños y SHA-256 exactos. `check:rights` rechaza cualquier imagen ausente, extra, modificada o con estado incierto.
 
@@ -18,6 +18,7 @@ El manifiesto identifica de forma exhaustiva las 244 familias propias bajo esta 
 | `/content/images/2024/04/algol-constelaciones-anotada.jpg` y variantes `size/w600`, `size/w1000`, `size/w1600` | «Algol y la variabilidad de las estrellas» | `ASTROCAVA-ORIGINAL`; CC BY 4.0 | Anotación editorial y variantes redimensionadas | 2026-07-11 |
 | `/content/images/2024/04/Algol-y-estrellas-comparacion.jpg` y variantes `size/w600`, `size/w1000`, `size/w1600` | «Algol y la variabilidad de las estrellas» | `ASTROCAVA-ORIGINAL`; CC BY 4.0 | Composición editorial y variantes redimensionadas | 2026-07-11 |
 | `/content/images/2024/04/astronomia-paleolitico-pintura-rupestre-lascaux-XIII.jpg` y variantes `size/w600`, `size/w1000`, `size/w1600` | «Astronomía en el Paleolítico» | `ASTROCAVA-ORIGINAL`; CC BY 4.0 | Esquema contemporáneo, no fotografía ni calco | 2026-07-11 |
+| `/content/images/2024/06/marte-mejores-oposiciones.jpg` y variantes `size/w600`, `size/w1000` | «El planeta Marte» | `ASTROCAVA-ORIGINAL`; CC BY 4.0 | Infografía rediseñada con OpenAI ImageGen a partir del esquema propio anterior, revisión editorial de la geometría orbital, rotulación estacional boreal y variantes redimensionadas | 2026-08-09 |
 
 ## British Museum
 
@@ -101,4 +102,4 @@ Crédito: **Ilustración generada con Midjourney por Sergio Cava**. La [CC BY 4.
 | Dominio público | 7 | 15 |
 | **Total** | **272** | **634** |
 
-Digest SHA-256 del inventario: `66098411a458e93998f219dc16a60ad89a78cab77554e9930b623a590bbe8ea9`.
+Digest SHA-256 del inventario: `e408d2230baffbf031aa7e1cc7506ee5b300ffd367b208e7036c1d22f27d62e8`.

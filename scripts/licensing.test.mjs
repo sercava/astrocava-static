@@ -78,6 +78,16 @@ test('NOTICE y ATTRIBUTIONS conservan el contrato del British Museum', async () 
   }
 });
 
+test('ATTRIBUTIONS documenta el rediseño asistido de la infografía de Marte', async () => {
+  const attributions = await readProjectFile('ATTRIBUTIONS.md');
+
+  assert.match(attributions, /marte-mejores-oposiciones\.jpg/);
+  assert.match(attributions, /OpenAI ImageGen/);
+  assert.match(attributions, /revisión editorial de la geometría orbital/);
+  assert.match(attributions, /rotulación estacional boreal/);
+  assert.match(attributions, /variantes `size\/w600`, `size\/w1000`/);
+});
+
 test('ATTRIBUTIONS no declara variantes inexistentes de Lascaux', async () => {
   const attributions = await readProjectFile('ATTRIBUTIONS.md');
 
@@ -191,7 +201,7 @@ test('los avisos y documentos remiten al inventario público exacto', async () =
   assert.deepEqual(manifest.totals, { families: 272, files: 634 });
   assert.equal(
     manifest.inventoryDigest,
-    '66098411a458e93998f219dc16a60ad89a78cab77554e9930b623a590bbe8ea9',
+    'e408d2230baffbf031aa7e1cc7506ee5b300ffd367b208e7036c1d22f27d62e8',
   );
   for (const document of [notice, attributions, readme]) {
     assert.ok(document.includes('RIGHTS_MANIFEST.json'));

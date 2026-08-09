@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
-  "inventoryDigest": "66098411a458e93998f219dc16a60ad89a78cab77554e9930b623a590bbe8ea9",
-  "verifiedOn": "2026-07-12",
+  "inventoryDigest": "e408d2230baffbf031aa7e1cc7506ee5b300ffd367b208e7036c1d22f27d62e8",
+  "verifiedOn": "2026-08-09",
   "totals": {
     "families": 272,
     "files": 634
@@ -4349,24 +4349,24 @@
       "sourceUrls": [
         "https://www.astrocava.com/"
       ],
-      "modifications": "",
-      "verifiedOn": "2026-07-12",
-      "familyDigest": "493522c9b4f89febb1c942bac03b71b1674eb941e37c65d2797fb1a9fc7b23a7",
+      "modifications": "Infografía propia rediseñada con OpenAI ImageGen a partir del esquema original, revisión editorial de la geometría orbital, rotulación estacional boreal y variantes redimensionadas.",
+      "verifiedOn": "2026-08-09",
+      "familyDigest": "3efdd24af474ca113207f4111a98a0387e5edec08dd7ea119477a1d10fefccbe",
       "files": [
         {
           "path": "/content/images/2024/06/marte-mejores-oposiciones.jpg",
-          "bytes": 80064,
-          "sha256": "5326327ec9ad946fe5858cad3489bf3250380a5e031b85c5ca08f514e6d684f3"
+          "bytes": 324032,
+          "sha256": "fc0e09056bbdac6b3c622490bd5bd85a99ebecca1293151ced9d1a851a056808"
         },
         {
           "path": "/content/images/size/w1000/2024/06/marte-mejores-oposiciones.jpg",
-          "bytes": 58180,
-          "sha256": "ed77e921faf8b7785787d1cd6f39bbc7fd19b6ca393598d0a2801237c56e1c82"
+          "bytes": 227286,
+          "sha256": "18bb2751a59965e34e05ddbcad496180652c532d4a3f454db25ad1598f62ca1a"
         },
         {
           "path": "/content/images/size/w600/2024/06/marte-mejores-oposiciones.jpg",
-          "bytes": 28359,
-          "sha256": "c5fd009ef7ab4e79a74239e05179de5a5fd95ed284d00f5ce10d6710e5ed052f"
+          "bytes": 100817,
+          "sha256": "c96ba5e8b1898704e9430e4a6dd99dec9c0ce2b990281d3316de2c9737967895"
         }
       ]
     },
