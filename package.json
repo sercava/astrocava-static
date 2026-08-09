@@ -28,6 +28,7 @@
     "check:predeploy": "node scripts/check-predeploy.mjs --root dist",
     "check:predeploy:verify": "node scripts/check-predeploy.mjs --root dist-verify",
     "test:legal-notice": "node --test --test-isolation=none scripts/remark-legal-notice.test.mjs",
+    "test:privacy-content": "node --test --test-isolation=none scripts/privacy-content.test.mjs",
     "test:licensing": "node --test --test-isolation=none scripts/licensing.test.mjs",
     "test:rights": "node --test --test-isolation=none scripts/check-rights.test.mjs",
     "test:predeploy": "node --test --test-isolation=none scripts/check-predeploy.test.mjs",
@@ -35,7 +36,7 @@
     "test:provenance": "node --test --test-isolation=none scripts/deployment-provenance.test.mjs",
     "test:smoke": "node --test --test-isolation=none scripts/smoke-deployment.test.mjs",
     "test:workflow": "node --test --test-isolation=none scripts/workflow-contract.test.mjs",
-    "test:ci": "npm run test:legal-notice && npm run test:licensing && npm run test:rights && npm run test:predeploy && npm run test:presentation && npm run test:provenance && npm run test:smoke && npm run test:workflow"
+    "test:ci": "npm run test:legal-notice && npm run test:privacy-content && npm run test:licensing && npm run test:rights && npm run test:predeploy && npm run test:presentation && npm run test:provenance && npm run test:smoke && npm run test:workflow"
   },
   "dependencies": {
     "@astrojs/mdx": "^4.3.0",
