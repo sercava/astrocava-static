@@ -1,17 +1,14 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import EntryList from '../components/EntryList.astro';
+import HomeShowcases from '../components/HomeShowcases.astro';
 import SearchBox from '../components/SearchBox.astro';
 import { getPublishedEntries } from '../lib/entries';
+import { getRecentHomeEntries, resolveHomeSections } from '../lib/home';
 
 const entries = await getPublishedEntries();
-const posts = entries
-  .filter((e) => e.data.type === 'post')
-  .sort(
-    (a, b) =>
-      (b.data.published_at?.getTime() ?? 0) -
-      (a.data.published_at?.getTime() ?? 0),
-  );
+const sections = resolveHomeSections(entries);
+const recentEntries = getRecentHomeEntries(sections);
 const canonicalUrl = 'https://www.astrocava.com/';
 ---
 
@@ -21,22 +18,36 @@ const canonicalUrl = 'https://www.astrocava.com/';
   canonicalUrl={canonicalUrl}
   mainClass="site-main--home"
 >
-  <section class="home-hero" aria-labelledby="home-title">
-    <div class="home-hero-content">
-      <h1 id="home-title">
-        Esto va de Astronomía: Observación visual, Astrofotografía y un poco de Arqueoastronomía
-      </h1>
-      <SearchBox variant="hero" idPrefix="home-search" />
-    </div>
-  </section>
-  <div class="home-content">
-    <h2>Últimas publicaciones</h2>
-    {
-      posts.length === 0 ? (
-        <p>Sitio en migración (piloto).</p>
-      ) : (
-        <EntryList entries={posts} />
-      )
-    }
+  <div class="home-page">
+    <section class="home-hero" aria-labelledby="home-title">
+      <div class="home-hero-content">
+        <p class="home-hero-kicker">Astrocava · Cuaderno del cielo</p>
+        <h1 id="home-title">
+          Esto va de Astronomía: Observación visual, Astrofotografía y un poco de Arqueoastronomía
+        </h1>
+        <p class="home-hero-summary">
+          Imágenes, técnicas y relatos para observar nuestro Sistema Solar, el cielo profundo y la huella que las estrellas han dejado en la historia.
+        </p>
+        <SearchBox variant="hero" idPrefix="home-search" />
+        <nav class="home-area-links" aria-label="Explorar por áreas">
+          {
+            sections.map((section) => (
+              <a href={`#area-${section.id}`}>{section.shortLabel}</a>
+            ))
+          }
+        </nav>
+      </div>
+    </section>
+
+    <HomeShowcases sections={sections} />
+
+    <section class="home-recent" aria-labelledby="home-recent-title">
+      <header class="home-recent-heading">
+        <p class="home-section-kicker">Un punto de partida</p>
+        <h2 id="home-recent-title">Tres lecturas recientes de la selección</h2>
+        <p>La cronología sigue disponible, pero ya no organiza por sí sola la portada.</p>
+      </header>
+      <EntryList entries={recentEntries} />
+    </section>
   </div>
 </BaseLayout>

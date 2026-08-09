@@ -49,6 +49,65 @@ test('la portada conserva su frase editorial histórica', () => {
   assert.match(home, /<SearchBox variant="hero" idPrefix="home-search" \/>/);
 });
 
+test('la portada A organiza cinco áreas con la selección editorial acordada', () => {
+  const home = source('src/pages/index.astro');
+  const homeData = source('src/lib/home.ts');
+  const showcases = source('src/components/HomeShowcases.astro');
+  const css = source('src/styles/global.css');
+  const selectedPaths = [
+    '/galeria/sistema-solar/colores-en-la-luna-pistas-de-su-composicion-quimica/',
+    '/galeria/sistema-solar/eclipse-parcial-de-sol-del-29-de-marzo-de-2025/',
+    '/galeria/sistema-solar/actividad-solar-del-ciclo-solar-25/',
+    '/observacion/el-planeta-jupiter/',
+    '/galeria/cielo-profundo/m16-la-nebulosa-del-aguila/',
+    '/galeria/cielo-profundo/la-galaxia-de-andromeda-m31/',
+    '/galeria/cielo-profundo/el-arbol-de-navidad-y-la-nebulosa-del-cono-ngc2264/',
+    '/galeria/cielo-profundo/nebulosa-de-orion-m42/',
+    '/astrofotografia/procesado/el-histograma-en-astrofotografia/',
+    '/astrofotografia/adquisicion/objetivos-en-astrofotografia/',
+    '/astrofotografia/preprocesado/calibracion-de-imagenes-astronomicas/',
+    '/astrofotografia/procesado/procesado-de-imagenes-astronomicas/',
+    '/observacion/catalogos-de-objetos-astronomicos/',
+    '/observacion/el-cielo-de-invierno/',
+    '/observacion/el-cielo-de-otono/',
+    '/observacion/el-cielo-de-verano/',
+    '/arqueoastronomia/astronomia-en-el-paleolitico/',
+  ];
+
+  for (const pathname of selectedPaths) {
+    assert.equal(
+      homeData.split(pathname).length - 1,
+      1,
+      `${pathname} debe aparecer una sola vez en la selección`,
+    );
+  }
+  assert.equal(
+    (homeData.match(/^\s+featuredPath:\s*(?:\n\s*)?'\/[^']+'/gm) || []).length,
+    5,
+  );
+  assert.match(home, /<HomeShowcases sections={sections} \/>/);
+  assert.match(showcases, /home-section-grid--a/);
+  assert.match(showcases, /role="featured" eyebrow="Protagonista"/);
+  assert.match(showcases, /section\.secondary\.map/);
+  assert.match(
+    css,
+    /\.home-section-grid--a\s*{[^}]*grid-template-columns:\s*minmax\(0, 1\.45fr\) minmax\(18rem, 0\.85fr\)/s,
+  );
+  assert.match(
+    css,
+    /@media \(max-width: 50rem\)[\s\S]*?\.home-section-grid--a\s*{[^}]*grid-template-columns:\s*minmax\(0, 1fr\)/,
+  );
+  assert.match(
+    css,
+    /@media \(max-width: 38rem\)[\s\S]*?\.home-section--a \.home-story--supporting \.home-story-link\s*{[^}]*grid-template-columns:\s*6\.8rem minmax\(0, 1fr\)/,
+  );
+  assert.doesNotMatch(home, /homeVariant|prototype/i);
+  assert.doesNotMatch(showcases, /variant ===|home-section--b|home-portal/);
+  assert.doesNotMatch(css, /home-prototype|home-section--b|home-portal/);
+  assert.doesNotMatch(homeData, /href: '\/sistema-solar\/'/);
+  assert.doesNotMatch(homeData, /href: '\/cielo-profundo\/'/);
+});
+
 test('M16 conserva la propuesta SEO y editorial aprobada', () => {
   const article = source(
     'src/content/entries/m16-la-nebulosa-del-aguila.md',

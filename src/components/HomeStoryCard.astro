@@ -1,0 +1,43 @@
+---
+import type { Entry } from '../lib/entries';
+
+interface Props {
+  entry: Entry;
+  role: 'featured' | 'supporting';
+  eyebrow?: string;
+}
+
+const { entry, role, eyebrow } = Astro.props;
+
+function summary(maxLength: number): string {
+  const text = (entry.data.excerpt || entry.data.content_plaintext || '')
+    .replace(/\s+/g, ' ')
+    .trim();
+  if (text.length <= maxLength) return text;
+  return `${text.slice(0, maxLength - 1).trimEnd()}…`;
+}
+
+const description = summary(role === 'featured' ? 190 : 120);
+---
+
+<article class:list={['home-story', `home-story--${role}`]}>
+  <a class="home-story-link" href={entry.data.pathname}>
+    {
+      entry.data.feature_image && (
+        <span class="home-story-media">
+          <img
+            src={entry.data.feature_image}
+            alt={entry.data.feature_image_alt || ''}
+            loading="lazy"
+          />
+        </span>
+      )
+    }
+    <span class="home-story-body">
+      {eyebrow && <span class="home-story-eyebrow">{eyebrow}</span>}
+      <span class="home-story-title">{entry.data.title}</span>
+      {description && <span class="home-story-description">{description}</span>}
+      <span class="home-story-action">Leer artículo <span aria-hidden="true">→</span></span>
+    </span>
+  </a>
+</article>

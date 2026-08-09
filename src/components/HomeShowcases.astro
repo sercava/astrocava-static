@@ -1,0 +1,57 @@
+---
+import type { HomeSection } from '../lib/home';
+import HomeStoryCard from './HomeStoryCard.astro';
+
+interface Props {
+  sections: HomeSection[];
+}
+
+const { sections } = Astro.props;
+const number = (index: number) => String(index + 1).padStart(2, '0');
+---
+
+<div class="home-curated home-curated--a">
+  <header class="home-curated-intro">
+    <p class="home-section-kicker">Una biblioteca para recorrer el cielo</p>
+    <h2>Explora Astrocava por temas</h2>
+    <p>
+      Una selección de artículos, observaciones e imágenes organizada en cinco
+      escaparates claros.
+    </p>
+  </header>
+  {
+    sections.map((section, index) => (
+      <section
+        id={`area-${section.id}`}
+        class:list={[
+          'home-section',
+          'home-section--a',
+          section.secondary.length === 0 && 'home-section--solo',
+        ]}
+        aria-labelledby={`area-${section.id}-title`}
+      >
+        <header class="home-section-header">
+          <span class="home-section-number" aria-hidden="true">{number(index)}</span>
+          <div>
+            <p class="home-section-kicker">Escaparate temático</p>
+            <h2 id={`area-${section.id}-title`}>{section.label}</h2>
+            <p>{section.description}</p>
+          </div>
+          <a class="home-section-link" href={section.href}>
+            Ver toda el área <span aria-hidden="true">→</span>
+          </a>
+        </header>
+        <div class="home-section-grid home-section-grid--a">
+          <HomeStoryCard entry={section.featured} role="featured" eyebrow="Protagonista" />
+          {section.secondary.length > 0 && (
+            <div class="home-supporting-grid">
+              {section.secondary.map((entry) => (
+                <HomeStoryCard entry={entry} role="supporting" />
+              ))}
+            </div>
+          )}
+        </div>
+      </section>
+    ))
+  }
+</div>
