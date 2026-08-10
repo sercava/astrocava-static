@@ -8,6 +8,7 @@ import test from 'node:test';
 import { runPredeployChecks, validatePredeployContract } from './check-predeploy.mjs';
 
 const ORIGIN = 'https://www.astrocava.com';
+const COMPLIANT_EXTERNAL_LINK = '<a href="https://example.org/fuente" target="_blank" rel="nofollow noopener noreferrer">Fuente<span class="visually-hidden external-link-new-tab-note"> (abre en una pestaña nueva)</span></a>';
 const ACTUAL_CONTRACT = JSON.parse(
   fs.readFileSync(new URL('../PREDEPLOY_CONTRACT.json', import.meta.url), 'utf8'),
 );
@@ -69,7 +70,7 @@ function createFixture(t) {
   const favicon = Buffer.from('favicon-publico');
   write(root, 'index.html', page({
     route: '/',
-    body: '<a href="/licencias/#legal">Licencias</a><img src="/content/images/test.jpg" alt="Prueba">',
+    body: `<a href="/licencias/#legal">Licencias</a>${COMPLIANT_EXTERNAL_LINK}<img src="/content/images/test.jpg" alt="Prueba">`,
   }));
   write(root, 'licencias/index.html', page({ route: '/licencias/', body: '<a id="legal"></a><a href="/">Inicio</a>' }));
   write(root, 'page/2/index.html', redirectPage());
@@ -119,6 +120,7 @@ test('acepta el build que satisface todo el contrato predeploy', (t) => {
   assert.equal(result.summary.urls.html, 3);
   assert.equal(result.summary.urls.content, 2);
   assert.equal(result.summary.urls.redirects, 1);
+  assert.equal(result.summary.links.externalLinks, 1);
   assert.equal(result.summary.images.imageFiles, 2);
   assert.equal(result.summary.sitemap.sitemapUrls, 2);
 });
@@ -191,6 +193,42 @@ test('rechaza enlaces internos y fragmentos rotos', (t) => {
     body: '<a href="/ausente/">Ausente</a><a href="/licencias/#ausente">Fragmento</a>',
   }));
   assert.throws(() => run(fixture, ['links']), /ruta interna inexistente[\s\S]*fragmento inexistente/);
+});
+
+test('rechaza enlaces externos sin pestaña nueva, relaciones seguras o aviso accesible', (t) => {
+  const fixture = createFixture(t);
+  write(fixture.root, 'index.html', page({
+    route: '/',
+    body: '<a href="https://example.org/fuente">Fuente</a>',
+  }));
+  assert.throws(
+    () => run(fixture, ['links']),
+    /debe abrir en una pestaña nueva[\s\S]*rel="noopener noreferrer"[\s\S]*debe avisar de forma accesible/,
+  );
+});
+
+test('rechaza target blank en un enlace interno o no web', (t) => {
+  const fixture = createFixture(t);
+  write(fixture.root, 'index.html', page({
+    route: '/',
+    body: '<a href="/licencias/" target="_blank">Interno</a><a href="mailto:info@example.org" target="_blank">Correo</a>',
+  }));
+  assert.throws(
+    () => run(fixture, ['links']),
+    /no es externo y debe conservar la misma pestaña[\s\S]*no es externo y debe conservar la misma pestaña/,
+  );
+});
+
+test('rechaza enlaces sin cierre para que no eludan la política externa', (t) => {
+  const fixture = createFixture(t);
+  write(fixture.root, 'index.html', page({
+    route: '/',
+    body: '<a href="https://example.org/fuente">Fuente',
+  }));
+  assert.throws(
+    () => run(fixture, ['links']),
+    /enlaces <a> sin cierre o anidados de forma inválida/,
+  );
 });
 
 test('rechaza imágenes faltantes, extra, modificadas o no inventariadas', (t) => {

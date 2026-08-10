@@ -3,6 +3,11 @@ import crypto from 'node:crypto';
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
+import {
+  collectAnchorElements,
+  hasAccessibleNewTabNotice,
+  isExternalHttpHref,
+} from './external-links.mjs';
 
 const PROJECT_ROOT = path.join(path.dirname(fileURLToPath(import.meta.url)), '..');
 const DEFAULT_CONTRACT_PATH = path.join(PROJECT_ROOT, 'PREDEPLOY_CONTRACT.json');
@@ -367,16 +372,59 @@ function resolveInternalReference(raw, pageUrl, canonicalOrigin, issues, scope, 
 }
 
 function checkLinks({ pages, contract, distRoot, issues }) {
-  let checked = 0;
+  let internalLinks = 0;
+  let externalLinks = 0;
   for (const [route, page] of pages) {
     const pageUrl = `${contract.canonicalOrigin}${route}`;
     if (/astrocava\.ghost\.io/i.test(page.html)) {
       addIssue(issues, 'links', `${route} conserva una referencia al host de Ghost`);
     }
-    for (const tag of tags(page.html, 'a')) {
+    const anchors = collectAnchorElements(page.html);
+    const openingAnchorCount = tags(page.html, 'a').length;
+    if (anchors.length !== openingAnchorCount) {
+      addIssue(
+        issues,
+        'links',
+        `${route} contiene enlaces <a> sin cierre o anidados de forma inválida`,
+      );
+    }
+    for (const anchor of anchors) {
+      const tag = anchor.openingTag;
       const href = attribute(tag, 'href');
       // <a id="…"> también es un destino de fragmento válido, no un enlace.
       if (href === null || href === '') continue;
+      const target = attribute(tag, 'target')?.toLowerCase() ?? null;
+      if (isExternalHttpHref(href, { baseOrigin: pageUrl })) {
+        externalLinks += 1;
+        if (target !== '_blank') {
+          addIssue(issues, 'links', `${route} → ${href} debe abrir en una pestaña nueva`);
+        }
+        const rel = new Set(
+          (attribute(tag, 'rel') ?? '').toLowerCase().split(/\s+/).filter(Boolean),
+        );
+        if (!rel.has('noopener') || !rel.has('noreferrer')) {
+          addIssue(
+            issues,
+            'links',
+            `${route} → ${href} debe declarar rel="noopener noreferrer"`,
+          );
+        }
+        if (!hasAccessibleNewTabNotice(tag, anchor.innerHtml)) {
+          addIssue(
+            issues,
+            'links',
+            `${route} → ${href} debe avisar de forma accesible que abre una pestaña nueva`,
+          );
+        }
+        continue;
+      }
+      if (target === '_blank') {
+        addIssue(
+          issues,
+          'links',
+          `${route} → ${href} no es externo y debe conservar la misma pestaña`,
+        );
+      }
       const targetUrl = resolveInternalReference(
         href,
         pageUrl,
@@ -386,7 +434,7 @@ function checkLinks({ pages, contract, distRoot, issues }) {
         `${route} → ${href}`,
       );
       if (!targetUrl) continue;
-      checked += 1;
+      internalLinks += 1;
       const targetFile = pageFileForUrl(distRoot, targetUrl.pathname);
       if (!targetFile || !fs.existsSync(targetFile) || !fs.lstatSync(targetFile).isFile()) {
         addIssue(issues, 'links', `${route} enlaza a una ruta interna inexistente: ${href}`);
@@ -401,7 +449,7 @@ function checkLinks({ pages, contract, distRoot, issues }) {
       }
     }
   }
-  return { internalLinks: checked };
+  return { internalLinks, externalLinks };
 }
 
 function sha256Bytes(value) {
