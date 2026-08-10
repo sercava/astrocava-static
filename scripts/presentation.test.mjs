@@ -135,6 +135,35 @@ test('M16 conserva la propuesta SEO y editorial aprobada', () => {
   assert.doesNotMatch(article, /no se van a poder apreciar los colores/);
 });
 
+test('la guía de observación solar conserva el contexto aprobado del Trío Ibérico de Eclipses', () => {
+  const article = source(
+    'src/content/entries/recomendaciones-para-la-observacion-solar-a-traves-de-telescopios.md',
+  );
+
+  assert.match(
+    article,
+    /^title: Recomendaciones para la Observación Solar a través de telescopios$/m,
+  );
+  assert.match(
+    article,
+    /^pathname: \/observacion\/recomendaciones-para-la-observacion-solar-a-traves-de-telescopios\/$/m,
+  );
+  assert.match(article, /^meta_title: ''$/m);
+  assert.match(article, /^meta_description: ''$/m);
+  assert.match(
+    article,
+    /Trío Ibérico de Eclipses.*12 de agosto de 2026.*2 de agosto de 2027.*26 de enero de 2028/,
+  );
+  assert.match(
+    article,
+    /Para disfrutarlos a través de un telescopio.*filtro solar frontal adecuado y bien fijado.*protección debe mantenerse en todo momento\./,
+  );
+  assert.match(
+    article,
+    /href="https:\/\/eclipses\.ign\.es\/" rel="noreferrer">portal oficial de eclipses del Instituto Geográfico Nacional<\/a>/,
+  );
+});
+
 test('El cielo de otoño conserva la propuesta SEO y editorial aprobada', () => {
   const article = source('src/content/entries/el-cielo-de-otono.md');
   const expectedIntro =
