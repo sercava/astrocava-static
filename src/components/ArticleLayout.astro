@@ -115,6 +115,8 @@ const articleStructuredData =
               src={d.feature_image}
               alt={d.feature_image_alt || d.title}
               loading="eager"
+              srcset={d.feature_image_srcset}
+              sizes={d.feature_image_sizes}
             />
             {
               (d.feature_image_caption ||

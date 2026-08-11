@@ -18,6 +18,7 @@ const CONTRACT_KEYS = new Set([
   'canonicalOrigin',
   'baseline',
   'legacyUrlCount',
+  'approvedNewUrlCount',
   'expectedHtmlCount',
   'expectedImageFiles',
   'urls',
@@ -61,14 +62,19 @@ export function validatePredeployContract(contract) {
   for (const key of Object.keys(contract)) {
     if (!CONTRACT_KEYS.has(key)) throw new Error(`Campo no permitido en contrato: ${key}`);
   }
-  if (contract.schemaVersion !== 2) throw new Error('Schema predeploy no soportado');
+  if (contract.schemaVersion !== 3) throw new Error('Schema predeploy no soportado');
   if (contract.canonicalOrigin !== 'https://www.astrocava.com') {
     throw new Error('El origen canónico debe ser https://www.astrocava.com');
   }
   if (typeof contract.baseline !== 'string' || !contract.baseline.trim()) {
     throw new Error('baseline es obligatorio');
   }
-  for (const field of ['legacyUrlCount', 'expectedHtmlCount', 'expectedImageFiles']) {
+  for (const field of [
+    'legacyUrlCount',
+    'approvedNewUrlCount',
+    'expectedHtmlCount',
+    'expectedImageFiles',
+  ]) {
     if (!Number.isSafeInteger(contract[field]) || contract[field] < 0) {
       throw new Error(`${field} debe ser un entero no negativo`);
     }
@@ -124,8 +130,13 @@ export function validatePredeployContract(contract) {
   if (contract.urls.length + contract.redirects.length !== contract.expectedHtmlCount) {
     throw new Error('expectedHtmlCount no coincide con urls y redirects');
   }
-  if (contract.legacyUrlCount + 1 !== contract.urls.length) {
-    throw new Error('El contrato debe contener las URLs legacy más /licencias/');
+  if (
+    contract.legacyUrlCount + contract.approvedNewUrlCount + 1 !==
+    contract.urls.length
+  ) {
+    throw new Error(
+      'El contrato debe contener las URLs legacy, las nuevas aprobadas y /licencias/',
+    );
   }
   if (!contract.urls.includes('/licencias/')) {
     throw new Error('Falta la ruta aprobada /licencias/');

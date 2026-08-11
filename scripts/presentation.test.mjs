@@ -307,3 +307,36 @@ test('las imágenes del artículo se amplían sin alterar los enlaces', () => {
   assert.match(css, /\.prose img\[data-lightbox-trigger\]\s*{[^}]*cursor:\s*zoom-in/s);
   assert.match(css, /\.image-lightbox-image\s*{[^}]*object-fit:\s*contain/s);
 });
+
+test('la Cadena de Markarian conserva URL, SEO, datos e imágenes responsivas', () => {
+  const article = source('src/content/entries/cadena-de-markarian.md');
+
+  assert.match(article, /^pathname: \/galeria\/cielo-profundo\/cadena-de-markarian\/$/m);
+  assert.match(
+    article,
+    /^canonical_url: "https:\/\/www\.astrocava\.com\/galeria\/cielo-profundo\/cadena-de-markarian\/"$/m,
+  );
+  assert.match(
+    article,
+    /^meta_description: "Fotografía de la Cadena de Markarian con un Seestar S30:/m,
+  );
+  assert.match(article, /^tags: \[cielo-profundo, galaxia, primavera, messier\]$/m);
+  assert.match(article, /^feature_image_credit: Sergio Cava \/ Astrocava$/m);
+  assert.match(article, /^feature_image_license: CC BY 4\.0$/m);
+  assert.match(article, /^feature_image_srcset: ".+ 600w, .+ 1000w, .+ 1600w, .+ 1920w"$/m);
+  assert.match(article, /1\.278 exposiciones de 10 segundos/);
+  assert.match(article, /886 exposiciones/);
+  assert.match(article, /2 horas, 27 minutos y 40 segundos/);
+  assert.match(article, /M84 \(NGC 4374\) podría ser una excepción/);
+  assert.equal((article.match(/<figure class="kg-card kg-image-card/g) ?? []).length, 4);
+  assert.equal(
+    (
+      article.match(
+        /srcset="[^"]+ 600w,[^"]+ 1000w,[^"]+ 1600w,[^"]+ 1920w"/g,
+      ) ?? []
+    ).length,
+    4,
+  );
+  assert.doesNotMatch(article, /<img[^>]+alt=""/);
+  assert.match(source('src/components/ArticleLayout.astro'), /srcset=\{d\.feature_image_srcset\}/);
+});

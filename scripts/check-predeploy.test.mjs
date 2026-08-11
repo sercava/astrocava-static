@@ -84,10 +84,11 @@ function createFixture(t) {
   write(root, 'robots.txt', `User-agent: *\nAllow: /\nSitemap: ${ORIGIN}/sitemap-index.xml\n`);
 
   const contract = {
-    schemaVersion: 2,
+    schemaVersion: 3,
     canonicalOrigin: ORIGIN,
     baseline: 'Fixture pública mínima',
     legacyUrlCount: 1,
+    approvedNewUrlCount: 0,
     expectedHtmlCount: 3,
     expectedImageFiles: 2,
     urls: ['/', '/licencias/'],
@@ -128,18 +129,20 @@ test('acepta el build que satisface todo el contrato predeploy', (t) => {
 test('fija los totales, las cinco URLs SEO y las compatibilidades del contrato público real', () => {
   assert.doesNotThrow(() => validatePredeployContract(ACTUAL_CONTRACT));
   assert.equal(ACTUAL_CONTRACT.legacyUrlCount, 161);
-  assert.equal(ACTUAL_CONTRACT.expectedHtmlCount, 168);
-  assert.equal(ACTUAL_CONTRACT.expectedImageFiles, 640);
+  assert.equal(ACTUAL_CONTRACT.approvedNewUrlCount, 1);
+  assert.equal(ACTUAL_CONTRACT.expectedHtmlCount, 169);
+  assert.equal(ACTUAL_CONTRACT.expectedImageFiles, 660);
   assert.deepEqual(ACTUAL_CONTRACT.protectedUrls, PROTECTED_URLS);
   assert.deepEqual(ACTUAL_CONTRACT.redirects, EXPECTED_REDIRECTS);
 });
 
 test('rechaza contratos con URLs no canónicas, desordenadas o no declaradas', () => {
   const base = {
-    schemaVersion: 2,
+    schemaVersion: 3,
     canonicalOrigin: ORIGIN,
     baseline: 'Prueba',
     legacyUrlCount: 1,
+    approvedNewUrlCount: 0,
     expectedHtmlCount: 3,
     expectedImageFiles: 0,
     urls: ['/', '/licencias/'],

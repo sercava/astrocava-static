@@ -20,7 +20,7 @@ Quedan fuera de las concesiones generales de Astrocava:
 - el texto del aviso legal y de la política de cookies;
 - dependencias, paquetes, fuentes y herramientas externas, que conservan sus propias licencias.
 
-`RIGHTS_MANIFEST.json` cubre exactamente las 274 familias y 640 archivos de imagen del árbol público verificado el 2026-08-11. Una futura ruta no incluida o cualquier cambio de bytes queda bloqueado por `check:rights` hasta que exista una nueva revisión explícita.
+`RIGHTS_MANIFEST.json` cubre exactamente las 279 familias y 660 archivos de imagen del árbol público verificado el 2026-08-11. Una futura ruta no incluida o cualquier cambio de bytes queda bloqueado por `check:rights` hasta que exista una nueva revisión explícita.
 
 Las nueve familias Midjourney se presentan como ilustraciones conceptuales. La indicación visible `CC BY 4.0 (aportaciones humanas)` se limita a los derechos y aportaciones humanas que correspondan a Sergio Cava y no afirma autoría humana exclusiva sobre el resultado íntegro.
 

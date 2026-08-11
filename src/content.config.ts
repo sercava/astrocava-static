@@ -23,6 +23,8 @@ const entries = defineCollection({
     meta_description: z.string().optional(),
     feature_image: z.string().optional(),
     feature_image_alt: z.string().optional(),
+    feature_image_srcset: z.string().optional(),
+    feature_image_sizes: z.string().optional(),
     feature_image_caption: z.string().optional(),
     feature_image_credit: z.string().optional(),
     feature_image_credit_url: z.string().url().optional(),

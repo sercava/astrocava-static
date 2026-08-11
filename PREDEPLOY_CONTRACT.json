@@ -1,10 +1,11 @@
 {
-  "schemaVersion": 2,
+  "schemaVersion": 3,
   "canonicalOrigin": "https://www.astrocava.com",
-  "baseline": "Ghost sitemap verificado 2026-06-02 + /licencias/ aprobada en T-002D + seis compatibilidades legacy aprobadas en T-009/T-017",
+  "baseline": "Ghost sitemap verificado 2026-06-02 + /licencias/ aprobada en T-002D + seis compatibilidades legacy aprobadas en T-009/T-017 + Cadena de Markarian aprobada en T-023",
   "legacyUrlCount": 161,
-  "expectedHtmlCount": 168,
-  "expectedImageFiles": 640,
+  "approvedNewUrlCount": 1,
+  "expectedHtmlCount": 169,
+  "expectedImageFiles": 660,
   "urls": [
     "/",
     "/arqueoastronomia/",
@@ -32,6 +33,7 @@
     "/aviso-legal/",
     "/galeria/",
     "/galeria/cielo-profundo/",
+    "/galeria/cielo-profundo/cadena-de-markarian/",
     "/galeria/cielo-profundo/complejo-nebular-alrededor-de-sadr-gamma-cygni/",
     "/galeria/cielo-profundo/cumulo-abierto-el-pesebre-m44-en-cancer/",
     "/galeria/cielo-profundo/cumulo-globular-m12-en-ofiuco/",

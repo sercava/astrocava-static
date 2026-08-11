@@ -1,10 +1,10 @@
 {
   "schemaVersion": 1,
-  "inventoryDigest": "a656bd7c79a85ae6dd92761f47944d5e4c5bd4411194f1b1c9961fc2c717cf47",
+  "inventoryDigest": "a36d007ad8977c97c5670a30b9ba188a7f422894b08bec10ad9ac0bf97e2a21f",
   "verifiedOn": "2026-08-11",
   "totals": {
-    "families": 274,
-    "files": 640
+    "families": 279,
+    "files": 660
   },
   "families": [
     {
@@ -7591,6 +7591,186 @@
           "path": "/content/images/size/w600/2026/06/2026-06-30-161957-Solar-RAW_lapl5_ap1115_conv.jpg",
           "bytes": 31528,
           "sha256": "8a0481835d782c876e61e47c9d2a99a3918e77f88a8a0af51cde809506d89d98"
+        }
+      ]
+    },
+    {
+      "canonicalPath": "/content/images/2026/08/cadena-de-markarian-m84-m86-comparativa.jpg",
+      "classification": "OWNED_CC_BY_4_0",
+      "holder": "Sergio Cava",
+      "licenseId": "CC-BY-4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "credit": "Sergio Cava / Astrocava",
+      "sourceUrls": [
+        "https://www.astrocava.com/"
+      ],
+      "modifications": "Composición, anotación, rotulación editorial y variantes redimensionadas para publicación web.",
+      "verifiedOn": "2026-08-11",
+      "familyDigest": "ffdd87a6630f02704283a5a4665b4c56066ee955e21f3ff43683672ce882eb29",
+      "files": [
+        {
+          "path": "/content/images/2026/08/cadena-de-markarian-m84-m86-comparativa.jpg",
+          "bytes": 156668,
+          "sha256": "314eab18e1ccf3b2f8488c2ee65ac77ac58a6f5ec88d2593852e30b3194572b8"
+        },
+        {
+          "path": "/content/images/size/w1000/2026/08/cadena-de-markarian-m84-m86-comparativa.jpg",
+          "bytes": 54022,
+          "sha256": "9f408f77becfb9db5b08843ae67d8508511216c4efa5e417bb5a5ff7f3a4cf4b"
+        },
+        {
+          "path": "/content/images/size/w1600/2026/08/cadena-de-markarian-m84-m86-comparativa.jpg",
+          "bytes": 115695,
+          "sha256": "7838b87028d755f8f47ebc33e32478e35c9fdf8bad4550b0707dfca61dd486d8"
+        },
+        {
+          "path": "/content/images/size/w600/2026/08/cadena-de-markarian-m84-m86-comparativa.jpg",
+          "bytes": 25004,
+          "sha256": "411a7f079cbc383a5390feaea076cabd76e2d14a1fedbe98853c264db163489b"
+        }
+      ]
+    },
+    {
+      "canonicalPath": "/content/images/2026/08/cadena-de-markarian-seestar-close-up-anotada-s30.jpg",
+      "classification": "OWNED_CC_BY_4_0",
+      "holder": "Sergio Cava",
+      "licenseId": "CC-BY-4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "credit": "Sergio Cava / Astrocava",
+      "sourceUrls": [
+        "https://www.astrocava.com/"
+      ],
+      "modifications": "Recorte, anotación, rotulación editorial y variantes redimensionadas para publicación web.",
+      "verifiedOn": "2026-08-11",
+      "familyDigest": "d2893912875a801d7e8220583d89c989c6ebe6e1427433d935af6876c263c3ec",
+      "files": [
+        {
+          "path": "/content/images/2026/08/cadena-de-markarian-seestar-close-up-anotada-s30.jpg",
+          "bytes": 370463,
+          "sha256": "6fb1ee30b2227c1684d5be5833bd6b99003b20d84384c5f44ed735f357c0001c"
+        },
+        {
+          "path": "/content/images/size/w1000/2026/08/cadena-de-markarian-seestar-close-up-anotada-s30.jpg",
+          "bytes": 111286,
+          "sha256": "57f31e283b6919375a655ee3700c1a10615818bde299a6fd923d427174f48a77"
+        },
+        {
+          "path": "/content/images/size/w1600/2026/08/cadena-de-markarian-seestar-close-up-anotada-s30.jpg",
+          "bytes": 242228,
+          "sha256": "bb1da38c0991da3b3a810d13b3d45db27e654c5b6b7b2daf4eb1950c3ee923c6"
+        },
+        {
+          "path": "/content/images/size/w600/2026/08/cadena-de-markarian-seestar-close-up-anotada-s30.jpg",
+          "bytes": 49927,
+          "sha256": "b8157bba11192287624871d54323b2ca7067126859b8110bbde46dd1862eaa0b"
+        }
+      ]
+    },
+    {
+      "canonicalPath": "/content/images/2026/08/cadena-de-markarian-seestar-close-up-s30.jpg",
+      "classification": "OWNED_CC_BY_4_0",
+      "holder": "Sergio Cava",
+      "licenseId": "CC-BY-4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "credit": "Sergio Cava / Astrocava",
+      "sourceUrls": [
+        "https://www.astrocava.com/"
+      ],
+      "modifications": "Recorte, rotulación editorial y variantes redimensionadas para publicación web.",
+      "verifiedOn": "2026-08-11",
+      "familyDigest": "567277abd43808adc8565dba97ae1cd6fee09b2d30522dec110cdce2dd954c5d",
+      "files": [
+        {
+          "path": "/content/images/2026/08/cadena-de-markarian-seestar-close-up-s30.jpg",
+          "bytes": 277530,
+          "sha256": "d51de81a9c4d0d33fcccd7f38def737aaa4fa0923ffefeedb56075ee1cac28bc"
+        },
+        {
+          "path": "/content/images/size/w1000/2026/08/cadena-de-markarian-seestar-close-up-s30.jpg",
+          "bytes": 82995,
+          "sha256": "5f55a454d89301c849e6ac9f0fa27434d3754320d950d125cf1f3ca1abe64f39"
+        },
+        {
+          "path": "/content/images/size/w1600/2026/08/cadena-de-markarian-seestar-close-up-s30.jpg",
+          "bytes": 183595,
+          "sha256": "1a32713f7d5d80f019d3d41dbd0114cbb734bcedd01684cd10af34031bb84dca"
+        },
+        {
+          "path": "/content/images/size/w600/2026/08/cadena-de-markarian-seestar-close-up-s30.jpg",
+          "bytes": 37005,
+          "sha256": "33c62202491f4fd547c97c9729660b7231d0c00c58884660743545aaf87301ef"
+        }
+      ]
+    },
+    {
+      "canonicalPath": "/content/images/2026/08/cadena-de-markarian-seestar-s30-anotada.jpg",
+      "classification": "OWNED_CC_BY_4_0",
+      "holder": "Sergio Cava",
+      "licenseId": "CC-BY-4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "credit": "Sergio Cava / Astrocava",
+      "sourceUrls": [
+        "https://www.astrocava.com/"
+      ],
+      "modifications": "Anotación, rotulación editorial y variantes redimensionadas para publicación web.",
+      "verifiedOn": "2026-08-11",
+      "familyDigest": "e33f03aea2f12077acd9d1cce4c40a723b6373083d2c901a16f5261fd528215c",
+      "files": [
+        {
+          "path": "/content/images/2026/08/cadena-de-markarian-seestar-s30-anotada.jpg",
+          "bytes": 506076,
+          "sha256": "14d8efdb8d2331d7ca1af616631580df5033d31ff31fe8fa9417c779779f0264"
+        },
+        {
+          "path": "/content/images/size/w1000/2026/08/cadena-de-markarian-seestar-s30-anotada.jpg",
+          "bytes": 138113,
+          "sha256": "b5521c3eab5cd8d45b428b594427441ada53cc9a3d1e726a7cadb3f47d851c50"
+        },
+        {
+          "path": "/content/images/size/w1600/2026/08/cadena-de-markarian-seestar-s30-anotada.jpg",
+          "bytes": 337066,
+          "sha256": "b6d23edd9ca0b7689d75e4d10e042991acd4a4a459d6bcff2bdc104c8af0d6c8"
+        },
+        {
+          "path": "/content/images/size/w600/2026/08/cadena-de-markarian-seestar-s30-anotada.jpg",
+          "bytes": 53423,
+          "sha256": "6a2e37a470044013bee6980dc64a99e3b586fc6c4b317614a15ee1e721ed88ff"
+        }
+      ]
+    },
+    {
+      "canonicalPath": "/content/images/2026/08/cadena-de-markarian-seestar-s30.jpg",
+      "classification": "OWNED_CC_BY_4_0",
+      "holder": "Sergio Cava",
+      "licenseId": "CC-BY-4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "credit": "Sergio Cava / Astrocava",
+      "sourceUrls": [
+        "https://www.astrocava.com/"
+      ],
+      "modifications": "Rotulación editorial y variantes redimensionadas para publicación web.",
+      "verifiedOn": "2026-08-11",
+      "familyDigest": "dbf65291c58d5d37a5f89beed98078e4f6a62964dc4a91cbc5d213e900bed6b6",
+      "files": [
+        {
+          "path": "/content/images/2026/08/cadena-de-markarian-seestar-s30.jpg",
+          "bytes": 288807,
+          "sha256": "435873e024236a513a78fad585d6da814f2f5c4e11a7edca7ea7822026e3d0c1"
+        },
+        {
+          "path": "/content/images/size/w1000/2026/08/cadena-de-markarian-seestar-s30.jpg",
+          "bytes": 100083,
+          "sha256": "c43fa189b69e2da4262300029fd3b57bc4ceeba5d968b62cb7ee1609cabc3c9f"
+        },
+        {
+          "path": "/content/images/size/w1600/2026/08/cadena-de-markarian-seestar-s30.jpg",
+          "bytes": 214826,
+          "sha256": "5b127d29392a17103e74070cae6e0c0f84b984bfb2a0b1a67abfb55592875c0d"
+        },
+        {
+          "path": "/content/images/size/w600/2026/08/cadena-de-markarian-seestar-s30.jpg",
+          "bytes": 42284,
+          "sha256": "7dbad54de5c75aafa22569ce7381291f4dba5faacf34c4a317d262e99a80388e"
         }
       ]
     },
