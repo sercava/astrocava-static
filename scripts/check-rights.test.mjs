@@ -103,7 +103,7 @@ async function writeManifest(fixture) {
 }
 
 test('el contrato fija el árbol final y las nueve familias Midjourney', () => {
-  assert.deepEqual(EXPECTED_FINAL_RIGHTS_TOTALS, { families: 272, files: 634 });
+  assert.deepEqual(EXPECTED_FINAL_RIGHTS_TOTALS, { families: 274, files: 640 });
   assert.equal(MIDJOURNEY_FAMILY_PATHS.length, 9);
   assert.equal(new Set(MIDJOURNEY_FAMILY_PATHS).size, 9);
 });

@@ -13,6 +13,9 @@ interface Props {
   twitterTitle?: string;
   twitterDescription?: string;
   twitterImage?: string;
+  articlePublishedTime?: string;
+  articleModifiedTime?: string;
+  structuredData?: Record<string, unknown>;
 }
 
 const {
@@ -26,6 +29,9 @@ const {
   twitterTitle,
   twitterDescription,
   twitterImage,
+  articlePublishedTime,
+  articleModifiedTime,
+  structuredData,
 } = Astro.props;
 const pageTitle = title.includes('Astrocava') ? title : `${title} | Astrocava`;
 const resolvedOgTitle = ogTitle || pageTitle;
@@ -33,6 +39,9 @@ const resolvedOgDesc = ogDescription || description;
 const resolvedTwTitle = twitterTitle || resolvedOgTitle;
 const resolvedTwDesc = twitterDescription || resolvedOgDesc;
 const resolvedTwImage = twitterImage || ogImage;
+const structuredDataJson = structuredData
+  ? JSON.stringify(structuredData).replace(/</g, '\\u003c')
+  : null;
 const pathname = Astro.url.pathname;
 const primaryNav = [
   { href: '/galeria/', label: 'Galería' },
@@ -62,6 +71,15 @@ const isCurrent = (href: string) => pathname === href || pathname.startsWith(hre
     <meta name="twitter:title" content={resolvedTwTitle} />
     {resolvedTwDesc && <meta name="twitter:description" content={resolvedTwDesc} />}
     {resolvedTwImage && <meta name="twitter:image" content={resolvedTwImage} />}
+    {articlePublishedTime && (
+      <meta property="article:published_time" content={articlePublishedTime} />
+    )}
+    {articleModifiedTime && (
+      <meta property="article:modified_time" content={articleModifiedTime} />
+    )}
+    {structuredDataJson && (
+      <script type="application/ld+json" is:inline set:html={structuredDataJson}></script>
+    )}
   </head>
   <body>
     <header class="site-header">

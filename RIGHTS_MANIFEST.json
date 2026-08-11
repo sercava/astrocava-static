@@ -1,10 +1,10 @@
 {
   "schemaVersion": 1,
-  "inventoryDigest": "e408d2230baffbf031aa7e1cc7506ee5b300ffd367b208e7036c1d22f27d62e8",
-  "verifiedOn": "2026-08-09",
+  "inventoryDigest": "a656bd7c79a85ae6dd92761f47944d5e4c5bd4411194f1b1c9961fc2c717cf47",
+  "verifiedOn": "2026-08-11",
   "totals": {
-    "families": 272,
-    "files": 634
+    "families": 274,
+    "files": 640
   },
   "families": [
     {
@@ -7529,6 +7529,68 @@
           "path": "/content/images/size/w600/2025/12/sol_20251202-165235_seestar-s50-ndf.jpg",
           "bytes": 18946,
           "sha256": "bb1613fe5cf32b60c25e16f8e186121c54caa150ea1d9e3d85c1c99badc7ae3e"
+        }
+      ]
+    },
+    {
+      "canonicalPath": "/content/images/2026/04/2026-04-02-144901-Solar-RAW_lapl5_ap1151_conv.jpg",
+      "classification": "OWNED_CC_BY_4_0",
+      "holder": "Sergio Cava",
+      "licenseId": "CC-BY-4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "credit": "Sergio Cava / Astrocava",
+      "sourceUrls": [
+        "https://www.astrocava.com/"
+      ],
+      "modifications": "Variantes redimensionadas para publicación web.",
+      "verifiedOn": "2026-08-11",
+      "familyDigest": "5e9c900d1bcbf52252655831162d0b37701c5aa4c107ba515302cd530816d68c",
+      "files": [
+        {
+          "path": "/content/images/2026/04/2026-04-02-144901-Solar-RAW_lapl5_ap1151_conv.jpg",
+          "bytes": 98193,
+          "sha256": "f85e0b43a74979e9264d57f7d191dc2aea7f98de8fdb2c31f34ed19f1519936c"
+        },
+        {
+          "path": "/content/images/size/w1000/2026/04/2026-04-02-144901-Solar-RAW_lapl5_ap1151_conv.jpg",
+          "bytes": 77801,
+          "sha256": "129254358df34724f7ab0f23de43dcd5e1ea765aec906f5ed7cf0456c4453400"
+        },
+        {
+          "path": "/content/images/size/w600/2026/04/2026-04-02-144901-Solar-RAW_lapl5_ap1151_conv.jpg",
+          "bytes": 33444,
+          "sha256": "48d24b3cd8f274aaf02f038d4858de1bff201e0c1535c6e27530f96b6cb99cdb"
+        }
+      ]
+    },
+    {
+      "canonicalPath": "/content/images/2026/06/2026-06-30-161957-Solar-RAW_lapl5_ap1115_conv.jpg",
+      "classification": "OWNED_CC_BY_4_0",
+      "holder": "Sergio Cava",
+      "licenseId": "CC-BY-4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "credit": "Sergio Cava / Astrocava",
+      "sourceUrls": [
+        "https://www.astrocava.com/"
+      ],
+      "modifications": "Variantes redimensionadas para publicación web.",
+      "verifiedOn": "2026-08-11",
+      "familyDigest": "ad2a9fd47dabd3bf41734d5d98e298a9f79301b28c1d55381d50087ea12d14b9",
+      "files": [
+        {
+          "path": "/content/images/2026/06/2026-06-30-161957-Solar-RAW_lapl5_ap1115_conv.jpg",
+          "bytes": 98319,
+          "sha256": "881829896b8e160bb0752928cb1a3580e8befe70839c4e577834daa23e0a517d"
+        },
+        {
+          "path": "/content/images/size/w1000/2026/06/2026-06-30-161957-Solar-RAW_lapl5_ap1115_conv.jpg",
+          "bytes": 77352,
+          "sha256": "6ab4b32c9d115e13aeccacc13a478ef012fd07164eb17e3f87109d9f2b089a0b"
+        },
+        {
+          "path": "/content/images/size/w600/2026/06/2026-06-30-161957-Solar-RAW_lapl5_ap1115_conv.jpg",
+          "bytes": 31528,
+          "sha256": "8a0481835d782c876e61e47c9d2a99a3918e77f88a8a0af51cde809506d89d98"
         }
       ]
     },

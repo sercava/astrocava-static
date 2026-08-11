@@ -3,12 +3,43 @@ import fs from 'node:fs';
 import path from 'node:path';
 import test from 'node:test';
 import { fileURLToPath } from 'node:url';
+import {
+  formatArticleDate,
+  visibleEditorialUpdate,
+} from '../src/lib/article-dates.ts';
 
 const ROOT = path.resolve(path.dirname(fileURLToPath(import.meta.url)), '..');
 
 function source(relativePath) {
   return fs.readFileSync(path.join(ROOT, relativePath), 'utf8');
 }
+
+test('la actualización editorial exige una fecha civil posterior y se formatea en UTC', () => {
+  const published = new Date('2026-08-11T08:00:00.000Z');
+  const sameDay = new Date('2026-08-11T23:00:00.000Z');
+  const nextDay = new Date('2026-08-12T00:00:00.000Z');
+
+  assert.equal(visibleEditorialUpdate(published, undefined), undefined);
+  assert.equal(visibleEditorialUpdate(published, sameDay), undefined);
+  assert.equal(visibleEditorialUpdate(published, nextDay), nextDay);
+  assert.equal(formatArticleDate(new Date('2026-04-02T00:00:00.000Z')), '2 de abril de 2026');
+});
+
+test('las entradas separan publicación y actualización editorial en UI y metadatos', () => {
+  const article = source('src/components/ArticleLayout.astro');
+  const base = source('src/layouts/BaseLayout.astro');
+  const schema = source('src/content.config.ts');
+
+  assert.match(schema, /editorial_updated_at: z\.coerce\.date\(\)\.optional\(\)/);
+  assert.match(article, /visibleEditorialUpdate\(/);
+  assert.match(article, /Publicado:/);
+  assert.match(article, /Actualizado:/);
+  assert.match(article, /datePublished:/);
+  assert.match(article, /dateModified:/);
+  assert.match(base, /property="article:published_time"/);
+  assert.match(base, /property="article:modified_time"/);
+  assert.match(base, /type="application\/ld\+json"/);
+});
 
 test('la cabecera conserva las cinco secciones principales históricas', () => {
   const layout = source('src/layouts/BaseLayout.astro');

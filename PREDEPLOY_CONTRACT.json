@@ -4,7 +4,7 @@
   "baseline": "Ghost sitemap verificado 2026-06-02 + /licencias/ aprobada en T-002D + seis compatibilidades legacy aprobadas en T-009/T-017",
   "legacyUrlCount": 161,
   "expectedHtmlCount": 168,
-  "expectedImageFiles": 634,
+  "expectedImageFiles": 640,
   "urls": [
     "/",
     "/arqueoastronomia/",

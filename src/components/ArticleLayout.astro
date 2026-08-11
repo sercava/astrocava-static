@@ -3,6 +3,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import ImageLightbox from './ImageLightbox.astro';
 import { render } from 'astro:content';
 import type { CollectionEntry } from 'astro:content';
+import { formatArticleDate, visibleEditorialUpdate } from '../lib/article-dates';
 import { resolveMetaDescription } from '../lib/seo';
 
 interface Props {
@@ -32,13 +33,39 @@ const twitterTitle = d.twitter_title || ogTitle;
 const twitterDescription = d.twitter_description || ogDescription;
 const twitterImage = absImage(d.twitter_image || d.og_image || d.feature_image);
 
-const dateStr = d.published_at
-  ? d.published_at.toLocaleDateString('es-ES', {
-      year: 'numeric',
-      month: 'long',
-      day: 'numeric',
-    })
+const publishedAt = d.published_at;
+const editorialUpdatedAt = visibleEditorialUpdate(
+  publishedAt,
+  d.editorial_updated_at,
+);
+const publishedDateStr = publishedAt ? formatArticleDate(publishedAt) : null;
+const updatedDateStr = editorialUpdatedAt
+  ? formatArticleDate(editorialUpdatedAt)
   : null;
+const articleStructuredData =
+  d.type === 'post' && publishedAt
+    ? {
+        '@context': 'https://schema.org',
+        '@type': 'Article',
+        headline: d.title,
+        url: d.canonical_url,
+        mainEntityOfPage: {
+          '@type': 'WebPage',
+          '@id': d.canonical_url,
+        },
+        datePublished: publishedAt.toISOString(),
+        ...(editorialUpdatedAt
+          ? { dateModified: editorialUpdatedAt.toISOString() }
+          : {}),
+        ...(ogImage ? { image: ogImage } : {}),
+        author: {
+          '@type': 'Person',
+          name: 'Sergio Cava',
+          url: 'https://www.astrocava.com/author/sergio/',
+        },
+        inLanguage: 'es',
+      }
+    : undefined;
 ---
 
 <BaseLayout
@@ -51,11 +78,36 @@ const dateStr = d.published_at
   twitterTitle={twitterTitle}
   twitterDescription={twitterDescription}
   twitterImage={twitterImage}
+  articlePublishedTime={d.type === 'post' ? publishedAt?.toISOString() : undefined}
+  articleModifiedTime={
+    d.type === 'post' ? editorialUpdatedAt?.toISOString() : undefined
+  }
+  structuredData={articleStructuredData}
 >
   <article class="prose">
     <header class="article-header">
       <h1>{d.title}</h1>
-      {dateStr && <p class="article-meta">Publicado: {dateStr}</p>}
+      {
+        publishedDateStr && publishedAt && (
+          <p class="article-meta">
+            <span>
+              Publicado:{' '}
+              <time datetime={publishedAt.toISOString()}>{publishedDateStr}</time>
+            </span>
+            {updatedDateStr && editorialUpdatedAt && (
+              <>
+                <span aria-hidden="true"> · </span>
+                <span>
+                  Actualizado:{' '}
+                  <time datetime={editorialUpdatedAt.toISOString()}>
+                    {updatedDateStr}
+                  </time>
+                </span>
+              </>
+            )}
+          </p>
+        )
+      }
       {
         d.feature_image && (
           <figure class="feature-image">

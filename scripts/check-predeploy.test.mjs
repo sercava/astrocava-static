@@ -129,7 +129,7 @@ test('fija los totales, las cinco URLs SEO y las compatibilidades del contrato p
   assert.doesNotThrow(() => validatePredeployContract(ACTUAL_CONTRACT));
   assert.equal(ACTUAL_CONTRACT.legacyUrlCount, 161);
   assert.equal(ACTUAL_CONTRACT.expectedHtmlCount, 168);
-  assert.equal(ACTUAL_CONTRACT.expectedImageFiles, 634);
+  assert.equal(ACTUAL_CONTRACT.expectedImageFiles, 640);
   assert.deepEqual(ACTUAL_CONTRACT.protectedUrls, PROTECTED_URLS);
   assert.deepEqual(ACTUAL_CONTRACT.redirects, EXPECTED_REDIRECTS);
 });

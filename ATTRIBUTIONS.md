@@ -1,8 +1,8 @@
 # Atribuciones y procedencia de recursos
 
-Actualizado: 2026-08-09
+Actualizado: 2026-08-11
 
-Este registro ofrece la lectura humana de las atribuciones que requieren más contexto. El inventario completo y vinculante del árbol actual está en [`RIGHTS_MANIFEST.json`](RIGHTS_MANIFEST.json): 272 familias y 634 archivos, todos con clasificación publicable, rutas, tamaños y SHA-256 exactos. `check:rights` rechaza cualquier imagen ausente, extra, modificada o con estado incierto.
+Este registro ofrece la lectura humana de las atribuciones que requieren más contexto. El inventario completo y vinculante del árbol actual está en [`RIGHTS_MANIFEST.json`](RIGHTS_MANIFEST.json): 274 familias y 640 archivos, todos con clasificación publicable, rutas, tamaños y SHA-256 exactos. `check:rights` rechaza cualquier imagen ausente, extra, modificada o con estado incierto.
 
 Las variantes de tamaño heredan el estado y la licencia de su original solo cuando la fila las incluye expresamente. La notación abreviada `size/w600`, `size/w1000`, etc. significa que se inserta ese segmento tras `/content/images/` y se conserva el resto de la ruta original; no cubre ningún otro tamaño. `ASTROCAVA-ORIGINAL` identifica una aportación propia; `THIRD-PARTY` conserva la licencia de origen; `PUBLIC-DOMAIN` registra procedencia sin reclamar derechos exclusivos.
 
@@ -10,7 +10,7 @@ Las variantes de tamaño heredan el estado y la licencia de su original solo cua
 
 La atribución solicitada para estas obras es **Sergio Cava / Astrocava**, con enlace a `https://www.astrocava.com/`. Se distribuyen bajo [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).
 
-El manifiesto identifica de forma exhaustiva las 244 familias propias bajo esta licencia. La tabla siguiente conserva los casos con contexto histórico o atribución visible adicional. El favicon vigente es una familia de identidad visual separada, con derechos reservados.
+El manifiesto identifica de forma exhaustiva las 246 familias propias bajo esta licencia. La tabla siguiente conserva los casos con contexto histórico o atribución visible adicional. El favicon vigente es una familia de identidad visual separada, con derechos reservados.
 
 | Familia de rutas | Contexto | Estado y licencia | Modificaciones | Verificado |
 | --- | --- | --- | --- | --- |
@@ -19,6 +19,7 @@ El manifiesto identifica de forma exhaustiva las 244 familias propias bajo esta 
 | `/content/images/2024/04/Algol-y-estrellas-comparacion.jpg` y variantes `size/w600`, `size/w1000`, `size/w1600` | «Algol y la variabilidad de las estrellas» | `ASTROCAVA-ORIGINAL`; CC BY 4.0 | Composición editorial y variantes redimensionadas | 2026-07-11 |
 | `/content/images/2024/04/astronomia-paleolitico-pintura-rupestre-lascaux-XIII.jpg` y variantes `size/w600`, `size/w1000`, `size/w1600` | «Astronomía en el Paleolítico» | `ASTROCAVA-ORIGINAL`; CC BY 4.0 | Esquema contemporáneo, no fotografía ni calco | 2026-07-11 |
 | `/content/images/2024/06/marte-mejores-oposiciones.jpg` y variantes `size/w600`, `size/w1000` | «El planeta Marte» | `ASTROCAVA-ORIGINAL`; CC BY 4.0 | Infografía rediseñada con OpenAI ImageGen a partir del esquema propio anterior, revisión editorial de la geometría orbital, rotulación estacional boreal y variantes redimensionadas | 2026-08-09 |
+| `/content/images/2026/04/2026-04-02-144901-Solar-RAW_lapl5_ap1151_conv.jpg` y `/content/images/2026/06/2026-06-30-161957-Solar-RAW_lapl5_ap1115_conv.jpg`, cada una con variantes `size/w600` y `size/w1000` | «Actividad solar del ciclo solar 25» | `ASTROCAVA-ORIGINAL`; CC BY 4.0 | Originales conservados sin recodificar; variantes redimensionadas para publicación web | 2026-08-11 |
 
 ## British Museum
 
@@ -95,11 +96,11 @@ Crédito: **Ilustración generada con Midjourney por Sergio Cava**. La [CC BY 4.
 
 | Clasificación | Familias | Archivos |
 | --- | ---: | ---: |
-| Obra propia, CC BY 4.0 | 244 | 588 |
+| Obra propia, CC BY 4.0 | 246 | 594 |
 | Identidad visual propia, derechos reservados | 1 | 1 |
 | Ilustración Midjourney documentada | 9 | 9 |
 | Material de terceros | 11 | 21 |
 | Dominio público | 7 | 15 |
-| **Total** | **272** | **634** |
+| **Total** | **274** | **640** |
 
-Digest SHA-256 del inventario: `e408d2230baffbf031aa7e1cc7506ee5b300ffd367b208e7036c1d22f27d62e8`.
+Digest SHA-256 del inventario: `a656bd7c79a85ae6dd92761f47944d5e4c5bd4411194f1b1c9961fc2c717cf47`.

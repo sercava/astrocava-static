@@ -4,8 +4,8 @@ export const PUBLIC_RIGHTS_MANIFEST_SCHEMA_VERSION = 1;
 export const PUBLIC_RIGHTS_MANIFEST_FILENAME = 'RIGHTS_MANIFEST.json';
 
 export const EXPECTED_FINAL_RIGHTS_TOTALS = Object.freeze({
-  families: 272,
-  files: 634,
+  families: 274,
+  files: 640,
 });
 
 export const PUBLIC_RIGHTS_CLASSIFICATIONS = Object.freeze([

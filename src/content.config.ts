@@ -14,6 +14,7 @@ const entries = defineCollection({
     canonical_url: z.string(),
     published_at: z.coerce.date().optional(),
     updated_at: z.coerce.date().optional(),
+    editorial_updated_at: z.coerce.date().optional(),
     excerpt: z.string().optional(),
     content_plaintext: z.string().optional(),
     tags: z.array(z.string()).default([]),
