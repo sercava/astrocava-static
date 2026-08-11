@@ -8,7 +8,7 @@ import { getRecentHomeEntries, resolveHomeSections } from '../lib/home';
 
 const entries = await getPublishedEntries();
 const sections = resolveHomeSections(entries);
-const recentEntries = getRecentHomeEntries(sections);
+const recentEntries = getRecentHomeEntries(entries);
 const canonicalUrl = 'https://www.astrocava.com/';
 ---
 

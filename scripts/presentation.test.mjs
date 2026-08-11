@@ -83,6 +83,7 @@ test('la portada conserva su frase editorial histórica', () => {
 test('la portada A organiza cinco áreas con la selección editorial acordada', () => {
   const home = source('src/pages/index.astro');
   const homeData = source('src/lib/home.ts');
+  const [sectionData] = homeData.split('export const HOME_RECENT_PATHS');
   const showcases = source('src/components/HomeShowcases.astro');
   const css = source('src/styles/global.css');
   const selectedPaths = [
@@ -107,7 +108,7 @@ test('la portada A organiza cinco áreas con la selección editorial acordada', 
 
   for (const pathname of selectedPaths) {
     assert.equal(
-      homeData.split(pathname).length - 1,
+      sectionData.split(pathname).length - 1,
       1,
       `${pathname} debe aparecer una sola vez en la selección`,
     );
@@ -139,6 +140,36 @@ test('la portada A organiza cinco áreas con la selección editorial acordada', 
   assert.doesNotMatch(css, /home-prototype|home-section--b|home-portal/);
   assert.doesNotMatch(homeData, /href: '\/sistema-solar\/'/);
   assert.doesNotMatch(homeData, /href: '\/cielo-profundo\/'/);
+});
+
+test('la portada fija las tres lecturas recientes elegidas por el propietario', () => {
+  const home = source('src/pages/index.astro');
+  const homeData = source('src/lib/home.ts');
+  const recentBlock = homeData.match(
+    /export const HOME_RECENT_PATHS = \[([\s\S]*?)\] as const;/,
+  );
+
+  assert.ok(
+    recentBlock,
+    'debe existir una selección explícita de lecturas recientes',
+  );
+  assert.deepEqual(
+    [...recentBlock[1].matchAll(/'([^']+)'/g)].map((match) => match[1]),
+    [
+      '/galeria/sistema-solar/eclipse-parcial-de-sol-del-29-de-marzo-de-2025/',
+      '/galeria/sistema-solar/actividad-solar-del-ciclo-solar-25/',
+      '/galeria/cielo-profundo/cadena-de-markarian/',
+    ],
+  );
+  assert.match(home, /getRecentHomeEntries\(entries\)/);
+  assert.doesNotMatch(
+    recentBlock[1],
+    /\/astrofotografia\/adquisicion\/objetivos-en-astrofotografia\//,
+  );
+  assert.doesNotMatch(
+    homeData,
+    /export function getRecentHomeEntries[\s\S]*?\.sort\(|export function getRecentHomeEntries[\s\S]*?\.slice\(/,
+  );
 });
 
 test('M16 conserva la propuesta SEO y editorial aprobada', () => {

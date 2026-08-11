@@ -89,8 +89,16 @@ export const HOME_SECTION_DEFINITIONS = [
   },
 ] as const satisfies readonly HomeSectionDefinition[];
 
+export const HOME_RECENT_PATHS = [
+  '/galeria/sistema-solar/eclipse-parcial-de-sol-del-29-de-marzo-de-2025/',
+  '/galeria/sistema-solar/actividad-solar-del-ciclo-solar-25/',
+  '/galeria/cielo-profundo/cadena-de-markarian/',
+] as const;
+
 export function resolveHomeSections(entries: Entry[]): HomeSection[] {
-  const entriesByPath = new Map(entries.map((entry) => [entry.data.pathname, entry]));
+  const entriesByPath = new Map(
+    entries.map((entry) => [entry.data.pathname, entry]),
+  );
   const selectedPaths = new Set<string>();
 
   const requireEntry = (pathname: string): Entry => {
@@ -117,13 +125,22 @@ export function resolveHomeSections(entries: Entry[]): HomeSection[] {
   }));
 }
 
-export function getRecentHomeEntries(sections: HomeSection[]): Entry[] {
-  return sections
-    .flatMap((section) => [section.featured, ...section.secondary])
-    .sort(
-      (left, right) =>
-        (right.data.published_at?.getTime() ?? 0) -
-        (left.data.published_at?.getTime() ?? 0),
-    )
-    .slice(0, 3);
+export function getRecentHomeEntries(entries: Entry[]): Entry[] {
+  const entriesByPath = new Map(
+    entries.map((entry) => [entry.data.pathname, entry]),
+  );
+  const selectedPaths = new Set<string>();
+
+  return HOME_RECENT_PATHS.map((pathname) => {
+    if (selectedPaths.has(pathname)) {
+      throw new Error(`La selección de lecturas recientes repite ${pathname}`);
+    }
+    selectedPaths.add(pathname);
+
+    const entry = entriesByPath.get(pathname);
+    if (!entry) {
+      throw new Error(`Falta la lectura reciente seleccionada para portada: ${pathname}`);
+    }
+    return entry;
+  });
 }
