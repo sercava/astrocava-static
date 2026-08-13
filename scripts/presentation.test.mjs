@@ -280,6 +280,22 @@ test('la portada y la cabecera comparten una búsqueda local bajo demanda', () =
   assert.doesNotMatch(search, /https?:\/\//);
 });
 
+test('la búsqueda reserva aria-expanded para el botón que despliega la cabecera', () => {
+  const search = source('src/components/SearchBox.astro');
+  const inputMarkup = search.match(/<input[\s\S]*?data-search-input[\s\S]*?\/>/);
+
+  assert.ok(inputMarkup, 'No se encontró el campo compartido de búsqueda');
+  assert.match(inputMarkup[0], /type="search"/);
+  assert.match(inputMarkup[0], /aria-controls=\{resultsId\}/);
+  assert.doesNotMatch(inputMarkup[0], /aria-expanded/);
+  assert.doesNotMatch(search, /input\.setAttribute\('aria-expanded'/);
+  assert.match(
+    search,
+    /<button[\s\S]*?aria-controls=\{panelId\}[\s\S]*?aria-expanded="false"[\s\S]*?data-search-toggle/,
+  );
+  assert.match(search, /toggle\.setAttribute\('aria-expanded'/);
+});
+
 test('el crédito y la licencia de la imagen principal son metadatos secundarios', () => {
   const article = source('src/components/ArticleLayout.astro');
   const css = source('src/styles/global.css');

@@ -51,7 +51,6 @@ const resultsId = `${idPrefix}-results`;
         placeholder={label}
         autocomplete="off"
         aria-controls={resultsId}
-        aria-expanded="false"
         data-search-input
       />
     </form>
@@ -108,7 +107,6 @@ const resultsId = `${idPrefix}-results`;
       results.hidden = true;
       results.removeAttribute('aria-busy');
       results.replaceChildren();
-      input.setAttribute('aria-expanded', 'false');
     };
 
     const closeWidget = (restoreFocus = false) => {
@@ -127,7 +125,6 @@ const resultsId = `${idPrefix}-results`;
       text.textContent = message;
       results.replaceChildren(text);
       results.hidden = false;
-      input.setAttribute('aria-expanded', 'true');
     };
 
     const renderResults = async () => {
@@ -183,7 +180,6 @@ const resultsId = `${idPrefix}-results`;
         }
         results.replaceChildren(list);
         results.hidden = false;
-        input.setAttribute('aria-expanded', 'true');
       } catch {
         if (version === requestVersion) {
           showMessage('No se pudo cargar la búsqueda. Inténtalo de nuevo.');
