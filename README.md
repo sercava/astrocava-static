@@ -65,10 +65,10 @@ Tras publicar, el smoke del workflow consulta `https://www.astrocava.com`, esper
 | `npm run check` | Ejecuta `astro check` con la identidad legal local/de producción |
 | `npm run check:verify` | Ejecuta `astro check` con la identidad sintética determinista para CI sin secretos |
 | `npm run check:privacy` | Verifica que el aviso versionable no contiene PII |
-| `npm run check:rights` | Compara las 279 familias/660 imágenes con el manifiesto exacto y valida la rotulación Midjourney |
+| `npm run check:rights` | Compara las 282 familias/670 imágenes con el manifiesto exacto y valida la rotulación Midjourney |
 | `npm run check:urls` | Compara las páginas de `dist/` con las 163 URLs aprobadas |
 | `npm run check:links` | Rechaza enlaces o fragmentos internos rotos y referencias al host Ghost |
-| `npm run check:images` | Compara todas las imágenes de `dist/` con las 660 rutas, tamaños y hashes aprobados |
+| `npm run check:images` | Compara todas las imágenes de `dist/` con las 670 rutas, tamaños y hashes aprobados |
 | `npm run check:seo` | Valida idioma, title, description, H1, canonical, `og:url` y ausencia de `noindex` |
 | `npm run check:sitemap` | Valida índice, alias, sitemap hijo, URLs exactas y `robots.txt` sin escribir informes |
 | `npm run check:predeploy` | Ejecuta los cinco checks anteriores sobre `dist/` |
@@ -86,7 +86,7 @@ Tras publicar, el smoke del workflow consulta `https://www.astrocava.com`, esper
 
 El código propio se distribuye bajo licencia MIT, con copyright de Sergio Cava. Los textos editoriales originales y únicamente las imágenes propias identificadas de forma expresa se distribuyen bajo CC BY 4.0 con la atribución `Sergio Cava / Astrocava`.
 
-Los materiales de terceros, de dominio público, logos, elementos de identidad y páginas legales no quedan relicenciados por estas concesiones. [`RIGHTS_MANIFEST.json`](RIGHTS_MANIFEST.json) cubre exactamente las 279 familias y 660 imágenes actuales; una ruta nueva o unos bytes distintos requieren revisión antes de que el build los acepte.
+Los materiales de terceros, de dominio público, logos, elementos de identidad y páginas legales no quedan relicenciados por estas concesiones. [`RIGHTS_MANIFEST.json`](RIGHTS_MANIFEST.json) cubre exactamente las 282 familias y 670 imágenes actuales; una ruta nueva o unos bytes distintos requieren revisión antes de que el build los acepte.
 
 Consulta [LICENSE.md](LICENSE.md), [NOTICE.md](NOTICE.md), [ATTRIBUTIONS.md](ATTRIBUTIONS.md) y la página pública `/licencias/` para conocer el alcance y las atribuciones verificadas.
 

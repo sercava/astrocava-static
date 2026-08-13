@@ -198,14 +198,14 @@ test('los avisos y documentos remiten al inventario público exacto', async () =
   ]);
   const manifest = JSON.parse(manifestText);
 
-  assert.deepEqual(manifest.totals, { families: 279, files: 660 });
+  assert.deepEqual(manifest.totals, { families: 282, files: 670 });
   assert.equal(
     manifest.inventoryDigest,
-    'a36d007ad8977c97c5670a30b9ba188a7f422894b08bec10ad9ac0bf97e2a21f',
+    '4ab174b68a7040c0518ae20a44b5e2e4be2d0348e0a36f70a071e1cf2b798499',
   );
   for (const document of [notice, attributions, readme]) {
     assert.ok(document.includes('RIGHTS_MANIFEST.json'));
-    assert.match(document, /279 familias[^\n]+660/i);
+    assert.match(document, /282 familias[^\n]+670/i);
     assert.doesNotMatch(document, /inventario[^\n]+(?:incompleto|parcial)/i);
   }
 });

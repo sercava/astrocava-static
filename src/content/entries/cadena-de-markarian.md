@@ -118,4 +118,4 @@ twitter_image: /content/images/2026/08/cadena-de-markarian-seestar-s30.jpg
 
 <p>El procesado final se completó en PixInsight, buscando mantener un fondo de cielo natural y hacer visibles las numerosas galaxias débiles sin perder la estructura de los objetos más luminosos.</p>
 
-<p>Este trabajo también ha servido para probar un flujo automatizado entre Siril y Codex en Windows. Escribiré una entrada independiente en la que documentaré ese proceso, incluyendo la preparación de las sesiones, el registro astrométrico, la selección de imágenes y la integración final.</p>
+<p>El proceso completo para registrar el mosaico, resolver astrométricamente las 1.278 tomas y seleccionar las mejores imágenes está explicado en <a href="/astrofotografia/preprocesado/mosaico-seestar-siril-codex-windows/">Cómo procesé un mosaico Seestar con Siril y Codex en Windows</a>.</p>

@@ -97,7 +97,7 @@ test('la portada A organiza cinco áreas con la selección editorial acordada', 
     '/galeria/cielo-profundo/nebulosa-de-orion-m42/',
     '/astrofotografia/procesado/el-histograma-en-astrofotografia/',
     '/astrofotografia/adquisicion/objetivos-en-astrofotografia/',
-    '/astrofotografia/preprocesado/calibracion-de-imagenes-astronomicas/',
+    '/astrofotografia/preprocesado/mosaico-seestar-siril-codex-windows/',
     '/astrofotografia/procesado/procesado-de-imagenes-astronomicas/',
     '/observacion/catalogos-de-objetos-astronomicos/',
     '/observacion/el-cielo-de-invierno/',
@@ -359,6 +359,10 @@ test('la Cadena de Markarian conserva URL, SEO, datos e imágenes responsivas', 
   assert.match(article, /886 exposiciones/);
   assert.match(article, /2 horas, 27 minutos y 40 segundos/);
   assert.match(article, /M84 \(NGC 4374\) podría ser una excepción/);
+  assert.match(
+    article,
+    /\/astrofotografia\/preprocesado\/mosaico-seestar-siril-codex-windows\//,
+  );
   assert.equal((article.match(/<figure class="kg-card kg-image-card/g) ?? []).length, 4);
   assert.equal(
     (
@@ -370,4 +374,35 @@ test('la Cadena de Markarian conserva URL, SEO, datos e imágenes responsivas', 
   );
   assert.doesNotMatch(article, /<img[^>]+alt=""/);
   assert.match(source('src/components/ArticleLayout.astro'), /srcset=\{d\.feature_image_srcset\}/);
+});
+
+test('el mosaico Seestar conserva URL, voz, enlaces e imágenes seleccionadas', () => {
+  const article = source(
+    'src/content/entries/mosaico-seestar-siril-codex-windows.md',
+  );
+
+  assert.match(
+    article,
+    /^title: "Cómo procesé un mosaico Seestar con Siril y Codex en Windows"$/m,
+  );
+  assert.match(
+    article,
+    /^pathname: \/astrofotografia\/preprocesado\/mosaico-seestar-siril-codex-windows\/$/m,
+  );
+  assert.match(
+    article,
+    /^canonical_url: "https:\/\/www\.astrocava\.com\/astrofotografia\/preprocesado\/mosaico-seestar-siril-codex-windows\/"$/m,
+  );
+  assert.match(article, /^tags: \[preprocesado-astrofoto\]$/m);
+  assert.match(article, /nuestro «conejillo de indias»/);
+  assert.match(article, /Y unos cuantos problemas adicionales/);
+  assert.match(article, /la herramienta ya no depende de Codex/);
+  assert.match(article, /\/galeria\/cielo-profundo\/cadena-de-markarian\//);
+  assert.match(article, /href="\/astrofotografia\/preprocesado\/"/);
+  assert.match(article, /mosaico-seestar-siril-todas-las-tomas-anotado\.jpg/);
+  assert.match(article, /mosaico-seestar-siril-informe-calidad\.jpg/);
+  assert.match(article, /mosaico-seestar-siril-integracion-filtrada-anotada\.jpg/);
+  assert.equal((article.match(/<figure class="kg-card kg-image-card/g) ?? []).length, 3);
+  assert.doesNotMatch(article, /ejemplo saneado|weighted_fwhm/);
+  assert.doesNotMatch(article, /<img[^>]+alt=""/);
 });

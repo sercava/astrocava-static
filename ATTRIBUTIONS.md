@@ -1,8 +1,8 @@
 # Atribuciones y procedencia de recursos
 
-Actualizado: 2026-08-11
+Actualizado: 2026-08-13
 
-Este registro ofrece la lectura humana de las atribuciones que requieren más contexto. El inventario completo y vinculante del árbol actual está en [`RIGHTS_MANIFEST.json`](RIGHTS_MANIFEST.json): 279 familias y 660 archivos, todos con clasificación publicable, rutas, tamaños y SHA-256 exactos. `check:rights` rechaza cualquier imagen ausente, extra, modificada o con estado incierto.
+Este registro ofrece la lectura humana de las atribuciones que requieren más contexto. El inventario completo y vinculante del árbol actual está en [`RIGHTS_MANIFEST.json`](RIGHTS_MANIFEST.json): 282 familias y 670 archivos, todos con clasificación publicable, rutas, tamaños y SHA-256 exactos. `check:rights` rechaza cualquier imagen ausente, extra, modificada o con estado incierto.
 
 Las variantes de tamaño heredan el estado y la licencia de su original solo cuando la fila las incluye expresamente. La notación abreviada `size/w600`, `size/w1000`, etc. significa que se inserta ese segmento tras `/content/images/` y se conserva el resto de la ruta original; no cubre ningún otro tamaño. `ASTROCAVA-ORIGINAL` identifica una aportación propia; `THIRD-PARTY` conserva la licencia de origen; `PUBLIC-DOMAIN` registra procedencia sin reclamar derechos exclusivos.
 
@@ -10,7 +10,7 @@ Las variantes de tamaño heredan el estado y la licencia de su original solo cua
 
 La atribución solicitada para estas obras es **Sergio Cava / Astrocava**, con enlace a `https://www.astrocava.com/`. Se distribuyen bajo [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/).
 
-El manifiesto identifica de forma exhaustiva las 251 familias propias bajo esta licencia. La tabla siguiente conserva los casos con contexto histórico o atribución visible adicional. El favicon vigente es una familia de identidad visual separada, con derechos reservados.
+El manifiesto identifica de forma exhaustiva las 254 familias propias bajo esta licencia. La tabla siguiente conserva los casos con contexto histórico o atribución visible adicional. El favicon vigente es una familia de identidad visual separada, con derechos reservados.
 
 | Familia de rutas | Contexto | Estado y licencia | Modificaciones | Verificado |
 | --- | --- | --- | --- | --- |
@@ -96,11 +96,11 @@ Crédito: **Ilustración generada con Midjourney por Sergio Cava**. La [CC BY 4.
 
 | Clasificación | Familias | Archivos |
 | --- | ---: | ---: |
-| Obra propia, CC BY 4.0 | 251 | 614 |
+| Obra propia, CC BY 4.0 | 254 | 624 |
 | Identidad visual propia, derechos reservados | 1 | 1 |
 | Ilustración Midjourney documentada | 9 | 9 |
 | Material de terceros | 11 | 21 |
 | Dominio público | 7 | 15 |
-| **Total** | **279** | **660** |
+| **Total** | **282** | **670** |
 
-Digest SHA-256 del inventario: `a36d007ad8977c97c5670a30b9ba188a7f422894b08bec10ad9ac0bf97e2a21f`.
+Digest SHA-256 del inventario: `4ab174b68a7040c0518ae20a44b5e2e4be2d0348e0a36f70a071e1cf2b798499`.

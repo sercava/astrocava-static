@@ -59,7 +59,7 @@ export const HOME_SECTION_DEFINITIONS = [
       '/astrofotografia/procesado/el-histograma-en-astrofotografia/',
     secondaryPaths: [
       '/astrofotografia/adquisicion/objetivos-en-astrofotografia/',
-      '/astrofotografia/preprocesado/calibracion-de-imagenes-astronomicas/',
+      '/astrofotografia/preprocesado/mosaico-seestar-siril-codex-windows/',
       '/astrofotografia/procesado/procesado-de-imagenes-astronomicas/',
     ],
   },

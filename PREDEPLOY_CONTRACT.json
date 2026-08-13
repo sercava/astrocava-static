@@ -1,11 +1,11 @@
 {
   "schemaVersion": 3,
   "canonicalOrigin": "https://www.astrocava.com",
-  "baseline": "Ghost sitemap verificado 2026-06-02 + /licencias/ aprobada en T-002D + seis compatibilidades legacy aprobadas en T-009/T-017 + Cadena de Markarian aprobada en T-023",
+  "baseline": "Ghost sitemap verificado 2026-06-02 + /licencias/ aprobada en T-002D + seis compatibilidades legacy aprobadas en T-009/T-017 + Cadena de Markarian aprobada en T-023 + mosaico Seestar con Siril y Codex aprobado en T-025",
   "legacyUrlCount": 161,
-  "approvedNewUrlCount": 1,
-  "expectedHtmlCount": 169,
-  "expectedImageFiles": 660,
+  "approvedNewUrlCount": 2,
+  "expectedHtmlCount": 170,
+  "expectedImageFiles": 670,
   "urls": [
     "/",
     "/arqueoastronomia/",
@@ -26,6 +26,7 @@
     "/astrofotografia/preprocesado/",
     "/astrofotografia/preprocesado/calibracion-de-imagenes-astronomicas/",
     "/astrofotografia/preprocesado/integracion-de-imagenes-astronomicas/",
+    "/astrofotografia/preprocesado/mosaico-seestar-siril-codex-windows/",
     "/astrofotografia/procesado/",
     "/astrofotografia/procesado/el-histograma-en-astrofotografia/",
     "/astrofotografia/procesado/procesado-de-imagenes-astronomicas/",

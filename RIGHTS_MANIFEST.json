@@ -1,10 +1,10 @@
 {
   "schemaVersion": 1,
-  "inventoryDigest": "a36d007ad8977c97c5670a30b9ba188a7f422894b08bec10ad9ac0bf97e2a21f",
-  "verifiedOn": "2026-08-11",
+  "inventoryDigest": "4ab174b68a7040c0518ae20a44b5e2e4be2d0348e0a36f70a071e1cf2b798499",
+  "verifiedOn": "2026-08-13",
   "totals": {
-    "families": 279,
-    "files": 660
+    "families": 282,
+    "files": 670
   },
   "families": [
     {
@@ -7771,6 +7771,104 @@
           "path": "/content/images/size/w600/2026/08/cadena-de-markarian-seestar-s30.jpg",
           "bytes": 42284,
           "sha256": "7dbad54de5c75aafa22569ce7381291f4dba5faacf34c4a317d262e99a80388e"
+        }
+      ]
+    },
+    {
+      "canonicalPath": "/content/images/2026/08/mosaico-seestar-siril-informe-calidad.jpg",
+      "classification": "OWNED_CC_BY_4_0",
+      "holder": "Sergio Cava",
+      "licenseId": "CC-BY-4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "credit": "Sergio Cava / Astrocava",
+      "sourceUrls": [
+        "https://www.astrocava.com/"
+      ],
+      "modifications": "Captura de la herramienta de análisis y variante redimensionada para publicación web.",
+      "verifiedOn": "2026-08-13",
+      "familyDigest": "1b71644f3a0d5ab084b71daac7d4401d7eaff2593c6e375cc34c3b9e67466144",
+      "files": [
+        {
+          "path": "/content/images/2026/08/mosaico-seestar-siril-informe-calidad.jpg",
+          "bytes": 199150,
+          "sha256": "8ab503ca5112df72df1f0190bc5cea1475159dff77837f407928f0b91f077eac"
+        },
+        {
+          "path": "/content/images/size/w600/2026/08/mosaico-seestar-siril-informe-calidad.jpg",
+          "bytes": 98506,
+          "sha256": "4266081da414f5d14c01dbc2f3c0c5b9c5f96588ea3f5d35b4e253177df0d332"
+        }
+      ]
+    },
+    {
+      "canonicalPath": "/content/images/2026/08/mosaico-seestar-siril-integracion-filtrada-anotada.jpg",
+      "classification": "OWNED_CC_BY_4_0",
+      "holder": "Sergio Cava",
+      "licenseId": "CC-BY-4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "credit": "Sergio Cava / Astrocava",
+      "sourceUrls": [
+        "https://www.astrocava.com/"
+      ],
+      "modifications": "Anotación astrométrica y variantes redimensionadas para publicación web.",
+      "verifiedOn": "2026-08-13",
+      "familyDigest": "84ed0ebd26048d8617988c294e0b3e3bbf87948790495749b0ce03a88656461a",
+      "files": [
+        {
+          "path": "/content/images/2026/08/mosaico-seestar-siril-integracion-filtrada-anotada.jpg",
+          "bytes": 835886,
+          "sha256": "d3735a4cbb5cde421ce988635364a115765abd1ea78d8070e22ead3ef5cd6c56"
+        },
+        {
+          "path": "/content/images/size/w1000/2026/08/mosaico-seestar-siril-integracion-filtrada-anotada.jpg",
+          "bytes": 186089,
+          "sha256": "db1a649fd8d15de811bffd740b514690e9b5335642936964b34b38f367469508"
+        },
+        {
+          "path": "/content/images/size/w1600/2026/08/mosaico-seestar-siril-integracion-filtrada-anotada.jpg",
+          "bytes": 506501,
+          "sha256": "af13978b799e47261b3a0fad701d11bedfd0d16a463444a4f3f01edaac478ad0"
+        },
+        {
+          "path": "/content/images/size/w600/2026/08/mosaico-seestar-siril-integracion-filtrada-anotada.jpg",
+          "bytes": 63927,
+          "sha256": "1b1970f7a78a27ea010e9859c0da4b76bf3ad6b94bcf96fb4635d844bef01d0c"
+        }
+      ]
+    },
+    {
+      "canonicalPath": "/content/images/2026/08/mosaico-seestar-siril-todas-las-tomas-anotado.jpg",
+      "classification": "OWNED_CC_BY_4_0",
+      "holder": "Sergio Cava",
+      "licenseId": "CC-BY-4.0",
+      "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+      "credit": "Sergio Cava / Astrocava",
+      "sourceUrls": [
+        "https://www.astrocava.com/"
+      ],
+      "modifications": "Anotación astrométrica y variantes redimensionadas para publicación web.",
+      "verifiedOn": "2026-08-13",
+      "familyDigest": "356aa02d190fa46bd36c06720eb322c648afe5b0ebe1222201ec631442023dbc",
+      "files": [
+        {
+          "path": "/content/images/2026/08/mosaico-seestar-siril-todas-las-tomas-anotado.jpg",
+          "bytes": 5850866,
+          "sha256": "c4581df7e904a8a19e192349ac74976b4d1e41f20f3de6227d41e8b8296bf0ec"
+        },
+        {
+          "path": "/content/images/size/w1000/2026/08/mosaico-seestar-siril-todas-las-tomas-anotado.jpg",
+          "bytes": 195736,
+          "sha256": "1640462445325ae60542255d24fae7577b6432e054124edb7b06540e63cce0ab"
+        },
+        {
+          "path": "/content/images/size/w1600/2026/08/mosaico-seestar-siril-todas-las-tomas-anotado.jpg",
+          "bytes": 615263,
+          "sha256": "46f32dab6e8cd6f1f6fc03c395198dcf375f91248c53cd4843471667ddd3f4af"
+        },
+        {
+          "path": "/content/images/size/w600/2026/08/mosaico-seestar-siril-todas-las-tomas-anotado.jpg",
+          "bytes": 58896,
+          "sha256": "c829ef836b13e1e9ed9f634b90f50d6a37326db17ba3933a78ab38697e0aff74"
         }
       ]
     },
