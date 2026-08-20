@@ -103,4 +103,4 @@ Crédito: **Ilustración generada con Midjourney por Sergio Cava**. La [CC BY 4.
 | Dominio público | 7 | 15 |
 | **Total** | **282** | **670** |
 
-Digest SHA-256 del inventario: `4ab174b68a7040c0518ae20a44b5e2e4be2d0348e0a36f70a071e1cf2b798499`.
+Digest SHA-256 del inventario: `a09f6e6a4f61a07954afc6ed50f0e91ab595d6f28cf2949976837a8cb109a7e0`.

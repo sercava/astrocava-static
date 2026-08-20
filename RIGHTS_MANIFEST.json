@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
-  "inventoryDigest": "4ab174b68a7040c0518ae20a44b5e2e4be2d0348e0a36f70a071e1cf2b798499",
-  "verifiedOn": "2026-08-13",
+  "inventoryDigest": "a09f6e6a4f61a07954afc6ed50f0e91ab595d6f28cf2949976837a8cb109a7e0",
+  "verifiedOn": "2026-08-20",
   "totals": {
     "families": 282,
     "files": 670
@@ -2491,13 +2491,13 @@
         "https://www.astrocava.com/"
       ],
       "modifications": "Variantes redimensionadas y/o anotación editorial cuando corresponda.",
-      "verifiedOn": "2026-07-12",
-      "familyDigest": "1212310fd478dd41c76098ef8a419ef3c51d595c68f4bb0581a829c9b1278b50",
+      "verifiedOn": "2026-08-20",
+      "familyDigest": "98f6bf9e6627074e1fe3aa496b69362bcc702c256305ef713322bb718cf00b90",
       "files": [
         {
           "path": "/content/images/2024/04/triplete-galaxias-leo_galaxia-m65_2011_canon-350d_refractor-ed80_original.jpg",
-          "bytes": 10622,
-          "sha256": "5c1e049f6471a9be58a3927ae818610d4ed359ae8e0db62b7fa28474c271cfbb"
+          "bytes": 31521,
+          "sha256": "b7d12679d2a2a5a686a18c7c5a547c3d2e65b1b6c16073396096e3294a5a0cf4"
         }
       ]
     },
@@ -2512,13 +2512,13 @@
         "https://www.astrocava.com/"
       ],
       "modifications": "Variantes redimensionadas y/o anotación editorial cuando corresponda.",
-      "verifiedOn": "2026-07-12",
-      "familyDigest": "82f7b58feb9fc1b845aae07cf4b985bad1c660f3c05c3789edfd08139540ac27",
+      "verifiedOn": "2026-08-20",
+      "familyDigest": "082cadc75c1dcfb5acf885924cda1b5b5650cf15b13475f8005c43e052ee640c",
       "files": [
         {
           "path": "/content/images/2024/04/triplete-galaxias-leo_galaxia-m66_2011_canon-350d_refractor-ed80_original.jpg",
-          "bytes": 10841,
-          "sha256": "cc3a1f0f20df11f1bcd577ff589c808f8d4500da4ce1a772a0fefccca5f9d92f"
+          "bytes": 32485,
+          "sha256": "3a5a33d9dcd0c094ab17953c72c53bbd1ebb1b81c8114e013064dfbcfc7124bc"
         }
       ]
     },
@@ -2533,13 +2533,13 @@
         "https://www.astrocava.com/"
       ],
       "modifications": "Variantes redimensionadas y/o anotación editorial cuando corresponda.",
-      "verifiedOn": "2026-07-12",
-      "familyDigest": "bb7ed58531b80f76bce9ac772bcc870e2eefb5af862cff2d0faa506b617c114b",
+      "verifiedOn": "2026-08-20",
+      "familyDigest": "1c4f53a5dce2eaca1a8345f4fcd09e6832218232427987418bf3b8608d43687a",
       "files": [
         {
           "path": "/content/images/2024/04/triplete-galaxias-leo_galaxia-ngc3628_2011_canon-350d_refractor-ed80_original.jpg",
-          "bytes": 10940,
-          "sha256": "5131e2bf2508bd0d13c2d5e38f5ac6b0ceb9b151174523658facdf27de559dbf"
+          "bytes": 32208,
+          "sha256": "ebf792a4326e4c3acc58e53c077fb27df1e8d71adb54cc8499a3af3235e6a14b"
         }
       ]
     },
@@ -2554,28 +2554,28 @@
         "https://www.astrocava.com/"
       ],
       "modifications": "Variantes redimensionadas y/o anotación editorial cuando corresponda.",
-      "verifiedOn": "2026-07-12",
-      "familyDigest": "d5828a299a279283cf4915a214cb26ab4fb3fe7e1d6b211e095529134b4bc3cd",
+      "verifiedOn": "2026-08-20",
+      "familyDigest": "c8c72959dd639b57af56e897539b481b0899e6468b21fd17eb67054f938192ac",
       "files": [
         {
           "path": "/content/images/2024/04/triplete-galaxias-leo-m65-m66-ngc3628_2011_canon-350d_refractor-ed80_anotada.jpg",
-          "bytes": 125205,
-          "sha256": "5e687a4fc797f32edf0e3e83ed205256179a7edb040c1f27c359db40b56ef5e5"
+          "bytes": 354727,
+          "sha256": "3cd7a471c99afe5855e50fc7a6bf20cf920d840e3992ee2738dbaae0c90980d8"
         },
         {
           "path": "/content/images/size/w1000/2024/04/triplete-galaxias-leo-m65-m66-ngc3628_2011_canon-350d_refractor-ed80_anotada.jpg",
-          "bytes": 64391,
-          "sha256": "27cf83325a0c02085a5f0fd9cbcfa02cf7016bc5b4e93dae04a3a262d0d945ab"
+          "bytes": 107290,
+          "sha256": "243597010da0c67258408f31c5d1cc5e9148f6687839cd2bafdcc3ff7ddb79de"
         },
         {
           "path": "/content/images/size/w1600/2024/04/triplete-galaxias-leo-m65-m66-ngc3628_2011_canon-350d_refractor-ed80_anotada.jpg",
-          "bytes": 125205,
-          "sha256": "5e687a4fc797f32edf0e3e83ed205256179a7edb040c1f27c359db40b56ef5e5"
+          "bytes": 240854,
+          "sha256": "41009b1fae145ffdceaf055727a919e840713f163f7bb0f20b69f90d146dbad8"
         },
         {
           "path": "/content/images/size/w600/2024/04/triplete-galaxias-leo-m65-m66-ngc3628_2011_canon-350d_refractor-ed80_anotada.jpg",
-          "bytes": 27826,
-          "sha256": "f6a837e90c48b36f5a7e8126db09f8d8b20571af95179649bf5b8a7a0f157ab9"
+          "bytes": 43349,
+          "sha256": "1e634b1b2e0c2783ac24ea07b87ae5d3f1b978632c72889d5a92685df64b248c"
         }
       ]
     },
@@ -2590,13 +2590,13 @@
         "https://www.astrocava.com/"
       ],
       "modifications": "Variantes redimensionadas y/o anotación editorial cuando corresponda.",
-      "verifiedOn": "2026-07-12",
-      "familyDigest": "285b3f224b62c29c3cb522561017e3409ccf9a14bcb7ab24f7855af974c8d045",
+      "verifiedOn": "2026-08-20",
+      "familyDigest": "3a9cb29f0e439570b904179604ed05bc89730c8e2c50d0b6a95e503f4431ba87",
       "files": [
         {
           "path": "/content/images/2024/04/triplete-galaxias-leo-m65-m66-ngc3628_2011_canon-350d_refractor-ed80_original.jpg",
-          "bytes": 98187,
-          "sha256": "7ad2a0da7341bb0a036950fbbe6af5001d75e8204ed885eeab13f988f9bd3afd"
+          "bytes": 175650,
+          "sha256": "a64e970c1cce93a9c7b2acdeabe2a969ce4ec420f2555df2d05dd78a8921bed0"
         }
       ]
     },

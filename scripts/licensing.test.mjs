@@ -201,7 +201,7 @@ test('los avisos y documentos remiten al inventario público exacto', async () =
   assert.deepEqual(manifest.totals, { families: 282, files: 670 });
   assert.equal(
     manifest.inventoryDigest,
-    '4ab174b68a7040c0518ae20a44b5e2e4be2d0348e0a36f70a071e1cf2b798499',
+    'a09f6e6a4f61a07954afc6ed50f0e91ab595d6f28cf2949976837a8cb109a7e0',
   );
   for (const document of [notice, attributions, readme]) {
     assert.ok(document.includes('RIGHTS_MANIFEST.json'));
