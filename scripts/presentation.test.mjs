@@ -41,6 +41,18 @@ test('las entradas separan publicación y actualización editorial en UI y metad
   assert.match(base, /type="application\/ld\+json"/);
 });
 
+test('el Triplete de Leo declara la actualización editorial del reprocesado', () => {
+  const triplet = source(
+    'src/content/entries/el-triplete-de-galaxias-en-leo-m65-m66-y-ngc3628.md',
+  );
+
+  assert.match(triplet, /published_at: 2020-11-02T18:18:00\.000Z/);
+  assert.match(
+    triplet,
+    /editorial_updated_at: 2026-08-20T00:00:00\.000Z/,
+  );
+});
+
 test('la cabecera conserva las cinco secciones principales históricas', () => {
   const layout = source('src/layouts/BaseLayout.astro');
   const expected = [

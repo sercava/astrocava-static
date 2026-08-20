@@ -9,6 +9,7 @@ url: "https://www.astrocava.com/galeria/cielo-profundo/el-triplete-de-galaxias-e
 canonical_url: "https://www.astrocava.com/galeria/cielo-profundo/el-triplete-de-galaxias-en-leo-m65-m66-y-ngc3628/"
 published_at: 2020-11-02T18:18:00.000Z
 updated_at: 2024-09-01T17:30:33.000Z
+editorial_updated_at: 2026-08-20T00:00:00.000Z
 excerpt: ''
 content_plaintext: "El famoso «Triplete de Leo», formado por las galaxias M65 y M66 pertenecientes al Catálogo Messier junto a NGC3628, todas ellas espirales pero con inclinaciones variadas respecto a nuestro punto de vista que las hacen aparecer muy diferentes a la hora de observarlas o fotografiarlas. * Exposición: 24x600s * Fecha adquisición: 25/01/2011 * Equipo: Moonfish ED80-Canon EOS 350D Las tres galaxias, vis…"
 tags: [cielo-profundo, galaxia, leo, primavera]
