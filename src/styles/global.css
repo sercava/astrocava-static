@@ -589,6 +589,12 @@ img {
   outline-offset: 3px;
 }
 
+.prose > p {
+  text-align: justify;
+  text-justify: inter-word;
+  hyphens: auto;
+}
+
 .prose figcaption {
   font-size: 0.85rem;
   color: var(--muted);

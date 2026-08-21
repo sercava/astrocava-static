@@ -82,6 +82,15 @@ test('la cabecera y el pie recuperan el rojo de identidad con contraste claro', 
   assert.match(layout, /class="site-footer-inner"/);
 });
 
+test('los párrafos de lectura se justifican sin afectar metadatos ni pies', () => {
+  const css = source('src/styles/global.css');
+
+  assert.match(
+    css,
+    /\.prose\s*>\s*p\s*{[^}]*text-align:\s*justify;[^}]*text-justify:\s*inter-word;[^}]*hyphens:\s*auto;/s,
+  );
+});
+
 test('la portada conserva su frase editorial histórica', () => {
   const home = source('src/pages/index.astro');
   assert.match(
