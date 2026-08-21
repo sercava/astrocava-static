@@ -589,7 +589,9 @@ img {
   outline-offset: 3px;
 }
 
-.prose > p {
+.prose > p,
+.prose ul > li,
+.prose ol > li {
   text-align: justify;
   text-justify: inter-word;
   hyphens: auto;
