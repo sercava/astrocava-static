@@ -1,10 +1,10 @@
 {
   "schemaVersion": 3,
   "canonicalOrigin": "https://www.astrocava.com",
-  "baseline": "Ghost sitemap verificado 2026-06-02 + /licencias/ aprobada en T-002D + seis compatibilidades legacy aprobadas en T-009/T-017 + Cadena de Markarian aprobada en T-023 + mosaico Seestar con Siril y Codex aprobado en T-025",
+  "baseline": "Ghost sitemap verificado 2026-06-02 + /licencias/ aprobada en T-002D + seis compatibilidades legacy aprobadas en T-009/T-017 + Cadena de Markarian aprobada en T-023 + mosaico Seestar con Siril y Codex aprobado en T-025 + protuberancia solar del eclipse de 2026 aprobada en T-032",
   "legacyUrlCount": 161,
-  "approvedNewUrlCount": 2,
-  "expectedHtmlCount": 170,
+  "approvedNewUrlCount": 3,
+  "expectedHtmlCount": 171,
   "expectedImageFiles": 670,
   "urls": [
     "/",
@@ -103,6 +103,7 @@
     "/observacion/los-colores-en-la-observacion-visual/",
     "/observacion/los-transitos-del-planeta-venus/",
     "/observacion/ocultaciones-astronomicas/",
+    "/observacion/protuberancia-solar-eclipse-2026-h-alfa/",
     "/observacion/recomendaciones-para-la-observacion-solar-a-traves-de-telescopios/",
     "/politica-de-cookies/",
     "/tag/adquisicion-astrofoto/",

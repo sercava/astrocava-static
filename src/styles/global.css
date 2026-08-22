@@ -602,6 +602,41 @@ img {
   color: var(--muted);
 }
 
+.prose .table-scroll {
+  overflow-x: auto;
+  margin: 1.5rem 0;
+  border: 1px solid var(--border);
+  border-radius: 0.35rem;
+}
+
+.prose .table-scroll:focus-visible {
+  outline: 3px solid var(--link);
+  outline-offset: 3px;
+}
+
+.prose .table-scroll table {
+  width: 100%;
+  min-width: 42rem;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+}
+
+.prose .table-scroll th,
+.prose .table-scroll td {
+  padding: 0.65rem 0.75rem;
+  border-bottom: 1px solid var(--border);
+  text-align: left;
+  vertical-align: top;
+}
+
+.prose .table-scroll thead th {
+  background: #f3f0e9;
+}
+
+.prose .table-scroll tbody tr:last-child > * {
+  border-bottom: 0;
+}
+
 .prose img[data-lightbox-trigger] {
   cursor: zoom-in;
 }

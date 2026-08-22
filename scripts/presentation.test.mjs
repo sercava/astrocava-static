@@ -443,3 +443,32 @@ test('el mosaico Seestar conserva URL, voz, enlaces e imágenes seleccionadas', 
   assert.doesNotMatch(article, /ejemplo saneado|weighted_fwhm/);
   assert.doesNotMatch(article, /<img[^>]+alt=""/);
 });
+
+test('la protuberancia del eclipse conserva URL, voz, gráfico y tabla', () => {
+  const article = source(
+    'src/content/entries/protuberancia-solar-eclipse-2026-h-alfa.md',
+  );
+  const css = source('src/styles/global.css');
+
+  assert.match(
+    article,
+    /^pathname: \/observacion\/protuberancia-solar-eclipse-2026-h-alfa\/$/m,
+  );
+  assert.match(
+    article,
+    /^canonical_url: "https:\/\/www\.astrocava\.com\/observacion\/protuberancia-solar-eclipse-2026-h-alfa\/"$/m,
+  );
+  assert.doesNotMatch(article, /^feature_image:/m);
+  assert.match(article, /<svg[\s\S]*role="img"[\s\S]*<title/);
+  assert.match(article, /<div class="table-scroll"[^>]+tabindex="0">/);
+  assert.match(article, /H-alfa está por doquier/);
+  assert.match(article, /la comparación es brutal/);
+  assert.match(article, /H-alfa prácticamente no \(una lástima\)/);
+  assert.match(article, /Vimos la protuberancia/);
+  assert.match(article, /no para de darle vueltas a lo que vio/);
+  assert.doesNotMatch(article, /conviene introducir un matiz/);
+  assert.doesNotMatch(article, /A igualdad de potencia radiante/);
+  assert.match(css, /\.prose \.table-scroll\s*{[^}]*overflow-x:\s*auto/s);
+  assert.match(css, /\.prose \.table-scroll:focus-visible/);
+  assert.match(css, /min-width:\s*42rem/);
+});

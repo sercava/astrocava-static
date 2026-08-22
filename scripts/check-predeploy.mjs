@@ -586,7 +586,10 @@ function checkSeo({ pages, contract, issues }) {
       addIssue(issues, 'seo', `${route} debe declarar exactamente <html lang="es">`);
     }
 
-    const pageTitles = pairedText(page.html, 'title');
+    const headBlocks = [
+      ...page.html.matchAll(/<head\b[^>]*>([\s\S]*?)<\/head>/gi),
+    ].map((match) => match[1]);
+    const pageTitles = headBlocks.length === 1 ? pairedText(headBlocks[0], 'title') : [];
     if (pageTitles.length !== 1 || !pageTitles[0]) {
       addIssue(issues, 'seo', `${route} debe tener un title no vacío y único`);
     } else {

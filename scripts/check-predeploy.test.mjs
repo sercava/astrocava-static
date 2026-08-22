@@ -126,12 +126,31 @@ test('acepta el build que satisface todo el contrato predeploy', (t) => {
   assert.equal(result.summary.sitemap.sitemapUrls, 2);
 });
 
+test('el title accesible de un SVG no cuenta como title SEO de la página', (t) => {
+  const fixture = createFixture(t);
+  write(
+    fixture.root,
+    'index.html',
+    page({
+      route: '/',
+      body: '<svg role="img"><title>Descripción accesible del gráfico</title></svg>',
+    }),
+  );
+
+  assert.doesNotThrow(() => run(fixture, ['seo']));
+});
+
 test('fija los totales, las cinco URLs SEO y las compatibilidades del contrato público real', () => {
   assert.doesNotThrow(() => validatePredeployContract(ACTUAL_CONTRACT));
   assert.equal(ACTUAL_CONTRACT.legacyUrlCount, 161);
-  assert.equal(ACTUAL_CONTRACT.approvedNewUrlCount, 2);
-  assert.equal(ACTUAL_CONTRACT.expectedHtmlCount, 170);
+  assert.equal(ACTUAL_CONTRACT.approvedNewUrlCount, 3);
+  assert.equal(ACTUAL_CONTRACT.expectedHtmlCount, 171);
   assert.equal(ACTUAL_CONTRACT.expectedImageFiles, 670);
+  assert.ok(
+    ACTUAL_CONTRACT.urls.includes(
+      '/observacion/protuberancia-solar-eclipse-2026-h-alfa/',
+    ),
+  );
   assert.deepEqual(ACTUAL_CONTRACT.protectedUrls, PROTECTED_URLS);
   assert.deepEqual(ACTUAL_CONTRACT.redirects, EXPECTED_REDIRECTS);
 });
