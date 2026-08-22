@@ -82,13 +82,14 @@ test('la cabecera y el pie recuperan el rojo de identidad con contraste claro', 
   assert.match(layout, /class="site-footer-inner"/);
 });
 
-test('los párrafos y listas de lectura se justifican sin afectar otros textos', () => {
+test('los párrafos y listas de lectura se justifican sin separar palabras automáticamente', () => {
   const css = source('src/styles/global.css');
 
   assert.match(
     css,
-    /\.prose\s*>\s*p,\s*\.prose\s+ul\s*>\s*li,\s*\.prose\s+ol\s*>\s*li\s*{[^}]*text-align:\s*justify;[^}]*text-justify:\s*inter-word;[^}]*hyphens:\s*auto;/s,
+    /\.prose\s*>\s*p,\s*\.prose\s+ul\s*>\s*li,\s*\.prose\s+ol\s*>\s*li\s*{[^}]*text-align:\s*justify;[^}]*text-justify:\s*inter-word;[^}]*hyphens:\s*none;/s,
   );
+  assert.doesNotMatch(css, /hyphens:\s*auto/);
 });
 
 test('la portada conserva su frase editorial histórica', () => {
@@ -464,6 +465,8 @@ test('la protuberancia del eclipse conserva URL, voz, gráfico y tabla', () => {
   assert.match(article, /H-alfa está por doquier/);
   assert.match(article, /la comparación es brutal/);
   assert.match(article, /H-alfa prácticamente no \(una lástima\)/);
+  assert.match(article, /el contraste de las estructuras de la cromosfera se vuelve espectacular/);
+  assert.doesNotMatch(article, /\[O III\]/);
   assert.match(article, /Vimos la protuberancia/);
   assert.match(article, /no para de darle vueltas a lo que vio/);
   assert.doesNotMatch(article, /conviene introducir un matiz/);

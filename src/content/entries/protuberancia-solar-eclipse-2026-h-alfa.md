@@ -99,7 +99,7 @@ twitter_description: "Durante el eclipse total de Sol de 2026 pude ver una protu
       <rect x="78" y="82" width="14" height="3" fill="#175f86" />
       <text x="99" y="88">Escotópica V′(λ), bastones</text>
       <text x="274" y="316" text-anchor="end" fill="#356b42">Hβ</text>
-      <text x="319" y="316" fill="#1d6f91">[O III]</text>
+      <text x="319" y="316" fill="#1d6f91">O III</text>
       <text x="622" y="300" text-anchor="end" fill="#b52638">Hα</text>
     </g>
   </svg>
@@ -126,7 +126,7 @@ twitter_description: "Durante el eclipse total de Sol de 2026 pude ver una protu
         <td><strong>≈ 2.030×</strong></td>
       </tr>
       <tr>
-        <th scope="row">[O III]</th>
+        <th scope="row">O III</th>
         <td>500,7 nm</td>
         <td>0,338</td>
         <td><strong>0,986</strong></td>
@@ -143,13 +143,13 @@ twitter_description: "Durante el eclipse total de Sol de 2026 pude ver una protu
   </table>
 </div>
 
-<p>En la visión escotópica (nocturna), la comparación es brutal: la radiación de aproximadamente 500 nm cae prácticamente donde nuestros bastones tienen su máxima sensibilidad, mientras que a 656 nm estamos ya en la cola extrema de la respuesta. La sensibilidad escotópica relativa es unas 2.000–2.300 veces mayor en H-beta y [O III] que en H-alfa según la función estándar CIE. Es decir... somos virtualmente ciegos a H-alfa en visión escotópica.</p>
+<p>En la visión escotópica (nocturna), la comparación es brutal: la radiación de aproximadamente 500 nm cae prácticamente donde nuestros bastones tienen su máxima sensibilidad, mientras que a 656 nm estamos ya en la cola extrema de la respuesta. La sensibilidad escotópica relativa es unas 2.000–2.300 veces mayor en H-beta y O III que en H-alfa según la función estándar CIE. Es decir... somos virtualmente ciegos a H-alfa en visión escotópica.</p>
 
 <h2 id="que-vemos-al-observar-nebulosas">Entonces, ¿qué vemos al observar nebulosas?</h2>
 
-<p>H-alfa prácticamente no (una lástima). Vemos fundamentalmente H-beta y [O III], dependiendo del tipo de nebulosa, y para esos sí tenemos filtros para la observación visual.</p>
+<p>H-alfa prácticamente no (una lástima). Vemos fundamentalmente H-beta y O III, dependiendo del tipo de nebulosa, y para esos sí tenemos filtros para la observación visual.</p>
 
-<p>Basta pensar en objetos como <a href="/galeria/cielo-profundo/velo-este-ngc6992/">el Velo Este</a>, donde un filtro [O III] puede resultar espectacular. Tenemos la suerte de que estas emisiones también caen en la zona donde los bastones son más sensibles. Además, en las nebulosas de hidrógeno ionizado, la emisión H-alfa suele ir acompañada también de H-beta en una proporción variable y por eso somos capaces de verlas, al menos, en blanco y negro.</p>
+<p>Basta pensar en objetos como <a href="/galeria/cielo-profundo/velo-este-ngc6992/">el Velo Este</a>, donde un filtro O III puede resultar espectacular. Tenemos la suerte de que estas emisiones también caen en la zona donde los bastones son más sensibles. Además, en las nebulosas de hidrógeno ionizado, la emisión H-alfa suele ir acompañada también de H-beta en una proporción variable y por eso somos capaces de verlas, al menos, en blanco y negro.</p>
 
 <h2 id="por-que-vi-la-protuberancia-roja">¿Por qué sí pude ver la protuberancia roja?</h2>
 
@@ -157,7 +157,7 @@ twitter_description: "Durante el eclipse total de Sol de 2026 pude ver una protu
 
 <h2 id="como-funcionan-telescopios-solares-h-alfa">¿Cómo funcionan los telescopios solares H-alfa?</h2>
 
-<p>De forma similar funcionan los telescopios solares dedicados a H-alfa. El Sol irradia tal cantidad de luz que, incluso después de filtrar prácticamente todo el espectro y dejar pasar solo una banda extremadamente estrecha alrededor de H-alfa, sigue llegando luz suficiente a nuestros ojos para verla. Al eliminar el resto de la luz, además, el contraste de las estructuras de la cromosfera se vuelve brutal.</p>
+<p>De forma similar funcionan los telescopios solares dedicados a H-alfa. El Sol irradia tal cantidad de luz que, incluso después de filtrar prácticamente todo el espectro y dejar pasar solo una banda extremadamente estrecha alrededor de H-alfa, sigue llegando luz suficiente a nuestros ojos para verla. Al eliminar el resto de la luz, además, el contraste de las estructuras de la cromosfera se vuelve espectacular.</p>
 
 <p>De hecho, el Observatorio de Yebes retransmitió este mismo eclipse utilizando un telescopio con filtro H-alfa, en cuyas imágenes pueden verse <a href="https://www.rtve.es/play/videos/especiales-informativos/eclipse-solar-2026-totalidad-yebes-alpha/17188992/">las protuberancias durante la totalidad</a>.</p>
 

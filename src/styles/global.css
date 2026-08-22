@@ -594,7 +594,7 @@ img {
 .prose ol > li {
   text-align: justify;
   text-justify: inter-word;
-  hyphens: auto;
+  hyphens: none;
 }
 
 .prose figcaption {
