@@ -107,10 +107,11 @@ test('la portada A organiza cinco áreas con la selección editorial acordada', 
   const homeData = source('src/lib/home.ts');
   const [sectionData] = homeData.split('export const HOME_RECENT_PATHS');
   const showcases = source('src/components/HomeShowcases.astro');
+  const storyCard = source('src/components/HomeStoryCard.astro');
   const css = source('src/styles/global.css');
   const selectedPaths = [
     '/galeria/sistema-solar/colores-en-la-luna-pistas-de-su-composicion-quimica/',
-    '/galeria/sistema-solar/eclipse-parcial-de-sol-del-29-de-marzo-de-2025/',
+    '/observacion/protuberancia-solar-eclipse-2026-h-alfa/',
     '/galeria/sistema-solar/actividad-solar-del-ciclo-solar-25/',
     '/observacion/el-planeta-jupiter/',
     '/galeria/cielo-profundo/m16-la-nebulosa-del-aguila/',
@@ -143,6 +144,10 @@ test('la portada A organiza cinco áreas con la selección editorial acordada', 
   assert.match(showcases, /home-section-grid--a/);
   assert.match(showcases, /role="featured" eyebrow="Protagonista"/);
   assert.match(showcases, /section\.secondary\.map/);
+  assert.match(
+    storyCard,
+    /!entry\.data\.feature_image\s*&&\s*'home-story--text-only'/,
+  );
   assert.doesNotMatch(showcases, /Escaparate temático|home-section-number|number\(index\)/);
   assert.doesNotMatch(css, /\.home-section-number/);
   assert.match(
@@ -156,6 +161,10 @@ test('la portada A organiza cinco áreas con la selección editorial acordada', 
   assert.match(
     css,
     /@media \(max-width: 38rem\)[\s\S]*?\.home-section--a \.home-story--supporting \.home-story-link\s*{[^}]*grid-template-columns:\s*6\.8rem minmax\(0, 1fr\)/,
+  );
+  assert.match(
+    css,
+    /\.home-section--a\s+\.home-story--supporting\.home-story--text-only\s+\.home-story-link\s*{[^}]*grid-template-columns:\s*minmax\(0, 1fr\)/,
   );
   assert.doesNotMatch(home, /homeVariant|prototype/i);
   assert.doesNotMatch(showcases, /variant ===|home-section--b|home-portal/);

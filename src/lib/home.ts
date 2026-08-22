@@ -29,7 +29,7 @@ export const HOME_SECTION_DEFINITIONS = [
     featuredPath:
       '/galeria/sistema-solar/colores-en-la-luna-pistas-de-su-composicion-quimica/',
     secondaryPaths: [
-      '/galeria/sistema-solar/eclipse-parcial-de-sol-del-29-de-marzo-de-2025/',
+      '/observacion/protuberancia-solar-eclipse-2026-h-alfa/',
       '/galeria/sistema-solar/actividad-solar-del-ciclo-solar-25/',
       '/observacion/el-planeta-jupiter/',
     ],

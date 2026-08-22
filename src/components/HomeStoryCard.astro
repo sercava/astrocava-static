@@ -20,7 +20,13 @@ function summary(maxLength: number): string {
 const description = summary(role === 'featured' ? 190 : 120);
 ---
 
-<article class:list={['home-story', `home-story--${role}`]}>
+<article
+  class:list={[
+    'home-story',
+    `home-story--${role}`,
+    !entry.data.feature_image && 'home-story--text-only',
+  ]}
+>
   <a class="home-story-link" href={entry.data.pathname}>
     {
       entry.data.feature_image && (
